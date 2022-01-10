@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/shawn-jacobsen/linux-automation/issues"
   },
-  "homepage": "https://github.com/shawn-jacobsen/linux-automation#readme"
+  "homepage": "https://github.com/shawn-jacobsen/linux-automation#readme",
+  "dependencies": {
+    "@notionhq/client": "^0.4.12"
+  }
 }
