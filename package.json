@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/shawn-jacobsen/linux-automation#readme",
   "dependencies": {
-    "@notionhq/client": "^0.4.12"
+    "@notionhq/client": "^0.4.12",
+    "dotenv": "^10.0.0"
   }
 }
