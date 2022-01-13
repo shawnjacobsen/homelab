@@ -1,21 +1,25 @@
-require('dotenv').config()
 const { Client } = require("@notionhq/client")
+require('dotenv').config()
 
-console.log(process.env.NOTION_SECRET)
+import { addAssignment } from './assignmentDB'
+import { logError, isProduction } from '../helpers'
 
 // Initializing a client
 const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
-(async () => {
+export default async () => {
   const retrievedDatabase = await notion.databases.query({
     database_id: process.env.NOTION_DB_TEST,
-  })
-  retrievedDatabase.results.forEach(row => {
-    console.dir(row.properties,{depth:null});
-    console.log("-------------\n")
-  })
+  }).catch(logError);
+  
+  if (!isProduction()) {
+    retrievedDatabase.results.forEach((row:any) => {
+      console.dir(row.properties,{depth:null});
+      console.log("-------------\n")
+    })
+  }
 
   const newPage = notion.pages.create({
     parent: { database_id: process.env.NOTION_DB_TEST },
@@ -44,34 +48,4 @@ const notion = new Client({
     database_id: process.env.NOTION_DB_TEST
   })
   console.log(updatedDatabase)
-  
-})()
-
-type ProgressType = 
-    "Incomplete"
-    | "In Progress"
-    |"Complete";
-
-type AssignmentType =
-    "Lab"
-  | "Book Quiz"
-  | "Book Homework"
-  | "PDF Homework"
-  | "Essay | Report"
-  | "EXAM";
-
-export function addAssignment(
-  category="",
-  _class="",
-  assignmentName="",
-  progress:ProgressType="Incomplete",
-  dueDate="",
-  assignmentType:AssignmentType="Book Quiz",
-  submission="",
-  quickNotes="",
-  canvasID="",
-  semester="",
-  DoToday=false
-  ) {
-    const updatedDatabase=123
-  }
+}
