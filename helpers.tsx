@@ -1,0 +1,1 @@
+export const isNumber = (test:string):boolean => {return /^\d+$/.test(test)}

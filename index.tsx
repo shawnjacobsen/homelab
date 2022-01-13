@@ -12,17 +12,20 @@ const notion = new Client({
   const retrievedDatabase = await notion.databases.query({
     database_id: process.env.NOTION_DB_TEST,
   })
-  retrievedDatabase.results.forEach(row => console.log(row.properties.Name.title))
+  retrievedDatabase.results.forEach(row => {
+    console.dir(row.properties,{depth:null});
+    console.log("-------------\n")
+  })
 
   const newPage = notion.pages.create({
     parent: { database_id: process.env.NOTION_DB_TEST },
     properties: {
-      name: {
+      Name: {
         id: 'title',
         type: 'title',
-        'title':{
+        'title':[{
             type: 'text',
-            text: { content: 'Item 2', link: null },
+            text: { content: 'NEW ITEM', link: null },
             annotations: {
               bold: false,
               italic: false,
@@ -31,16 +34,44 @@ const notion = new Client({
               code: false,
               color: 'default'
             },
-            plain_text: 'Item 2',
-            href: null
-          
-        }
-    }
+            plain_text: 'NEW ITEM',
+            href: null 
+        }]
+      }
     }
   })
   const updatedDatabase = await notion.databases.update({
     database_id: process.env.NOTION_DB_TEST
   })
-  console.log(notion.databases.update)
+  console.log(updatedDatabase)
   
 })()
+
+type ProgressType = 
+    "Incomplete"
+    | "In Progress"
+    |"Complete";
+
+type AssignmentType =
+    "Lab"
+  | "Book Quiz"
+  | "Book Homework"
+  | "PDF Homework"
+  | "Essay | Report"
+  | "EXAM";
+
+export function addAssignment(
+  category="",
+  _class="",
+  assignmentName="",
+  progress:ProgressType="Incomplete",
+  dueDate="",
+  assignmentType:AssignmentType="Book Quiz",
+  submission="",
+  quickNotes="",
+  canvasID="",
+  semester="",
+  DoToday=false
+  ) {
+    const updatedDatabase=123
+  }

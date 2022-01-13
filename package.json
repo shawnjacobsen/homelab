@@ -18,6 +18,8 @@
   "homepage": "https://github.com/shawn-jacobsen/linux-automation#readme",
   "dependencies": {
     "@notionhq/client": "^0.4.12",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
   }
 }
