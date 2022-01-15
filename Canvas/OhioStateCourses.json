@@ -1,9 +1,9 @@
 {
-  "class_Data": [
+  "course_data": [
     {
       "semester": "SP21",
       "enrollment_term_id": "85970000000000158",
-      "classes": [
+      "courses": [
         {
           "name": "SP21 BUSFIN 3220 - Business Finance (3993)",
           "notion_name": "BUSFIN 3220",
@@ -34,7 +34,7 @@
     {
       "semester": "SP22",
       "enrollment_term_id": "85970000000000161",
-      "classes": [
+      "courses": [
         {
           "name": "SP22 CSE 3241 - Intr Database Sys (25185)",
           "notion_name": "CSE 3241",

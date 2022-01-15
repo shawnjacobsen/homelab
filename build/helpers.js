@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logError = exports.isNumber = exports.isProduction = void 0;
+exports.filterKeysOfObject = exports.logError = exports.isNumber = exports.isProduction = void 0;
 require('dotenv').config();
 // assume production build if env variable is missing
 const isProduction = () => !process.env.PRODUCTION || Number.parseInt(process.env.PRODUCTION) === 1;
@@ -20,3 +20,10 @@ const logError = (e) => {
     }
 };
 exports.logError = logError;
+const filterKeysOfObject = (obj, allowed) => {
+    return Object.keys(obj).filter(key => allowed.includes(key)).reduce((prevObj, key) => {
+        prevObj[key] = obj[key];
+        return prevObj;
+    }, {});
+};
+exports.filterKeysOfObject = filterKeysOfObject;

@@ -1,7 +1,4 @@
 require('dotenv').config()
-import { getCurrentSemesterClasses } from './Queries'
+import { getCurrentSemesterAssignements } from './Courses'
 
-export default async () => {
-  
-  await getCurrentSemesterClasses()
-}
+async () => {}

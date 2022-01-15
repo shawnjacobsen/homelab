@@ -28,28 +28,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Notion Imports
-const Assignment = __importStar(require("./Notion/assignmentDB"));
-const NotionQueries = __importStar(require("./Notion/Queries"));
-// Canvas Imports
-const Courses = __importStar(require("./Canvas/Courses"));
-// async script
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    // init notion client
-    const notionClient = NotionQueries.getNotionClient();
-    // get canvas assignments
-    const aggregateAssignmentData = yield Courses.getCurrentSemesterAssignements();
-    // flatten assignments (remove course layer)
-    const flattenedCanvasAssignments = [];
-    aggregateAssignmentData.forEach(course => course.forEach(assignment => flattenedCanvasAssignments.push(assignment)));
-    // filter down to only assignments not in Notion DB
-    const unresolvedNewAssignments = flattenedCanvasAssignments.filter(assignment => Assignment.isNewAssignment(notionClient, assignment.id));
-    const newAssignments = yield Promise.all(unresolvedNewAssignments);
-    console.log(newAssignments.length, newAssignments[0]);
-    // add new assignments to notion
-    newAssignments.forEach(assignment => {
-        // create assignment properties
-        const properties = Assignment.createAssignmentProperties();
-        // add page to assignments DB
-    });
-}))();
+exports.getAssignementsBySemesterID = exports.getCurrentSemesterAssignements = void 0;
+const Queries_1 = require("./Queries");
+// course data
+const COURSE_DATA = __importStar(require("./OhioStateCourses.json"));
+// fields to keep when getting assignments
+const usefulAssignmentFields = ["id", "description", "due_at", "name", "has_submitted_submissions"];
+const getCurrentSemesterAssignements = () => __awaiter(void 0, void 0, void 0, function* () {
+    const currentSemesterID = COURSE_DATA.course_data.find(obj => obj.semester === process.env.SEMESTER).enrollment_term_id;
+    const aggregateAssignments = yield (0, exports.getAssignementsBySemesterID)(currentSemesterID);
+    return aggregateAssignments;
+});
+exports.getCurrentSemesterAssignements = getCurrentSemesterAssignements;
+const getAssignementsBySemesterID = (semesterID) => __awaiter(void 0, void 0, void 0, function* () {
+    const currentCourseData = COURSE_DATA.course_data.find(obj => obj.semester === process.env.SEMESTER).courses;
+    // get the canvas data for all courses in currentCourseData
+    const unresolvedAggregateAssignments = currentCourseData.map(course => (0, Queries_1.getAssignmentsByCourseID)(course.id, usefulAssignmentFields));
+    return yield Promise.all(unresolvedAggregateAssignments);
+});
+exports.getAssignementsBySemesterID = getAssignementsBySemesterID;

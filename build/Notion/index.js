@@ -11,16 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const { Client } = require("@notionhq/client");
 require('dotenv').config();
+const assignmentDB_1 = require("./assignmentDB");
 const helpers_1 = require("../helpers");
 // Initializing a client
 const notion = new Client({
     auth: process.env.NOTION_SECRET,
 });
 exports.default = () => __awaiter(void 0, void 0, void 0, function* () {
-    const retrievedDatabase = yield notion.databases.query({
-        database_id: process.env.NOTION_DB_TEST,
-    }).catch(helpers_1.logError);
-    if (!(0, helpers_1.isProduction)()) {
+    const retrievedDatabase = yield (0, assignmentDB_1.getDatabase)(notion, process.env.NOTION_DB_TEST);
+    console.dir(retrievedDatabase, {});
+    if ((0, helpers_1.isProduction)()) {
         retrievedDatabase.results.forEach((row) => {
             console.dir(row.properties, { depth: null });
             console.log("-------------\n");

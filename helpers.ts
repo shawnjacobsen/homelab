@@ -17,7 +17,7 @@ export const logError = (e) => {
 }
 
 
-export const filterObjectByKeys = (obj:Object, allowed:Array<any>) => {
+export const filterKeysOfObject = (obj:Object, allowed:Array<any>) => {
   return Object.keys(obj).filter(key => 
     allowed.includes(key)).reduce((prevObj, key) => {
     prevObj[key] = obj[key]

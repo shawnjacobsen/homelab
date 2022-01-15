@@ -1,0 +1,76 @@
+{
+    "course_data": [
+        {
+            "semester": "SP21",
+            "enrollment_term_id": "85970000000000158",
+            "courses": [
+                {
+                    "name": "SP21 BUSFIN 3220 - Business Finance (3993)",
+                    "notion_name": "BUSFIN 3220",
+                    "id": "85970000000092688"
+                },
+                {
+                    "name": "SP21 CSE 2331 - Fndns 2: DS & Alg (11079)",
+                    "notion_name": "FNDS II 2331",
+                    "id": "85970000000099262"
+                },
+                {
+                    "name": "SP21 CSE 2421 - Sys 1: Comput Org (8470)",
+                    "notion_name": "SYSTEMS I 2421",
+                    "id": "85970000000097140"
+                },
+                {
+                    "name": "SP21 MATH 3345 - Fdn Higher Math (28722)",
+                    "notion_name": "MATH 3345",
+                    "id": "85970000000096314"
+                },
+                {
+                    "name": "SP21 PHILOS 1338 - Comp Ethics & Pres (23566)",
+                    "notion_name": "PHILOS 1338",
+                    "id": "85970000000099687"
+                }
+            ]
+        },
+        {
+            "semester": "SP22",
+            "enrollment_term_id": "85970000000000161",
+            "courses": [
+                {
+                    "name": "SP22 CSE 3241 - Intr Database Sys (25185)",
+                    "notion_name": "CSE 3241",
+                    "id": "85970000000115974"
+                },
+                {
+                    "name": "SP22 CSE 3341 - Prin Prgrmng Langs (24826)",
+                    "notion_name": "CSE 3341",
+                    "id": "85970000000118096"
+                },
+                {
+                    "name": "SP22 CSE 3461 - Computer Netwrking (25619)",
+                    "notion_name": "CSE 3461",
+                    "id": "85970000000117324"
+                },
+                {
+                    "name": "SP22 ECE 2060 - Int Digital Logic (27864)",
+                    "notion_name": "ECE 2060",
+                    "id": "85970000000116601"
+                },
+                {
+                    "name": "SP22 ECE 2060 - Int Digital Logic (32940_1-s)",
+                    "notion_name": "ECE 2060 LAB",
+                    "id": "85970000000117477"
+                },
+                {
+                    "name": "SP22 BUSOBA 3230 - Intro to Ops Mgt (4605)",
+                    "notion_name": "BUSOBA 3230",
+                    "id": "85970000000113457"
+                },
+                {
+                    "name": "SP22 EARTHSC 1121 - Dynamic Earth (12797)",
+                    "notion_name": "EARTHSC 1121",
+                    "id": "85970000000116004"
+                }
+            ]
+        }
+    ]
+}
