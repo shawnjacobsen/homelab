@@ -51,5 +51,6 @@ const Courses = __importStar(require("./Canvas/Courses"));
         // create assignment properties
         const properties = Assignment.createAssignmentProperties();
         // add page to assignments DB
+        Assignment.addNewAssignmentRow(notionClient, properties);
     });
 }))();

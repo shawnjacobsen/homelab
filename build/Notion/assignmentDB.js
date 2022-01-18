@@ -28,28 +28,45 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isNewAssignment = exports.getAssignmentRows = exports.createAssignmentProperties = void 0;
+exports.addNewAssignmentRow = exports.isNewAssignment = exports.getAssignmentRows = exports.createAssignmentProperties = void 0;
 const Queries_1 = require("./Queries");
 const assignmentProperties = __importStar(require("./assignmentProperties.json"));
-const createAssignmentProperties = (category = "", _class = "", assignmentName = "", progress = "Incomplete", dueDate = "", assignmentType = "Book Quiz", submission = "", quickNotes = "", canvasID = "", semester = "", DoToday = false) => {
+const NOTION_DB_ASSIGNMENTS = process.env.NOTION_DB_ASSIGNMENTS;
+const DEFAULT_ASSIGNMENT_PROPS = {
+    category: "",
+    _class: null,
+    assignmentName: "",
+    progress: "Incomplete",
+    dueDate: null,
+    assignmentType: "Book Quiz",
+    submission: "",
+    quickNotes: "",
+    canvasID: "",
+    semester: "",
+    DoToday: false
+};
+const createAssignmentProperties = (overriddenProperties = {}) => {
+    // default property values of an assignment overridden with parameter properties
+    const assignmentcustomProperties = Object.assign(Object.assign({}, DEFAULT_ASSIGNMENT_PROPS), overriddenProperties);
+    // supplied structure for assignment query
     const properties = assignmentProperties;
-    properties.Submission.url = submission;
-    properties.Class.select.name = _class;
-    properties["Due Date"].date.start = dueDate;
-    properties.Type.select.name = assignmentType;
-    properties.canvasID.rich_text[0].text.content = canvasID;
-    properties.canvasID.rich_text[0].plain_text = canvasID;
-    properties.Progress.select.name = progress;
-    properties["Quick Notes"].rich_text[0].text.content = quickNotes;
-    properties["Quick Notes"].rich_text[0].plain_text = quickNotes;
-    properties.Category.select.name = category;
-    properties.Assignment.title[0].text.content = assignmentName;
-    properties.Assignment.title[0].plain_text = assignmentName;
+    properties.Submission.url = assignmentcustomProperties.submission == "" ? null : assignmentcustomProperties.submission;
+    properties.Class.select.name = assignmentcustomProperties._class;
+    properties["Due Date"].date.start = assignmentcustomProperties.dueDate;
+    properties.Type.select.name = assignmentcustomProperties.assignmentType;
+    properties.canvasID.rich_text[0].text.content = assignmentcustomProperties.canvasID;
+    properties.canvasID.rich_text[0].plain_text = assignmentcustomProperties.canvasID;
+    properties.Progress.select.name = assignmentcustomProperties.progress;
+    properties["Quick Notes"].rich_text[0].text.content = assignmentcustomProperties.quickNotes;
+    properties["Quick Notes"].rich_text[0].plain_text = assignmentcustomProperties.quickNotes;
+    properties.Category.select.name = assignmentcustomProperties.category;
+    properties.Assignment.title[0].text.content = assignmentcustomProperties.assignmentName;
+    properties.Assignment.title[0].plain_text = assignmentcustomProperties.assignmentName;
     return properties;
 };
 exports.createAssignmentProperties = createAssignmentProperties;
 const getAssignmentRows = (notionClient, filters = {}) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield (0, Queries_1.getDatabase)(notionClient, process.env.NOTION_DB_ASSIGNMENTS, filters);
+    return yield (0, Queries_1.getDatabase)(notionClient, NOTION_DB_ASSIGNMENTS, filters);
 });
 exports.getAssignmentRows = getAssignmentRows;
 const isNewAssignment = (notionClient, assignmentID) => __awaiter(void 0, void 0, void 0, function* () {
@@ -62,3 +79,7 @@ const isNewAssignment = (notionClient, assignmentID) => __awaiter(void 0, void 0
     return matchingCanvasIDAssignments.length === 0;
 });
 exports.isNewAssignment = isNewAssignment;
+const addNewAssignmentRow = (notionClient, properties) => __awaiter(void 0, void 0, void 0, function* () {
+    yield (0, Queries_1.createNewPage)(notionClient, NOTION_DB_ASSIGNMENTS, properties);
+});
+exports.addNewAssignmentRow = addNewAssignmentRow;

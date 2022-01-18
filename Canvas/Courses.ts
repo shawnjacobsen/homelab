@@ -12,7 +12,6 @@ export const getCurrentSemesterAssignements = async ():Promise<Array<Array<any>>
   return aggregateAssignments
 }
 
-
 export const getAssignementsBySemesterID = async (semesterID):Promise<Array<any>> => {
   const currentCourseData = COURSE_DATA.course_data.find(obj => obj.semester === process.env.SEMESTER).courses
 
@@ -20,4 +19,14 @@ export const getAssignementsBySemesterID = async (semesterID):Promise<Array<any>
   const unresolvedAggregateAssignments = currentCourseData.map(course => getAssignmentsByCourseID(course.id, usefulAssignmentFields))
 
   return await Promise.all(unresolvedAggregateAssignments)
+}
+
+
+// TODO
+export const getNotionCourseNameFromCanvasID = (courseID:string):string => {
+  let name = ""
+
+  COURSE_DATA.course_data.filter(() => {})
+
+  return name
 }

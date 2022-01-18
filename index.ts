@@ -33,9 +33,12 @@ import * as CanvasQueries from './Canvas/Queries'
   // add new assignments to notion
   newAssignments.forEach(assignment => {
     // create assignment properties
-    const properties = Assignment.createAssignmentProperties()
+    const properties = Assignment.createAssignmentProperties({
+      category: "OSUadfa"
+    })
 
     // add page to assignments DB
+    Assignment.addNewAssignmentRow(notionClient, properties)
   })
   
 })()
