@@ -21,8 +21,7 @@ const usefulAssignmentFields = [
 export const getCurrentSemesterAssignements = async ():Promise<Array<Array<any>>> => {
   const currentSemesterID = SEMESTER_DATA[CURRENT_SEMESTER]
   const aggregateAssignments = await getAssignementsBySemesterID(currentSemesterID)
-  console.log(aggregateAssignments)
-  throw new Error("STOP......")
+
   return aggregateAssignments
 }
 

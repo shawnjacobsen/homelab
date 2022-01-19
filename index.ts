@@ -32,7 +32,6 @@ import { productionLog } from './helpers'
   const newAssignments = await Promise.all(unresolvedNewAssignments)
 
   productionLog("NEW ASSIGNMENT COUNT: " + newAssignments.length)
-  newAssignments.forEach((assignment) => console.log(assignment.course_id))
 
   // add new assignments to notion
   let addedCount = 0;
@@ -41,8 +40,6 @@ import { productionLog } from './helpers'
       productionLog(`Course is not being tracked. Course ID ${assignment.course_id}`)
       return
     }
-
-    if (addedCount > 10) { return }
 
     productionLog(`Adding assignment: ${assignment.id}`)
 

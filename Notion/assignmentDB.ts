@@ -72,8 +72,6 @@ export const createAssignmentProperties = (
     properties.Assignment.title[0].text.content =             assignmentCustomProperties.assignmentName
     properties.Assignment.title[0].plain_text =               assignmentCustomProperties.assignmentName
 
-    console.log("properties: ")
-    console.dir(properties, {depth:null})
     return properties
   }
 
