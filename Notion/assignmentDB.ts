@@ -27,7 +27,8 @@ export const createAssignmentProperties = (
     const assignmentCustomProperties:AssignmentPropsType = {...DEFAULT_ASSIGNMENT_PROPS, ...overriddenProperties}
 
     // supplied structure for assignment query
-    const properties = {...assignmentProperties}
+    const properties = JSON.parse(JSON.stringify(assignmentProperties))
+    console.log(properties["Due Date"].date !== null)
 
     properties.Submission.url =                               assignmentCustomProperties.submission
     properties.Class.select.name =                            assignmentCustomProperties._class
@@ -83,7 +84,7 @@ export const isNewAssignment = async (notionClient, assignmentID:string):Promise
 
   const matchingCanvasIDFilter = {
     property: "canvasID",
-    text:{ equals: assignmentID.toString() }
+    rich_text:{ contains: assignmentID }
   }
 
   const matchingCanvasIDAssignments = await getAssignmentRows(notionClient, matchingCanvasIDFilter)

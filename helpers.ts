@@ -29,3 +29,10 @@ export const stringifySpecifiedKeyValue = (JSON_str, specifiedKey:string) => {
   const regex = new RegExp(`"${specifiedKey}":(\\d+)`,'g')
   return JSON.parse(JSON_str.replace(regex, `"${specifiedKey}":"$1"`))
 };
+
+// async filter
+export const asyncFilter = async (arr, predicate) => {
+	const results = await Promise.all(arr.map(predicate));
+
+	return arr.filter((_v, index) => results[index]);
+}
