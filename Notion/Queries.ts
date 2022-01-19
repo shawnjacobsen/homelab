@@ -1,11 +1,11 @@
 const { Client } = require("@notionhq/client")
-import { logError } from '../helpers'
+import { productionLog } from '../helpers'
 
 export const getDatabase = async (notionClient:any, databaseID:string, filters:any={}):Promise<Array<any>> => {
   return (await notionClient.databases.query({
     database_id: databaseID,
     filter: filters
-  }).catch(logError)).results;
+  }).catch(productionLog)).results;
 }
 
 export const createNewPage = (notionClient:any, parentID:string, properties:any) => {

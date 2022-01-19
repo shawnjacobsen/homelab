@@ -16,7 +16,7 @@ const getDatabase = (notionClient, databaseID, filters = {}) => __awaiter(void 0
     return (yield notionClient.databases.query({
         database_id: databaseID,
         filter: filters
-    }).catch(helpers_1.logError)).results;
+    }).catch(helpers_1.productionLog)).results;
 });
 exports.getDatabase = getDatabase;
 const createNewPage = (notionClient, parentID, properties) => {

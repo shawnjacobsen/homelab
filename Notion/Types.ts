@@ -9,13 +9,15 @@ export type AssignmentType =
   | "Book Homework"
   | "PDF Homework"
   | "Essay | Report"
-  | "EXAM";
+  | "EXAM"
+  | "";
 
 export type CategoryType =
     "OSU"
   | "Workato"
   | "Storyline"
   | "Other"
+  | "";
 
 export type AssignmentPropsType = {
   category:CategoryType,

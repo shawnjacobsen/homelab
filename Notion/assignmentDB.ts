@@ -1,17 +1,17 @@
-import { logError } from '../helpers'
+import { productionLog } from '../helpers'
 import { getDatabase, createNewPage } from './Queries'
-import * as assignmentProperties from './assignmentProperties.json'
+import assignmentProperties from './assignmentProperties.json'
 import { AssignmentPropsType, AssignmentPropsSubsetType } from './Types'
 
 const NOTION_DB_ASSIGNMENTS = process.env.NOTION_DB_ASSIGNMENTS
 
 const DEFAULT_ASSIGNMENT_PROPS:AssignmentPropsType = {
-  category:null,
+  category:"",
   _class:null,
   assignmentName:"New Assignment",
   progress:"Incomplete",
   dueDate:null,
-  assignmentType:"Book Quiz",
+  assignmentType:"",
   submission:null,
   quickNotes:"",
   canvasID:null,
@@ -32,13 +32,17 @@ export const createAssignmentProperties = (
     properties.Submission.url =                             assignmentCustomProperties.submission
     properties.Class.select.name =                          assignmentCustomProperties._class
     properties["Due Date"].date.start =                     assignmentCustomProperties.dueDate
-    properties.Type.select.name =                           assignmentCustomProperties.assignmentType
 
+    if (assignmentCustomProperties.assignmentType === "") {
+      properties.Type.select = null
+    } else {
+      properties.Type.select.name =                           assignmentCustomProperties.assignmentType
+    }
     if (assignmentCustomProperties.canvasID === null) {
       properties.canvasID.rich_text = []
     } else {
-      properties.canvasID.rich_text[0].text.content =       assignmentCustomProperties.canvasID
-      properties.canvasID.rich_text[0].plain_text =         assignmentCustomProperties.canvasID
+      properties.canvasID.rich_text[0].text.content =       assignmentCustomProperties.canvasID.toString()
+      properties.canvasID.rich_text[0].plain_text =         assignmentCustomProperties.canvasID.toString()
     }
 
     if (assignmentCustomProperties.progress === null) {
@@ -50,11 +54,11 @@ export const createAssignmentProperties = (
     if (assignmentCustomProperties.quickNotes === null) {
       properties["Quick Notes"].rich_text = []
     } else {
-      properties["Quick Notes"].rich_text[0].text.content =   assignmentCustomProperties.quickNotes
-      properties["Quick Notes"].rich_text[0].plain_text =     assignmentCustomProperties.quickNotes
+      properties["Quick Notes"].rich_text[0].text.content =   assignmentCustomProperties.quickNotes.toString()
+      properties["Quick Notes"].rich_text[0].plain_text =     assignmentCustomProperties.quickNotes.toString()
     }
 
-    if (assignmentCustomProperties.category === null) {
+    if (assignmentCustomProperties.category === "") {
       properties.Category.select = null
     } else {
       properties.Category.select.name =                       assignmentCustomProperties.category
@@ -63,6 +67,8 @@ export const createAssignmentProperties = (
     properties.Assignment.title[0].text.content =           assignmentCustomProperties.assignmentName
     properties.Assignment.title[0].plain_text =             assignmentCustomProperties.assignmentName
 
+    console.log("properties: ")
+    console.dir(properties, {depth:null})
     return properties
   }
 
@@ -76,8 +82,6 @@ export const isNewAssignment = async (notionClient, assignmentID:string):Promise
     property: "canvasID",
     text:{ equals: assignmentID.toString() }
   }
-
-  console.log(matchingCanvasIDFilter)
 
   const matchingCanvasIDAssignments = await getAssignmentRows(notionClient, matchingCanvasIDFilter)
   return matchingCanvasIDAssignments.length === 0

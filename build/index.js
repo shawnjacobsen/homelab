@@ -33,6 +33,8 @@ const Assignment = __importStar(require("./Notion/assignmentDB"));
 const NotionQueries = __importStar(require("./Notion/Queries"));
 // Canvas Imports
 const Courses = __importStar(require("./Canvas/Courses"));
+// production log
+const helpers_1 = require("./helpers");
 // async script
 (() => __awaiter(void 0, void 0, void 0, function* () {
     // init notion client
@@ -45,12 +47,34 @@ const Courses = __importStar(require("./Canvas/Courses"));
     // filter down to only assignments not in Notion DB
     const unresolvedNewAssignments = flattenedCanvasAssignments.filter(assignment => Assignment.isNewAssignment(notionClient, assignment.id));
     const newAssignments = yield Promise.all(unresolvedNewAssignments);
-    console.log(newAssignments.length, newAssignments[0]);
+    (0, helpers_1.productionLog)("NEW ASSIGNMENT COUNT: " + newAssignments.length);
+    newAssignments.forEach((assignment) => console.log(assignment.course_id));
     // add new assignments to notion
+    let addedCount = 0;
     newAssignments.forEach(assignment => {
+        if (!Courses.isBeingTracked(assignment.course_id)) {
+            (0, helpers_1.productionLog)(`Course is not being tracked. Course ID ${assignment.course_id}`);
+            return;
+        }
+        if (addedCount > 1) {
+            (0, helpers_1.productionLog)(`Already added one. Assignment ID: ${assignment.id}`);
+            return;
+        }
+        (0, helpers_1.productionLog)(`Adding assignment: ${assignment.id}`);
         // create assignment properties
-        const properties = Assignment.createAssignmentProperties();
+        const properties = Assignment.createAssignmentProperties({
+            category: "OSU",
+            _class: Courses.getNotionCourseNameFromCourseID(assignment.course_id),
+            assignmentName: assignment.name,
+            progress: assignment.has_submitted_submissions ? "Complete" : "Incomplete",
+            dueDate: assignment.due_at,
+            submission: Courses.getCanvasSubmissionURL(assignment.id, assignment.course_id),
+            canvasID: assignment.id,
+            semester: Courses.getNotionSemesterFromCourseID(assignment.course_id)
+        });
         // add page to assignments DB
         Assignment.addNewAssignmentRow(notionClient, properties);
+        addedCount++;
     });
+    (0, helpers_1.productionLog)(`Added ${addedCount} course assignments to Notion`);
 }))();
