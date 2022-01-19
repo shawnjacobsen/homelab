@@ -15,7 +15,6 @@ export const productionLog = (message:string=""):void => {
   }
 }
 
-
 export const filterKeysOfObject = (obj:Object, allowed:Array<any>) => {
   return Object.keys(obj).filter(key => 
     allowed.includes(key)).reduce((prevObj, key) => {
@@ -24,3 +23,9 @@ export const filterKeysOfObject = (obj:Object, allowed:Array<any>) => {
     },
     {})
 }
+
+// converts the specified key's value from a number to a string
+export const stringifySpecifiedKeyValue = (JSON_str, specifiedKey:string) => {
+  const regex = new RegExp(`"${specifiedKey}":(\\d+)`,'g')
+  return JSON.parse(JSON_str.replace(regex, `"${specifiedKey}":"$1"`))
+};
