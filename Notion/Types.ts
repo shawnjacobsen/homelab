@@ -10,14 +10,12 @@ export type AssignmentType =
   | "PDF Homework"
   | "Essay | Report"
   | "EXAM"
-  | "";
 
 export type CategoryType =
     "OSU"
   | "Workato"
   | "Storyline"
   | "Other"
-  | "";
 
 export type AssignmentPropsType = {
   category:CategoryType,
@@ -35,7 +33,7 @@ export type AssignmentPropsType = {
 
 export type AssignmentPropsSubsetType = {
   category?:CategoryType,
-  _class?:string,
+  _class:string,
   assignmentName?:string,
   progress?:ProgressType,
   dueDate?:string,

@@ -42,6 +42,8 @@ import { productionLog } from './helpers'
       return
     }
 
+    if (addedCount > 10) { return }
+
     productionLog(`Adding assignment: ${assignment.id}`)
 
     // create assignment properties

@@ -6,12 +6,12 @@ import { AssignmentPropsType, AssignmentPropsSubsetType } from './Types'
 const NOTION_DB_ASSIGNMENTS = process.env.NOTION_DB_ASSIGNMENTS
 
 const DEFAULT_ASSIGNMENT_PROPS:AssignmentPropsType = {
-  category:"",
+  category:null,
   _class:null,
   assignmentName:"New Assignment",
   progress:"Incomplete",
   dueDate:null,
-  assignmentType:"",
+  assignmentType:null,
   submission:null,
   quickNotes:"",
   canvasID:null,
@@ -27,13 +27,18 @@ export const createAssignmentProperties = (
     const assignmentCustomProperties:AssignmentPropsType = {...DEFAULT_ASSIGNMENT_PROPS, ...overriddenProperties}
 
     // supplied structure for assignment query
-    const properties = assignmentProperties
+    const properties = {...assignmentProperties}
 
-    properties.Submission.url =                             assignmentCustomProperties.submission
-    properties.Class.select.name =                          assignmentCustomProperties._class
-    properties["Due Date"].date.start =                     assignmentCustomProperties.dueDate
+    properties.Submission.url =                               assignmentCustomProperties.submission
+    properties.Class.select.name =                            assignmentCustomProperties._class
+    
+    if (assignmentCustomProperties.dueDate === null) {
+      properties['Due Date'].date = null
+    } else {
+      properties["Due Date"].date.start =                     assignmentCustomProperties.dueDate
+    }
 
-    if (assignmentCustomProperties.assignmentType === "") {
+    if (assignmentCustomProperties.assignmentType === null) {
       properties.Type.select = null
     } else {
       properties.Type.select.name =                           assignmentCustomProperties.assignmentType
@@ -41,14 +46,14 @@ export const createAssignmentProperties = (
     if (assignmentCustomProperties.canvasID === null) {
       properties.canvasID.rich_text = []
     } else {
-      properties.canvasID.rich_text[0].text.content =       assignmentCustomProperties.canvasID.toString()
-      properties.canvasID.rich_text[0].plain_text =         assignmentCustomProperties.canvasID.toString()
+      properties.canvasID.rich_text[0].text.content =         assignmentCustomProperties.canvasID.toString()
+      properties.canvasID.rich_text[0].plain_text =           assignmentCustomProperties.canvasID.toString()
     }
 
     if (assignmentCustomProperties.progress === null) {
       properties.Progress.select = null
     } else {
-      properties.Progress.select.name =                     assignmentCustomProperties.progress
+      properties.Progress.select.name =                       assignmentCustomProperties.progress
     }
 
     if (assignmentCustomProperties.quickNotes === null) {
@@ -58,14 +63,14 @@ export const createAssignmentProperties = (
       properties["Quick Notes"].rich_text[0].plain_text =     assignmentCustomProperties.quickNotes.toString()
     }
 
-    if (assignmentCustomProperties.category === "") {
+    if (assignmentCustomProperties.category === null) {
       properties.Category.select = null
     } else {
       properties.Category.select.name =                       assignmentCustomProperties.category
     }
 
-    properties.Assignment.title[0].text.content =           assignmentCustomProperties.assignmentName
-    properties.Assignment.title[0].plain_text =             assignmentCustomProperties.assignmentName
+    properties.Assignment.title[0].text.content =             assignmentCustomProperties.assignmentName
+    properties.Assignment.title[0].plain_text =               assignmentCustomProperties.assignmentName
 
     console.log("properties: ")
     console.dir(properties, {depth:null})
