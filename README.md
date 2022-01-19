@@ -1,7 +1,7 @@
-# linux-automation
+<h1 style="color: #6C6EA0">linux-automation</h1>
 A directory of scripts to be continuously run on an on-prem linux server to automate various processes.
-
-
+</br>
+</br>
 ## Canvas Automation
 Pulls course and assignments information and adds this data as pages in Notion as a database
 
