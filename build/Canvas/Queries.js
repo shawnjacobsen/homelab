@@ -12,13 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAssignmentsByCourseID = exports.COURSE_BY_ID_URL = exports.COURSE_INFO_URL = exports.CANVAS_BASE_URL = void 0;
+exports.getAssignmentsByCourseID = exports.COURSE_BY_ID_URL = exports.COURSE_INFO_URL = exports.CARMEN_BASE_URL = exports.CANVAS_BASE_URL = void 0;
 require('dotenv').config();
 const axios_1 = __importDefault(require("axios"));
 const helpers_1 = require("../helpers");
 const COURSE_ID_INDICATOR = "<course_id>";
 // base URL
 exports.CANVAS_BASE_URL = `https://canvas.instructure.com`;
+// CARMEN URL
+exports.CARMEN_BASE_URL = `https://osu.instructure.com`;
 // endpoint to access all active course information
 exports.COURSE_INFO_URL = `${exports.CANVAS_BASE_URL}/api/v1/courses?per_page=100&access_token=${process.env.CARMEN_ACCESS_TOKEN}`;
 // endpoint to access specific course information

@@ -51,7 +51,7 @@ import { productionLog } from './helpers'
       assignmentName: assignment.name,
       progress: assignment.has_submitted_submissions ? "Complete" : "Incomplete",
       dueDate: assignment.due_at,
-      submission: Courses.getCanvasSubmissionURL(assignment.id, assignment.course_id),
+      submission: Courses.getCanvasSubmissionURL(assignment.course_id, assignment.id),
       canvasID: assignment.id,
       semester: Courses.getNotionSemesterFromCourseID(assignment.course_id)
     })

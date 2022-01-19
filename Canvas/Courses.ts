@@ -1,4 +1,4 @@
-import { CANVAS_BASE_URL, getAssignmentsByCourseID } from './Queries'
+import { CARMEN_BASE_URL, getAssignmentsByCourseID } from './Queries'
 
 // environment
 const CURRENT_SEMESTER = process.env.SEMESTER
@@ -37,7 +37,7 @@ export const getAssignementsBySemesterID = async (semesterID):Promise<Array<any>
 export const getNotionCourseNameFromCourseID = (courseID:string):string => COURSE_DATA.find(course => course.id === courseID).notion_name;
 
 // get Submission URL for an assignment
-export const getCanvasSubmissionURL = (courseID:string, assignmentID:string):string => `${CANVAS_BASE_URL}/courses/${courseID}/assignments/${assignmentID}`;
+export const getCanvasSubmissionURL = (courseID:string, assignmentID:string):string => `${CARMEN_BASE_URL}/courses/${courseID}/assignments/${assignmentID}`;
 
 // get the colloquial semester name (ie. SP22, AU35, etc) for some course
 export const getNotionSemesterFromCourseID = (courseID:string):string => COURSE_DATA.find(course => course.id === courseID).semester;

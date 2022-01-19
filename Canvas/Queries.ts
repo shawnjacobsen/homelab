@@ -9,6 +9,10 @@ const COURSE_ID_INDICATOR = "<course_id>"
 export const CANVAS_BASE_URL = 
   `https://canvas.instructure.com`
 
+// CARMEN URL
+export const CARMEN_BASE_URL = 
+  `https://osu.instructure.com`
+
 // endpoint to access all active course information
 export const COURSE_INFO_URL =
   `${CANVAS_BASE_URL}/api/v1/courses?per_page=100&access_token=${process.env.CARMEN_ACCESS_TOKEN}`

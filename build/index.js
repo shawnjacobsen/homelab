@@ -56,10 +56,6 @@ const helpers_1 = require("./helpers");
             (0, helpers_1.productionLog)(`Course is not being tracked. Course ID ${assignment.course_id}`);
             return;
         }
-        if (addedCount > 1) {
-            (0, helpers_1.productionLog)(`Already added one. Assignment ID: ${assignment.id}`);
-            return;
-        }
         (0, helpers_1.productionLog)(`Adding assignment: ${assignment.id}`);
         // create assignment properties
         const properties = Assignment.createAssignmentProperties({
@@ -68,7 +64,7 @@ const helpers_1 = require("./helpers");
             assignmentName: assignment.name,
             progress: assignment.has_submitted_submissions ? "Complete" : "Incomplete",
             dueDate: assignment.due_at,
-            submission: Courses.getCanvasSubmissionURL(assignment.id, assignment.course_id),
+            submission: Courses.getCanvasSubmissionURL(assignment.course_id, assignment.id),
             canvasID: assignment.id,
             semester: Courses.getNotionSemesterFromCourseID(assignment.course_id)
         });

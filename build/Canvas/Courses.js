@@ -46,7 +46,7 @@ exports.getAssignementsBySemesterID = getAssignementsBySemesterID;
 const getNotionCourseNameFromCourseID = (courseID) => COURSE_DATA.find(course => course.id === courseID).notion_name;
 exports.getNotionCourseNameFromCourseID = getNotionCourseNameFromCourseID;
 // get Submission URL for an assignment
-const getCanvasSubmissionURL = (courseID, assignmentID) => `${Queries_1.CANVAS_BASE_URL}/courses/${courseID}/assignments/${assignmentID}`;
+const getCanvasSubmissionURL = (courseID, assignmentID) => `${Queries_1.CARMEN_BASE_URL}/courses/${courseID}/assignments/${assignmentID}`;
 exports.getCanvasSubmissionURL = getCanvasSubmissionURL;
 // get the colloquial semester name (ie. SP22, AU35, etc) for some course
 const getNotionSemesterFromCourseID = (courseID) => COURSE_DATA.find(course => course.id === courseID).semester;
