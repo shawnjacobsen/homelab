@@ -28,7 +28,6 @@ export const createAssignmentProperties = (
 
     // supplied structure for assignment query
     const properties = JSON.parse(JSON.stringify(assignmentProperties))
-    console.log(properties["Due Date"].date !== null)
 
     properties.Submission.url =                               assignmentCustomProperties.submission
     properties.Class.select.name =                            assignmentCustomProperties._class

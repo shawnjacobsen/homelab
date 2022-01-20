@@ -25,14 +25,11 @@ import { productionLog, asyncFilter } from './helpers'
     course.forEach(assignment => flattenedCanvasAssignments.push(assignment))
   );
 
-  console.log("total Assignments: " + flattenedCanvasAssignments.length)
+  productionLog("total Assignments: " + flattenedCanvasAssignments.length)
 
   // filter down to only assignments not in Notion DB
   const newAssignments = await asyncFilter(flattenedCanvasAssignments, async (assignment) => {
     const isNew = await Assignment.isNewAssignment(notionClient, assignment.id)
-    console.log(`assignment ID: ${assignment.id}`)
-    console.log(`isNew: ${isNew}`)
-    console.log(`------------`)
     return isNew
   }) 
 
