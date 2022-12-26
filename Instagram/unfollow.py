@@ -1,7 +1,8 @@
 # unfollow bot for Instagram
 from time import sleep
-from selenium import webdriver, Keys
+from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 
 # Chrome driver location
 CHROME_DRIVER_LOC:str = "../chromedriver.exe"
