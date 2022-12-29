@@ -8,7 +8,8 @@
     "start": "node ./build",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "setup": "npm i & pip install -r requirements.txt"
+    "setup": "npm i & pip install -r requirements.txt",
+    "unfollow":"python -m Instagram.unfollow"
   },
   "repository": {
     "type": "git",
