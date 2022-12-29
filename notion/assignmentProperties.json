@@ -1,0 +1,109 @@
+{
+
+  "Submission": {
+      "type": "url",
+      "url": "TEST"
+  },
+  "Class": {
+      "type": "select",
+      "select": {
+          "name": ""
+      }
+  },
+  "Due Date": {
+      "type": "date",
+      "date": {
+          "start": "",
+          "end": null,
+          "time_zone": null
+      }
+  },
+  "Do Today": {
+      "type": "checkbox",
+      "checkbox": false
+  },
+  "Type": {
+      "type": "select",
+      "select": {
+          "name": ""
+      }
+  },
+  "canvasID": {
+      "type": "rich_text",
+      "rich_text": [
+          {
+              "type": "text",
+              "text": {
+                  "content": "",
+                  "link": null
+              },
+              "annotations": {
+                  "bold": false,
+                  "italic": false,
+                  "strikethrough": false,
+                  "underline": false,
+                  "code": false,
+                  "color": "default"
+              },
+              "plain_text": "",
+              "href": null
+          }
+      ]
+  },
+  "Progress": {
+      "type": "select",
+      "select": {
+          "name": ""
+      }
+  },
+  "Quick Notes": {
+      "type": "rich_text",
+      "rich_text": [
+          {
+              "type": "text",
+              "text": {
+                  "content": "",
+                  "link": null
+              },
+              "annotations": {
+                  "bold": false,
+                  "italic": false,
+                  "strikethrough": false,
+                  "underline": false,
+                  "code": false,
+                  "color": "default"
+              },
+              "plain_text": "",
+              "href": null
+          }
+      ]
+  },
+  "Category": {
+      "type": "select",
+      "select": {
+          "name": "OSU"
+      }
+  },
+  "Assignment": {
+      "type": "title",
+      "title": [
+          {
+              "type": "text",
+              "text": {
+                  "content": "",
+                  "link": null
+              },
+              "annotations": {
+                  "bold": false,
+                  "italic": false,
+                  "strikethrough": false,
+                  "underline": false,
+                  "code": false,
+                  "color": "default"
+              },
+              "plain_text": "",
+              "href": null
+          }
+      ]
+  }
+}
