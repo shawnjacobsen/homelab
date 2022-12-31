@@ -1,35 +1,51 @@
 # unfollow bot for Instagram
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 from time import sleep
+from random import random
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from helpers import scriptDirectory
+from instagram.helpers import loginToInstagram
+from instagram.pages import is404Page
 
 ### SETUP
-CHROME_DRIVER_LOC = "../chromedriver.exe"
-username="prod.maniac"
-password=""
+CHROME_DRIVER_LOC = f"{scriptDirectory()}/chromedriver.exe"
+CHROME_COOKIE_LOC = f"{scriptDirectory()}/selenium"
+IMPLICIT_WAIT_TIMEOUT = 20
+env = dotenv_values()
+USERNAME = env['INSTA_MANIAC_USR']
+PASSWORD = env['INSTA_MANIAC_PSW']
+### -----
 
-### ----------------------------------------
-
-# Chrome driver
+# Chrome driver v108.0.5359.71
 chrome_options = Options()
-chrome_options.add_argument("user-data-dir=selenium") 
+chrome_options.add_argument(f"user-data-dir={CHROME_COOKIE_LOC}") 
 chrome_options.add_argument(f"executable_path={CHROME_DRIVER_LOC}")
-dvr = webdriver.Chrome(chrome_options=chrome_options)
+chrome_options.add_experimental_option("detach",True) # don't auto quit when script is finished
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging']) # prevent USB Error
+dvr = webdriver.Chrome(options=chrome_options)
+dvr.implicitly_wait(IMPLICIT_WAIT_TIMEOUT)
 
-# login to instagram
-dvr.get("https://www.instagram.com/login")
-if dvr.find_element(By.LINK_TEXT,"Go back to Instagram."):
-  print("already logged in")
-elif dvr.find_element(By.NAME,"username"):
-  print("at the login page")
-else:
-  print("reached unknown page")
+# login
+didLogin, res_message = loginToInstagram(dvr)
+if not didLogin:
+  print(f"ERROR: could not login to instagram. {res_message}")
+  print("Stopping process")
+  ### should send message to client via smtp server, too
+  exit()
 
-# follower_btn = dvr.find_element("xpath","/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
-# input_field.send_keys("hello world")
-# dvr.send_keys(Keys.ENTER)
+# navigate to profile page, open followings modal
+dvr.get(f"{homeURL}{USERNAME}/")
+following_selector = "#mount_0_0_vo section > main > div > header > section > ul > li:nth-child(3) > a"
+following_btn = dvr.find_element(By.CSS_SELECTOR, following_selector)
+following_btn.click()
+
+
+
+print("beginning endinig sleep")
+print("done.")

@@ -9,7 +9,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "setup": "npm i & pip install -r requirements.txt",
-    "unfollow":"python -m Instagram.unfollow"
+    "unfollow":"python -m instagram.unfollow"
   },
   "repository": {
     "type": "git",
