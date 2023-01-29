@@ -38,53 +38,14 @@ def addPageToDatabase(databaseId, pageProperties, headers=HEADERS):
 
 
 filter = {
-  "property": "due",
+  "property": "Due Date",
   "date": {
     "past_week": {}
   }
 }
-newPageProperties = {
-	"due": { "type": "date", "date": { "start": "2023-02-01" } },
-	"Tags": { "type": "multi_select", "multi_select": [{ "name": "a" }, { "name": "b" }] },
-	"Column": {
-		"type": "rich_text",
-		"rich_text": [
-			{
-				"type": "text",
-				"text": { "content": "cccccc" },
-				"annotations": {
-					"bold": True,
-					"italic": False,
-					"strikethrough": False,
-					"underline": False,
-					"code": False,
-					"color": "default"
-				},
-				"plain_text": "cccccc"
-			}
-		]
-	},
-	"Name": {
-		"type": "title",
-		"title": [
-			{
-				"type": "text",
-				"text": { "content": "GENERATED ITEM" },
-				"annotations": {
-					"bold": False,
-					"italic": False,
-					"strikethrough": False,
-					"underline": False,
-					"code": False,
-					"color": "default"
-				},
-				"plain_text": "GENERATED ITEM"
-			}
-		]
-	}
-}
 
 print("Getting pages from DB:")
-print(json.dumps(getPages(os.getenv("NOTION_DB_TEST"), filter)))
-print("\nAdding page to DB:")
-print(json.dumps(addPageToDatabase(os.getenv("NOTION_DB_TEST"),newPageProperties)))
+f = open('./Notion/recurringTasks.json')
+tasks = json.load(f)['tasks']
+assignmentProperties = tasks[0]["properties"]
+print(json.dumps(addPageToDatabase(os.getenv("NOTION_DB_ASSIGNMENTS"), assignmentProperties)))

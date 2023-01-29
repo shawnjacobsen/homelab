@@ -1,0 +1,32 @@
+{
+  "tasks":[
+    {
+      "days of the week": [0,1,2,3,6],
+      "time": "21:30:00",
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "Swimming" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-30T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "swim fast", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Swim Practice", "link": null } } ]
+        }
+      }
+    }
+  ]
+}

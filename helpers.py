@@ -1,4 +1,5 @@
 import pathlib
+from datetime import datetime
 from time import sleep
 from random import gauss
 
@@ -16,3 +17,9 @@ def sleepRand(t:float, sigma:float,debug=False) -> None:
   sleep(time_to_wait)
   if (debug):
     print(f"ending random wait time ({time_to_wait} seconds)")
+
+# return the current day of the week as both a string and index
+def dayOfTheWeek():
+  day_of_week = datetime.today().weekday()
+  weekday_name = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][day_of_week]
+  return (day_of_week, weekday_name)
