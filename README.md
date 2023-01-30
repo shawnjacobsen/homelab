@@ -16,4 +16,4 @@ Programmatically uploads specified recurring tasks based on the day of the week 
 - [x] Use the Notion API to add pages to a database
 - [x] Use a JSON file to specify tasks and which days of the week they should be added to the Notion DB
 - [x] Automatic error notifications served to SMS via a local smtp server
-- [x] Deploy to production and create a recurring cronjob to automate script
+- [ ] Deploy to production and create a recurring cronjob to automate script
