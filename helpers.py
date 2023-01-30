@@ -23,3 +23,8 @@ def dayOfTheWeek():
   day_of_week = datetime.today().weekday()
   weekday_name = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][day_of_week]
   return (day_of_week, weekday_name)
+
+# returns current date in ISO 8601 format at a specified time and timezone offset
+def datetimeInISO(hh, mm, ss, offset='Z'):
+  today = datetime.today()
+  return today.strftime(f"%Y-%m-%dT{hh}:{mm}:{ss}{offset}")

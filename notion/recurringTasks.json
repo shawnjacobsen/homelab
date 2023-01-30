@@ -2,7 +2,7 @@
   "tasks":[
     {
       "days of the week": [0,1,2,3,6],
-      "time": "21:30:00",
+      "time": ["21","30","00","-05:00"],
       "properties": {
         "Do Today": { "type": "checkbox", "checkbox": true },
         "Category": {
@@ -19,12 +19,208 @@
         },
         "Due Date": {
           "type": "date",
-          "date": { "start": "2023-01-30T00:00:00-05:00", "end": null, "time_zone": null }
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
         },
-        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "swim fast", "link": null } } ] },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(2 hours) swim fast", "link": null } } ] },
         "Assignment": {
           "type": "title",
           "title": [ { "type": "text", "text": { "content": "Swim Practice", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [1,4,5,6],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "MANIAC" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(2 hours) Make sum heat!", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Beat Production", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [0,2,4],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "MANIAC" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(30 mins) Focus on volume!", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Beat Outreach", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [3,5,6],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "Photography" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(2 hours) Look for inspo!", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Edit Photo/Video", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [4],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "Photography" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(2 hours) Consider scheduling for another day, as well.", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Beat Production", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [0,5],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "Work" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Job Outreach" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(1 hour) Nothing like a good ole Linked List", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Study DSA", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [1,2,3],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "Work" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Job Outreach" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(1 hour) Expert by EOY...", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Study Cloud Architecture", "link": null } } ]
+        }
+      }
+    },
+    {
+      "days of the week": [4],
+      "time": ["23","59","00","-05:00"],
+      "properties": {
+        "Do Today": { "type": "checkbox", "checkbox": true },
+        "Category": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Class": {
+          "type": "select",
+          "select": { "name": "Other" }
+        },
+        "Progress": {
+          "type": "select",
+          "select": { "name": "Incomplete" }
+        },
+        "Due Date": {
+          "type": "date",
+          "date": { "start": "2023-01-01T00:00:00-05:00", "end": null, "time_zone": null }
+        },
+        "Quick Notes": { "type": "rich_text", "rich_text": [ { "type": "text", "text": { "content": "(1 hour) Reach out to network!", "link": null } } ] },
+        "Assignment": {
+          "type": "title",
+          "title": [ { "type": "text", "text": { "content": "Schedule Spring Break Trip", "link": null } } ]
         }
       }
     }

@@ -35,17 +35,3 @@ def addPageToDatabase(databaseId, pageProperties, headers=HEADERS):
   data = res.json()
 
   return data
-
-
-filter = {
-  "property": "Due Date",
-  "date": {
-    "past_week": {}
-  }
-}
-
-print("Getting pages from DB:")
-f = open('./Notion/recurringTasks.json')
-tasks = json.load(f)['tasks']
-assignmentProperties = tasks[0]["properties"]
-print(json.dumps(addPageToDatabase(os.getenv("NOTION_DB_ASSIGNMENTS"), assignmentProperties)))
