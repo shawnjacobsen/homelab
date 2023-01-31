@@ -21,7 +21,7 @@ def getPages(databaseId, filter={}, headers=HEADERS):
   res = requests.request("POST", endpoint, headers=headers, json=data)
   data = res.json()
 
-  return data
+  return (res.status_code, data)
 
 # returns response after adding a new page to the specified database
 def addPageToDatabase(databaseId, pageProperties, headers=HEADERS):
@@ -34,4 +34,4 @@ def addPageToDatabase(databaseId, pageProperties, headers=HEADERS):
   res = requests.request("POST", endpoint, headers=headers, json=data)
   data = res.json()
 
-  return data
+  return (res.status_code, data)
