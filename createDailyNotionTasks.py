@@ -7,7 +7,7 @@ load_dotenv()
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
-
+print(f"new working directory: {dname}")
 from Notion.queries import addPageToDatabase
 from helpers import dayOfTheWeek, datetimeInISO
 from notifications import sendText
