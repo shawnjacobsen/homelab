@@ -1,4 +1,5 @@
 .env
 automation
+venv
 selenium/
 chromedriver.exe
