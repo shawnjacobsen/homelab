@@ -1,0 +1,137 @@
+Disk /dev/loop0: 8 GiB, 8589934592 bytes, 16777216 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop1: 16 GiB, 17179869184 bytes, 33554432 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop2: 8 GiB, 8589934592 bytes, 16777216 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop3: 16 GiB, 17179869184 bytes, 33554432 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sda: 931.51 GiB, 1000204886016 bytes, 1953525168 sectors
+Disk model: ST1000DM010-2EP1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: gpt
+Disk identifier: 7D413748-8A0D-47F2-8EF7-5B9A85A068EE
+
+
+Disk /dev/sdc: 7.28 TiB, 8001563222016 bytes, 15628053168 sectors
+Disk model: ST8000VN004-3CP1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: gpt
+Disk identifier: A8DDAF58-E92C-1D4F-A278-E7A08380884D
+
+Device           Start         End     Sectors  Size Type
+/dev/sdc1         2048 15628036095 15628034048  7.3T Solaris /usr & Apple ZFS
+/dev/sdc9  15628036096 15628052479       16384    8M Solaris reserved 1
+
+
+Disk /dev/sdd: 256.17 GiB, 275064201216 bytes, 537234768 sectors
+Disk model: Crucial_CT275MX3
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 65B998F3-5AE7-4434-BB9B-B2A6CA79839E
+
+Device       Start       End   Sectors   Size Type
+/dev/sdd1       34      2047      2014  1007K BIOS boot
+/dev/sdd2     2048   1050623   1048576   512M EFI System
+/dev/sdd3  1050624 537234734 536184111 255.7G Linux LVM
+
+
+Disk /dev/sdb: 7.28 TiB, 8001563222016 bytes, 15628053168 sectors
+Disk model: ST8000VN004-3CP1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: gpt
+Disk identifier: 59B49AD6-674A-D746-9BC9-6D230D58E219
+
+Device           Start         End     Sectors  Size Type
+/dev/sdb1         2048 15628036095 15628034048  7.3T Solaris /usr & Apple ZFS
+/dev/sdb9  15628036096 15628052479       16384    8M Solaris reserved 1
+
+
+Disk /dev/mapper/pve-swap: 7 GiB, 7516192768 bytes, 14680064 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/pve-root: 248.67 GiB, 267005198336 bytes, 521494528 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+  --- Physical volume ---
+  PV Name               /dev/sdd3
+  VG Name               pve
+  PV Size               255.67 GiB / not usable <4.65 MiB
+  Allocatable           yes (but full)
+  PE Size               4.00 MiB
+  Total PE              65451
+  Free PE               0
+  Allocated PE          65451
+  PV UUID               OQFZm8-A9YV-OkrK-ASSr-n7N1-Jtgc-ViVmVI
+   
+  --- Logical volume ---
+  LV Path                /dev/pve/swap
+  LV Name                swap
+  VG Name                pve
+  LV UUID                Cy3ru6-1NfI-m4ga-2VB3-gnZW-8oP7-gqgcEu
+  LV Write Access        read/write
+  LV Creation host, time proxmox, 2022-01-06 20:28:06 -0500
+  LV Status              available
+  # open                 2
+  LV Size                7.00 GiB
+  Current LE             1792
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:0
+   
+  --- Logical volume ---
+  LV Path                /dev/pve/root
+  LV Name                root
+  VG Name                pve
+  LV UUID                wgaZzN-W7m0-BoE0-UNBC-CiUQ-LaxT-7pa5bn
+  LV Write Access        read/write
+  LV Creation host, time proxmox, 2022-01-06 20:28:06 -0500
+  LV Status              available
+  # open                 1
+  LV Size                <248.67 GiB
+  Current LE             63659
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:1
+   
+NAME   SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+tank  7.27T  1.53T  5.73T        -         -     0%    21%  1.00x    ONLINE  -
+NAME                     USED  AVAIL     REFER  MOUNTPOINT
+tank                    1.53T  5.61T      112K  /tank
+tank/container-backups   102G  5.61T      102G  /mnt/container-backups
+tank/nextcloud_backup     96K  5.61T       96K  /tank/nextcloud_backup
+tank/photography        1.44T  5.61T     1.44T  /tank/photography
+tank/subvol-104-disk-0    96K  8.00G       96K  /tank/subvol-104-disk-0
+tank/subvol-104-disk-1    96K  8.00G       96K  /tank/subvol-104-disk-1
