@@ -2,3 +2,5 @@
 venv
 selenium/
 chromedriver.exe
+*.env*
+*.venv*
