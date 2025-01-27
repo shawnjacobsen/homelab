@@ -1,0 +1,20 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "node test HTTP server",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "build-css": "sass src/style.scss public/style.css",
+    "build-js": "cp src/main.js public/main.js",
+    "build": "npm run build-css && npm run build-js",
+    "start": "npm run build && node app.js"
+  },
+  "author": "Shawn Jacobsen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "sass": "^1.81.0",
+    "vite": "^6.0.1"
+  }
+}
