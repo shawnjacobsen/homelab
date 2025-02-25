@@ -7,6 +7,7 @@ services:
     volumes:
       - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/docker/nextcloud:/mnt/data
     networks:
       - nextcloud-aio
     ports:
@@ -15,6 +16,7 @@ services:
       APACHE_PORT: 11000
       APACHE_IP_BINDING: 127.0.0.1
       SKIP_DOMAIN_VALIDATION: true
+      NEXTCLOUD_DATADIR: /mnt/data
   caddy:
     image: caddy:alpine
     restart: unless-stopped
