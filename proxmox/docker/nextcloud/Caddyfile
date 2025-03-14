@@ -17,8 +17,14 @@
     }
 }
 https://{$NC_DOMAIN} {
+    tls {
+        dns tailscale
+    }
     reverse_proxy nextcloud-aio-apache:11000
 }
 http://{$NC_DOMAIN} {
+    tls {
+        dns tailscale
+    }
     reverse_proxy nextcloud-aio-apache:11000
 }
