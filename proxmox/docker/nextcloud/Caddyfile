@@ -17,8 +17,8 @@
     }
 }
 https://{$NC_DOMAIN} {
-    reverse_proxy host.docker.internal:11000
+    reverse_proxy nextcloud-aio-mastercontainer:11000
 }
 http://{$NC_DOMAIN} {
-    reverse_proxy host.docker.internal:11000
+    reverse_proxy nextcloud-aio-mastercontainer:11000
 }
