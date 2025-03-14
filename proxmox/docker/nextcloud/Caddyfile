@@ -17,9 +17,6 @@
     }
 }
 https://{$NC_DOMAIN} {
-    tls {
-        get_certificate tailscale
-    }
     reverse_proxy host.docker.internal:11000
 }
 http://{$NC_DOMAIN} {
