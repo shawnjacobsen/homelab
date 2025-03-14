@@ -16,12 +16,13 @@ services:
       APACHE_IP_BINDING: 127.0.0.1
       SKIP_DOMAIN_VALIDATION: true
   nextcloud-aio-caddy:
+    env_file: .env
     build:
       context: .
       dockerfile: Caddy.Dockerfile
     restart: unless-stopped
     environment:
-      NC_DOMAIN: cloud.heron-fiordland.ts.net # Change this to your domain ending with .ts.net in the format {$TS_HOSTNAME}.{tailnetdomain}
+      NC_DOMAIN: ${NC_DOMAIN} # Change this to your domain ending with .ts.net in the format {$TS_HOSTNAME}.{tailnetdomain}
     volumes:
       - type: bind
         source: ./Caddyfile
@@ -42,10 +43,11 @@ services:
     network_mode: service:nextcloud-aio-tailscale
   nextcloud-aio-tailscale:
     image: tailscale/tailscale:v1.80.0
+    env_file: .env
     environment:
-      TS_HOSTNAME: cloud # Enter the hostname for your tailnet
-      TS_AUTH_KEY: tskey-client-kX4nsTTwT711CNTRL-enTXapn82484gJzZPHaq38y2eSQf23QQ # OAuth client key recommended
-      TS_EXTRA_ARGS: --advertise-tags=tag:nextcloud # Tags are required when using OAuth client
+      TS_HOSTNAME: ${TS_HOSTNAME} # Enter the hostname for your tailnet
+      TS_AUTH_KEY: ${TS_AUTH_KEY} # OAuth client key recommended
+      TS_EXTRA_ARGS: ${TS_EXTRA_ARGS} # Tags are required when using OAuth client
     init: true
     restart: unless-stopped
     devices:
