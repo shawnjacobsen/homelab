@@ -23,6 +23,8 @@ services:
     restart: unless-stopped
     environment:
       NC_DOMAIN: ${NC_DOMAIN} # Change this to your domain ending with .ts.net in the format {$TS_HOSTNAME}.{tailnetdomain}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - type: bind
         source: ./Caddyfile

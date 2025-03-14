@@ -18,13 +18,10 @@
 }
 https://{$NC_DOMAIN} {
     tls {
-        dns tailscale
+        get_certificate tailscale
     }
-    reverse_proxy nextcloud-aio-apache:11000
+    reverse_proxy host.docker.internal:11000
 }
 http://{$NC_DOMAIN} {
-    tls {
-        dns tailscale
-    }
-    reverse_proxy nextcloud-aio-apache:11000
+    reverse_proxy host.docker.internal:11000
 }
