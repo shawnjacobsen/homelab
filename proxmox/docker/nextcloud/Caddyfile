@@ -21,4 +21,3 @@ https://{$NC_DOMAIN} {
 }
 http://{$NC_DOMAIN} {
     reverse_proxy nextcloud-aio-apache:11000
-}
