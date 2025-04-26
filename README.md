@@ -1,10 +1,8 @@
-# linux-automation
-A directory of scripts to be continuously run on an on-prem linux server to automate various processes.</br>
-
+# Shawn's Home Lab
+A directory of scripts to be continuously run on an on-prem linux server to automate various processes.
+</br>
 [Homelab Setup and Information](https://tranquil-coyote-ee7.notion.site/Home-Lab-Architecture-v2-0-1e16f65623108162b7c6cb64fe7c54df)
 
-</br>
-</br>
 ## Canvas Automation
 Pulls course and assignment information and adds this data as pages to a specified Notion database
 
