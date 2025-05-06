@@ -1,0 +1,10 @@
+# Environment for all jobs
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DOCKER_DIR=/home/shawn/homelab/proxmox/docker
+
+# Nextcloud File Scan (every 15 minutes)
+*/15 * * * * root /bin/bash $DOCKER_DIR/nextcloud/scan-files.sh >> $DOCKER_DIR/nextcloud/logs/scan-files.log 2>&1
+
+# Nextcloud health check (daily at 3 AM)
+0 3 * * * root /bin/bash $DOCKER_DIR/nextcloud/health.sh >> $DOCKER_DIR/nextcloud/logs/health.log 2>&1
