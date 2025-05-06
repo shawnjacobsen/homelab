@@ -1,249 +1,444 @@
-# Docker Applications Cron Management
+<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
-This document describes a scalable, maintainable system for managing scheduled tasks (cron jobs) across all your Docker-based applications. It uses a single `/etc/cron.d` file, version-controlled under `./homelab/docker`, and a deployment script to push updates.
+# Cron Job Management System for Docker Applications
 
----
+This document describes how to manage scheduled tasks (cron jobs) for all your Docker-based applications in a centralized, version-controlled way.
 
-## Table of Contents
+## Path Reference
 
-1. [Overview](#overview)
-2. [Directory Layout](#directory-layout)
-3. [Tutorial: Initial Setup](#tutorial-initial-setup)
+Throughout this document, the following path references are used:
 
-4. [Prerequisites](#prerequisites)
-5. [Create per-app `cron.sh`](#create-per-app-cronsh)
-6. [Create the master cron file](#create-the-master-cron-file)
-7. [Create the deployment script](#create-the-deployment-script)
-8. [Version Control \& Deployment](#version-control--deployment)
-9. [Verification](#verification)
-1. [SOP: Ongoing Maintenance](#sop-ongoing-maintenance)
+- `<HOMELAB_PATH>` - The absolute path to your homelab directory (e.g., `/home/shawn/homelab`)
+- `<DOCKER_DIR>` - The Docker applications directory: `<HOMELAB_PATH>/docker`
 
-2. [Updating Existing Jobs](#updating-existing-jobs)
-3. [Adding New Jobs](#adding-new-jobs)
-4. [Removing Jobs](#removing-jobs)
-5. [Logging \& Log Rotation](#logging--log-rotation)
-1. [Best Practices](#best-practices)
+Example: If your homelab is at `/home/shawn/homelab`, then `<DOCKER_DIR>` would be `/home/shawn/homelab/docker`.
 
 ---
 
-## Overview
-
-We maintain a single cron file in `/etc/cron.d/docker-apps`, sourced from `./homelab/docker/docker-apps-cron`. Each application has its own `cron.sh` that encapsulates the actual `docker exec` commands. A deployment script (`update-cron.sh`) copies the version-controlled cron file into place and sets proper permissions.
-
-This approach ensures:
-
-- **Isolation** of per-app scripts
-- **Version control** of the master cron configuration
-- **Non-invasive** scheduling (no editing `/etc/crontab` or user crontabs)
-
----
-
-## Directory Layout
-
-```
-homelab/
-└── docker/
-    ├── nextcloud/
-    │   ├── docker-compose.yml
-    │   ├── cron.sh
-    │   └── cron.log
-    ├── application-2/
-    │   ├── docker-compose.yml
-    │   ├── cron.sh
-    │   └── cron.log
-    ├── docker-apps-cron        # Master cron file (version-controlled)
-    └── update-cron.sh          # Deployment script
-```
-
-- **`cron.sh`**: Script per application that runs `docker exec…`.
-- **`cron.log`**: Log file capturing stdout/stderr of the cron job.
-- **`docker-apps-cron`**: Consolidated cron definitions for all apps.
-- **`update-cron.sh`**: Copies `docker-apps-cron` to `/etc/cron.d/docker-apps`.
-
----
-
-## Tutorial: Initial Setup
+## Tutorial: Setup Guide
 
 ### Prerequisites
 
-- Ubuntu host with Docker installed
-- `homelab/docker` directory under version control (Git)
-- Sudo access to write `/etc/cron.d`
+- Ubuntu host with Docker and cron installed
+- Directory at `<DOCKER_DIR>` that contains your Docker application configurations
+- Sudo access to copy files into `/etc/cron.d`
 
 
-### Create per-app `cron.sh`
+### 1. Directory Layout
 
-1. In each application folder, create `cron.sh`:
+```plaintext
+<DOCKER_DIR>/
+├── nextcloud/
+│   ├── backup.sh
+│   ├── health.sh
+│   └── logs/
+├── application-2/
+│   ├── task.sh
+│   └── logs/
+├── docker-apps-cron
+└── update-cron.sh
+```
+
+
+### 2. Create Application Scripts
+
+#### Example: Nextcloud
+
+1. **Create script directories and logs folder**
+
+```bash
+mkdir -p <DOCKER_DIR>/nextcloud/logs
+```
+
+2. **Backup script**
+File: `<DOCKER_DIR>/nextcloud/backup.sh`
 
 ```bash
 #!/bin/bash
-# ./homelab/docker/nextcloud/cron.sh
-docker exec -u www-data nextcloud-aio-nextcloud \
-  /usr/src/nextcloud/occ preview:generate-all
+# Script to backup Nextcloud data
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Starting Nextcloud backup..."
+
+# Example: Execute docker command to backup Nextcloud
+docker exec -u www-data nextcloud-aio-nextcloud php occ maintenance:mode --on
+# More backup commands would go here
+docker exec -u www-data nextcloud-aio-nextcloud php occ maintenance:mode --off
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Nextcloud backup completed"
 ```
 
-2. Make it executable:
+3. **Health check script**
+File: `<DOCKER_DIR>/nextcloud/health.sh`
 
 ```bash
-chmod +x ./homelab/docker/nextcloud/cron.sh
+#!/bin/bash
+# Script to check Nextcloud health
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Running Nextcloud health check..."
+
+# Example: Check if container is running and database is accessible
+if docker exec nextcloud-aio-nextcloud php occ status | grep -q "installed: true"; then
+  echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Nextcloud is healthy"
+else
+  echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] WARNING: Nextcloud may have issues"
+fi
+```
+
+4. Make them executable:
+
+```bash
+chmod +x <DOCKER_DIR>/nextcloud/{backup.sh,health.sh}
 ```
 
 
-### Create the master cron file
+#### Example: Application-2
 
-1. Create `./homelab/docker/docker-apps-cron`:
+1. **Create script directory and logs folder**
 
 ```bash
+mkdir -p <DOCKER_DIR>/application-2/logs
+```
+
+2. **Task script**
+File: `<DOCKER_DIR>/application-2/task.sh`
+
+```bash
+#!/bin/bash
+# Script to perform routine tasks for Application-2
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Running Application-2 maintenance task..."
+
+# Example: Execute docker command for Application-2
+docker exec application-2-container ./maintenance-task.sh
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Application-2 task completed"
+```
+
+3. Make it executable:
+
+```bash
+chmod +x <DOCKER_DIR>/application-2/task.sh
+```
+
+
+### 3. Configure Log Rotation
+
+Create a log rotation configuration to prevent log files from consuming too much disk space:
+
+File: `<DOCKER_DIR>/docker-apps-logrotate`
+
+```
+<DOCKER_DIR>/*/logs/*.log {
+    weekly
+    rotate 4
+    compress
+    missingok
+    notifempty
+    create 0644 root root
+}
+```
+
+Deploy this configuration:
+
+```bash
+sudo cp <DOCKER_DIR>/docker-apps-logrotate /etc/logrotate.d/docker-apps
+sudo chmod 644 /etc/logrotate.d/docker-apps
+```
+
+
+### 4. Create Combined Cron File
+
+File: `<DOCKER_DIR>/docker-apps-cron`
+
+```
+# Environment for all jobs
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-# Nextcloud: daily at 2AM
-0 2 * * * root /bin/bash /full/path/to/homelab/docker/nextcloud/cron.sh \
-  >> /full/path/to/homelab/docker/nextcloud/cron.log 2>&1
+# Nextcloud backup (daily at 1 AM)
+0 1 * * * root /bin/bash <DOCKER_DIR>/nextcloud/backup.sh \
+    >> <DOCKER_DIR>/nextcloud/logs/backup.log 2>&1
 
-# Application-2: daily at 3AM
-0 3 * * * root /bin/bash /full/path/to/homelab/docker/application-2/cron.sh \
-  >> /full/path/to/homelab/docker/application-2/cron.log 2>&1
-```
+# Nextcloud health check (daily at 3 AM)
+0 3 * * * root /bin/bash <DOCKER_DIR>/nextcloud/health.sh \
+    >> <DOCKER_DIR>/nextcloud/logs/health.log 2>&1
 
-2. Commit to Git:
-
-```bash
-git add docker-apps-cron
-git commit -m "Add master cron for Docker apps"
+# Application-2 task (every 6 hours)
+0 */6 * * * root /bin/bash <DOCKER_DIR>/application-2/task.sh \
+    >> <DOCKER_DIR>/application-2/logs/task.log 2>&1
 ```
 
 
-### Create the deployment script
+### 5. Create Deployment Script
 
-1. Create `update-cron.sh` in `./homelab/docker`:
+File: `<DOCKER_DIR>/update-cron.sh`
 
 ```bash
 #!/bin/bash
-CRON_SRC="$(pwd)/docker-apps-cron"
+# Script to deploy the cron configuration to system
+
+CRON_SRC="<DOCKER_DIR>/docker-apps-cron"
 CRON_DST="/etc/cron.d/docker-apps"
 
+# Copy and set permissions
 sudo cp "$CRON_SRC" "$CRON_DST"
 sudo chmod 644 "$CRON_DST"
 sudo chown root:root "$CRON_DST"
 
-echo "Deployed cron file to $CRON_DST"
+echo "✅ Deployed cron file to $CRON_DST"
 ```
 
-2. Make it executable:
+Make it executable:
 
 ```bash
-chmod +x update-cron.sh
+chmod +x <DOCKER_DIR>/update-cron.sh
 ```
 
 
-### Version Control \& Deployment
+### 6. Deploy Cron File
 
-Whenever you change `docker-apps-cron`:
+Whenever you update `docker-apps-cron`:
 
 ```bash
-git add docker-apps-cron
-git commit -m "Update cron schedule for Nextcloud"
-./update-cron.sh
+<DOCKER_DIR>/update-cron.sh
 ```
 
+Cron will automatically pick up `/etc/cron.d/docker-apps`-no need to reload cron manually.
 
-### Verification
+### 7. Verify Cron Jobs \& Logs
 
-- Ensure `/etc/cron.d/docker-apps` exists, is owned by root, and has 644 perms:
+- Check job list:
 
 ```bash
-ls -l /etc/cron.d/docker-apps
+sudo grep CRON /var/log/syslog
+grep docker-apps /etc/cron.d/docker-apps
 ```
 
-- Check syslog or cron log for job execution:
+- Inspect logs under each app's `logs/` directory:
 
 ```bash
-grep CRON /var/log/syslog | tail -n 20
+tail -f <DOCKER_DIR>/nextcloud/logs/backup.log
 ```
 
-- Inspect per-app `cron.log` for output and errors.
 
 ---
 
-## SOP: Ongoing Maintenance
+## SOP: Standard Operating Procedure
 
-### Updating Existing Jobs
+### 1. Purpose
 
-1. **Edit** the relevant line in `docker-apps-cron` or `cron.sh`.
-2. **Commit** changes:
+Ensure reliable management of cron jobs for all Docker applications using a single `/etc/cron.d` file.
 
-```bash
-git add docker-apps-cron
-git commit -m "Reschedule Nextcloud preview generation to 1AM"
+### 2. Scope
+
+Applies to all scheduled tasks executed for containers managed under `<DOCKER_DIR>/`.
+
+### 3. Responsibilities
+
+- **Engineering Team**: Create and review cron definitions
+- **DevOps Lead**: Approve changes and deploy updates via `update-cron.sh`
+
+
+### 4. References
+
+- Docker documentation
+- Ubuntu cron manual (`man 5 crontab`)
+- Logrotate documentation (`man logrotate`)
+
+
+### 5. Directory Layout
+
+```
+<DOCKER_DIR>/
+├── <app-name>/
+│   ├── *.sh                  # individual task scripts
+│   └── logs/                 # per-script log output
+├── docker-apps-cron          # centralized cron definitions
+├── docker-apps-logrotate     # log rotation configuration
+└── update-cron.sh            # deployment script
 ```
 
-3. **Deploy**:
+
+### 6. Definitions
+
+- **Cron file**: `/etc/cron.d/docker-apps` loaded by system cron
+- **CRON_SRC**: Source file at `<DOCKER_DIR>/docker-apps-cron`
+- **CRON_DST**: Deployed file `/etc/cron.d/docker-apps`
+- **Log rotation**: Configured via `/etc/logrotate.d/docker-apps`
+
+
+### 7. Procedure
+
+#### 7.1 Adding a New Cron Job
+
+1. **Create the script directory and logs folder**:
 
 ```bash
-./update-cron.sh
+mkdir -p <DOCKER_DIR>/<app-name>/logs
 ```
 
-4. **Verify**: check `/etc/cron.d/docker-apps` and logs.
+2. **Create the task script**:
 
-### Adding New Jobs
+```bash
+nano <DOCKER_DIR>/<app-name>/task-name.sh
+```
 
-1. **Create** `cron.sh` in `./homelab/docker/<new-app>/`:
+Basic script template:
 
 ```bash
 #!/bin/bash
-docker exec -u ... your-command
+# Description: What this script does
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Starting task..."
+
+# Your commands here
+# docker exec <container-name> <command>
+
+echo "[ $(date '+%Y-%m-%d %H:%M:%S') ] Task completed"
 ```
 
-2. **Make executable**:
+3. **Make the script executable**:
 
 ```bash
-chmod +x ./homelab/docker/<new-app>/cron.sh
+chmod +x <DOCKER_DIR>/<app-name>/task-name.sh
 ```
 
-3. **Append** a new line in `docker-apps-cron`:
+4. **Add to `docker-apps-cron`**:
 
-```plaintext
-0 4 * * * root /bin/bash /full/path/to/homelab/docker/<new-app>/cron.sh \
-  >> /full/path/to/homelab/docker/<new-app>/cron.log 2>&1
+```bash
+nano <DOCKER_DIR>/docker-apps-cron
 ```
 
-4. **Commit \& deploy** as above.
+Add your new cron entry:
 
-### Removing Jobs
+```
+# <app-name> task description (timing)
+0 3 * * * root /bin/bash <DOCKER_DIR>/<app-name>/task-name.sh \
+    >> <DOCKER_DIR>/<app-name>/logs/task-name.log 2>&1
+```
 
-1. **Remove** the corresponding line from `docker-apps-cron`.
-2. (Optional) **Delete** the app’s `cron.sh` and `cron.log`.
-3. **Commit \& deploy**.
+5. **Deploy**:
 
-### Logging \& Log Rotation
+```bash
+<DOCKER_DIR>/update-cron.sh
+```
 
-- Each job appends to its own `cron.log`.
-- Implement `logrotate` in `/etc/logrotate.d/docker-apps`:
+6. **Verify** with:
 
-```plaintext
-/full/path/to/homelab/docker/*/cron.log {
-    daily
-    rotate 7
-    compress
-    missingok
-    notifempty
-}
+```bash
+grep <app-name> /etc/cron.d/docker-apps
 ```
 
 
----
+#### 7.2 Updating an Existing Cron Job
 
-## Best Practices
+1. **Edit the relevant line** in `docker-apps-cron`:
 
-- **Absolute Paths**: Always use full paths in cron entries.
-- **Permissions**: `/etc/cron.d` files must be `root:root` and `644`.
-- **Test Scripts**: Run `cron.sh` manually to catch errors early.
-- **Version Control**: Keep `docker-apps-cron` and `cron.sh` under Git.
-- **Documentation**: Comment your cron lines for clarity.
-- **Monitoring**: Regularly scan cron logs and `cron.log` files for failures.
+```bash
+nano <DOCKER_DIR>/docker-apps-cron
+```
 
----
+2. **Deploy**:
 
-By following this SOP, you maintain clear separation of concerns, version-controlled scheduling, and reliable execution of all Docker-based application cron tasks.
+```bash
+<DOCKER_DIR>/update-cron.sh
+```
+
+3. **Confirm** timing/execution via logs:
+
+```bash
+tail -f <DOCKER_DIR>/<app-name>/logs/task-name.log
+```
+
+
+#### 7.3 Removing a Cron Job
+
+1. **Delete the line(s)** from `docker-apps-cron`:
+
+```bash
+nano <DOCKER_DIR>/docker-apps-cron
+```
+
+2. **Deploy**:
+
+```bash
+<DOCKER_DIR>/update-cron.sh
+```
+
+3. **Archive old logs** (optional):
+
+```bash
+cd <DOCKER_DIR>/<app-name>/logs/
+tar -czvf task-name-logs-archive-$(date '+%Y%m%d').tar.gz task-name.log*
+rm task-name.log*
+```
+
+
+#### 7.4 Log Management
+
+Logs for all application tasks are stored in dedicated directories:
+
+```
+<DOCKER_DIR>/<app-name>/logs/
+```
+
+**Manual log inspection**:
+
+```bash
+tail -f <DOCKER_DIR>/<app-name>/logs/task-name.log
+```
+
+**Log analysis** with grep:
+
+```bash
+grep "ERROR" <DOCKER_DIR>/<app-name>/logs/task-name.log
+```
+
+**Log rotation** is handled automatically by the system's logrotate service using the configuration at `/etc/logrotate.d/docker-apps`.
+
+#### 7.5 Troubleshooting
+
+1. **Verify cron is running**:
+
+```bash
+systemctl status cron
+```
+
+2. **Check cron logs**:
+
+```bash
+sudo grep CRON /var/log/syslog
+```
+
+3. **Test script manually**:
+
+```bash
+<DOCKER_DIR>/<app-name>/task-name.sh
+```
+
+4. **Check permissions**:
+
+```bash
+ls -la /etc/cron.d/docker-apps
+ls -la <DOCKER_DIR>/<app-name>/task-name.sh
+```
+
+
+#### 7.6 Rollback
+
+If a cron job causes issues:
+
+1. **Edit the cron file** to comment out or fix the problematic job:
+
+```bash
+nano <DOCKER_DIR>/docker-apps-cron
+```
+
+2. **Deploy** the updated file:
+
+```bash
+<DOCKER_DIR>/update-cron.sh
+```
+
+By following this guide and SOP, you'll maintain a clear, auditable, and scalable cron management system for all your Dockerized applications.
 
