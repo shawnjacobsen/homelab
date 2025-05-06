@@ -8,3 +8,7 @@ chromedriver.exe
 *__pycache__*
 
 !*.env.template
+
+# ignore all files in a logs directory but keep the .gitkeep file
+**/logs/*
+!.gitkeep
