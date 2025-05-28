@@ -7,4 +7,4 @@ DOCKER_DIR=/home/shawn/homelab/proxmox/docker
 */15 * * * * root /bin/bash $DOCKER_DIR/nextcloud/scan-files.sh >> $DOCKER_DIR/nextcloud/logs/scan-files.log 2>&1
 
 # Nextcloud health check (daily at 3 AM)
-0 3 * * * root /bin/bash $DOCKER_DIR/nextcloud/health.sh >> $DOCKER_DIR/nextcloud/logs/health.log 2>&1
+0 3 * * * root /bin/bash $DOCKER_DIR/nextcloud/daily-health-check.sh >> $DOCKER_DIR/nextcloud/logs/health.log 2>&1
