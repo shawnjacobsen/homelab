@@ -6,6 +6,7 @@ chromedriver.exe
 *.venv*
 *node_modules*
 *__pycache__*
+**/data/**
 
 !*.env.template
 
