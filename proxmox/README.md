@@ -377,31 +377,6 @@ This multi-layered approach provides enterprise-grade storage features while mai
 
 <div style="text-align: center">⁂</div>
 
-[^1]: docker
-```
-
-This updated documentation preserves all the original information while adding the new Plex media server components, ZFS media dataset, GPU sharing details, and updated storage integration architecture.
-
-<div style="text-align: center">⁂</div>
-
-[^1]: Homelab-Infrastructure-Documentation-v3.0.md
-
-[^2]: https://github.com/M0NsTeRRR/homelabv3-infra
-
-[^3]: https://www.joekarlsson.com/2023/09/how-to-get-started-building-a-homelab-server-in-2024/
-
-[^4]: https://mattadam.com/2024/01/12/vmware-cloud-foundation-vcf-in-your-home-lab/
-
-[^5]: https://github.com/mkuthan/homelab-public
-
-[^6]: https://www.reddit.com/r/homelab/comments/u3h2l2/homelab_documentation/
-
-[^7]: https://www.thetechguy.it/post/33-home-lab-design/
-
-[^8]: https://news.ycombinator.com/item?id=39640992
-
-[^9]: https://techmyth.blog/en/posts/homelab-ad-doc-using-asbuiltreport/
-
 [^10]: https://www.youtube.com/watch?v=QY-jHRv60D0
 
 [^11]: https://techmyth.blog/en/posts/homelab-veeam-vbr-doc-with-asbuiltreport/
