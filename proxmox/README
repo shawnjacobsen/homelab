@@ -1,10 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
-# you removed a significant amount of information from the original markdown file. please use the attached markdown file as the starting point, then only add in additional information based on the changes we made for plex (zfs pool, bind mounts, container compose)
-
-You're absolutely right - I should preserve all the existing information. Here's the updated documentation using your attached markdown file as the base, adding only the Plex-related changes:
-
-```markdown
 # Homelab Infrastructure Documentation v3.0
 
 ## **Hardware Specifications**
