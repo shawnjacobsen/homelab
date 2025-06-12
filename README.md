@@ -1,115 +1,170 @@
 # Shawn's Home Lab
-*A hands-on learning environment for modern infrastructure technologies while solving real home service needs*
+*My personal setup for on-premise, local services and experimentation*
 
-## Why This Homelab Exists
+## Overview
 
-This homelab serves as my **learning laboratory** for enterprise technologies while providing practical home services. Every architectural choice balances learning opportunities with solving real problems I actually have - from media streaming to AI experimentation to secure remote access.
+My homelab runs essential home services while serving as a platform for exploring enterprise technologies. Built on an Intel Xeon E5-2640 v3 system with ZFS storage and Proxmox virtualization, it provides file hosting, media streaming, AI services, and secure remote access through containerized applications.
 
-## Core Infrastructure Decisions
+## Hardware Foundation
 
-### **Virtualization: Proxmox + LXC**
-- **What I'm Learning**: Enterprise virtualization management and container orchestration
-- **Practical Need**: Run multiple isolated services on limited hardware
-- **Why LXC over VMs**: Wanted to understand lightweight containerization without VM overhead
-- **Privileged LXC Choice**: Simplified my learning curve for GPU passthrough and storage access
+### **Proxmox Host (pve)**
+- **CPU**: Intel Xeon E5-2640 v3 (8-core, 2.6GHz)
+- **RAM**: 16GB DDR4-3000 CL15
+- **Motherboard**: ASUS X99 WS/IPMI
+- **GPU**: NVIDIA GTX 1070 (passed through to LXC)
+- **Boot Drive**: 256GB SSD
+- **Network**: Dual NIC bridge (enp5s0, enp6s0 → vmbr0)
+- **IP**: 10.0.0.20/24 (static)
 
-### **Storage: ZFS Multi-Pool Strategy**
+The hardware choice balances performance with power efficiency - the Xeon provides ECC memory support and sufficient compute for multiple concurrent workloads while the GTX 1070 handles both AI inference and media transcoding duties.
 
-**Learning Goals**: Modern filesystem management, data integrity, and performance optimization
+## ZFS Storage Architecture
 
-**Real Problems Solved**:
-- **Primary Pool (tank)**: Mirrored drives protect my irreplaceable family photos and documents
-- **Testing Pool (mouse)**: Separate space for breaking things without risking important data
-- **Media Optimization**: 1M recordsize because I got tired of slow Plex streaming on large files
+### **Tank Pool (Mirror - 7.3TB usable)**
+Primary storage using two mirrored 8TB drives for critical data that requires redundancy:
+- User files and documents
+- Docker engine data
+- Service configurations and databases
 
-**ZFS Features I'm Exploring**:
-- Snapshots for "oops, I broke it" moments
-- Compression to maximize my limited storage budget
-- Future expansion as I outgrow current capacity
+### **Mouse Pool (931GB)**
+Single 1TB drive for experimental workloads and media content:
+- Media files optimized with 1M recordsize for large video files
+- Temporary storage and testing datasets
+- Non-critical data where single-drive risk is acceptable
 
-### **GPU Sharing Experiment**
+### **Dataset Organization**
+- `tank/userdata` (926GB) - NextCloud user storage
+- `tank/docker` (141GB) - Docker engine data and volumes
+- `mouse/media` - Plex media library (movies, tv, music)
+  - **Recordsize**: 1M (optimized for video files vs 128K default)
+  - **Compression**: LZ4
+  - **Atime**: Disabled for performance
 
-**The Challenge**: I wanted both Plex transcoding and local AI, but only have one GPU
-**What I Learned**: NVENC/NVDEC and compute cores are separate - they can actually run concurrently
-**Practical Result**: Can transcode movies while running AI models without conflicts
+This setup provides data integrity through ZFS checksums, automatic compression, snapshot capabilities, and performance optimization tailored to each workload type.
 
-## Services I Actually Use
+## Virtualization Layer
 
-### **Self-Hosted Cloud (NextCloud)**
-- **Learning**: Alternative to Google Drive/Dropbox, understanding cloud storage architecture
-- **Real Use**: Access my files from anywhere, share photos with family
-- **Integration Challenge**: Getting it to work with both user files and media through unified storage
+### **Ubuntu Docker LXC (VMID: 101)**
+- **Hostname**: docker
+- **IP**: 10.0.0.30/24 (static)
+- **SSH Port**: 2053
+- **OS**: Ubuntu 24.04.2 LTS
+- **Resources**: 16GB RAM, 16 CPU cores
+- **Configuration**: Privileged container with GPU passthrough
 
-### **Media Server (Plex)**
-- **Learning**: Media server architecture, hardware transcoding optimization
-- **Real Use**: Stream my movie collection to family devices
-- **Storage Integration**: Learned to optimize ZFS for large media files
+### **LXC Storage Integration**
+Three-tier storage architecture: ZFS pools → LXC bind mounts → Docker volumes
+- **mp0**: `tank/docker` → `/var/lib/docker` (Docker engine data)
+- **mp1**: `tank/userdata` → `/mnt/data/share/myfiles` (NextCloud data)
+- **mp2**: `mouse/media` → `/mnt/data/share/media` (Plex media)
 
-### **Local AI (Ollama + Open WebUI)**
-- **Learning**: Running large language models locally, understanding AI inference
-- **Real Use**: Private AI assistant for coding help and general questions
-- **GPU Learning**: Figuring out memory management and performance optimization
+### **GPU Passthrough Configuration**
+Direct NVIDIA device access through LXC mount entries:
+/dev/nvidia0, /dev/nvidiactl, /dev/nvidia-modeset
+/dev/nvidia-uvm, /dev/nvidia-uvm-tools
+/dev/nvidia-caps/nvidia-cap1, /dev/nvidia-caps/nvidia-cap2
+
+text
+
+Device permissions configured for proper GPU access (195:*, 235:*, 238:*) enabling both compute and encoding hardware utilization.
+
+## Service Implementation
+
+### **File Hosting - NextCloud AIO**
+- **Access**: Via Tailscale (cloud.tailnet)
+- **Storage**: Unified mount to `/mnt/data/share` accessing both user files and media
+- **Integration**: Tailscale + Caddy for automatic HTTPS certificates
+- **Data**: ZFS `tank/userdata` provides core file storage with snapshot protection
+
+### **Media Streaming - Plex**
+- **Port**: 32400
+- **Access**: Via Tailscale (docker.tailnet:32400/web)
+- **Transcoding**: NVIDIA GTX 1070 hardware acceleration (NVENC/NVDEC)
+- **Media Libraries**: 
+  - Movies: `/data/movies`
+  - TV Shows: `/data/tv` 
+  - Music: `/data/music`
+- **Storage**: ZFS `mouse/media` with 1M recordsize optimization
+- **Performance**: Handles 5-6 concurrent 1080p transcodes alongside AI workloads
+
+### **Local AI Infrastructure**
+- **Ollama**: Port 11434 (LLM inference engine)
+- **Open WebUI**: Port 7000 (web interface)
+- **GPU Acceleration**: NVIDIA GTX 1070 compute cores
+- **Supporting Services**: SearXNG (port 7777), Redis, Apache Tika
+- **Network**: Isolated Docker network (ai-net) for service communication
 
 ### **Network Services**
-- **Pi-hole**: Learning DNS management while blocking ads on most devices
-- **Tailscale**: Wanted secure remote access that "just works" - replaced my Cloudflare Tunnel experiment
+- **Pi-hole**: DNS/ad-blocking on 10.0.0.30 (ports 53, 80, 443)
+  - Selective deployment - configured devices only
+  - Preserves default DHCP for testing and work devices
+- **Tailscale**: Mesh VPN with OAuth authentication
+  - Machine name: "cloud"
+  - Automatic certificate management
+  - Replaced Cloudflare Tunnel due to NextCloud AIO compatibility
 
-## What I've Learned Along the Way
+## Technical Architecture
 
-### **Storage Engineering**
-- ZFS pool management and optimization strategies
-- How different workloads need different storage configurations
-- The value of data integrity features when you can't afford to lose family photos
+### **Storage Flow**
+ZFS Pools → LXC Bind Mounts → Docker Volumes/Bind Mounts
 
-### **Containerization Strategy**
-- When to use LXC vs Docker vs full VMs
-- Container orchestration with practical Docker Compose
-- Resource allocation and isolation techniques
+text
 
-### **Hardware Optimization**
-- GPU resource sharing between competing workloads
-- Performance tuning for specific use cases
-- Capacity planning with limited resources
+**Docker Engine**: `tank/docker` → `/var/lib/docker`
+- overlay2 filesystem layers
+- persistent volumes
+- container metadata
+- build cache
 
-### **Network Architecture**
-- Modern VPN mesh networking vs traditional approaches
-- Selective DNS filtering strategies
-- Balancing security with usability
+**NextCloud Data**: `tank/userdata` → `/mnt/data/share/myfiles`
+- User files accessible via web interface
+- ZFS snapshots provide point-in-time recovery
 
-## Infrastructure as Learning Tool
+**Plex Media**: `mouse/media` → `/mnt/data/share/media`
+- Read-only access to media files
+- 1M recordsize reduces I/O operations for large files
 
-**Version Control**: All configurations in Git - helps me track what worked and what didn't
-**Reproducible Builds**: Docker Compose stacks let me rebuild services when I break them
-**Monitoring**: Learning to observe system behavior and performance patterns
+### **GPU Resource Management**
+The GTX 1070 efficiently serves dual purposes through hardware resource separation:
+- **NVENC/NVDEC encoders**: Handle Plex transcoding workloads
+- **CUDA compute cores**: Process AI inference for Ollama
+- **Concurrent operation**: Light transcoding alongside AI workloads without conflicts
 
-## Current Challenges & Future Learning
+### **Container Orchestration**
+- **Management**: Dockge web interface (port 5001)
+- **Stacks**: Version-controlled Docker Compose files
+- **Services**: dockge, nextcloud-aio, plex, llm (Ollama stack), pi-hole
+- **Repository**: All configurations stored in Git for reproducibility
 
-**Active Problems I'm Solving**:
-- Backup strategy (currently learning proper backup vs sync approaches)
-- Capacity planning as my data grows
-- Service monitoring and alerting
+## Network Design
 
-**Next Learning Goals**:
-- Proper backup automation
-- Infrastructure monitoring with Prometheus/Grafana
-- Maybe Kubernetes for container orchestration learning
+- **Range**: 10.0.0.0/24
+- **Gateway**: 10.0.0.1
+- **Proxmox Host**: 10.0.0.20
+- **Docker LXC**: 10.0.0.30
+- **DNS**: Pi-hole (10.0.0.30) for configured devices
+- **External Access**: Tailscale mesh VPN (100 devices free)
+
+Security through network segmentation, container isolation, and Tailscale's zero-trust model rather than traditional port forwarding.
+
+## Infrastructure Benefits
+
+**ZFS Advantages**: Data integrity through checksums, automatic compression, snapshot recovery, and workload-optimized performance tuning.
+
+**LXC Efficiency**: Minimal overhead compared to full VMs while maintaining isolation and enabling direct hardware access for GPU workloads.
+
+**GPU Resource Sharing**: Single hardware investment serves multiple high-performance workloads through careful resource allocation.
+
+**Scalability**: ZFS pools support expansion, container architecture enables easy service addition, and Tailscale mesh scales to 100 devices.
+
+## Related Automation Projects
+
+### **Canvas Integration**
+Python automation synchronizing Canvas LMS with Notion databases - handles course data, assignment tracking, and API abstraction for reuse in other projects.
+
+### **Task Management Automation**
+Scheduled system managing recurring Notion tasks via JSON configuration with automated deployment and SMS error notifications.
 
 ---
 
-*This homelab grows with my learning - each new technology I want to understand gets integrated into solving real problems I have.*
-
-## Canvas Automation
-Pulls course and assignment information and adds this data as pages to a specified Notion database
-
-**TO DO**
-- [x] Pull new assignments and add them to notion for the curent semester
-- [x] Abstract all canvas and notion queries for use with other automations
-- [x] Update existing assignments in Notion if any properties have changed
-
-## Recurring Notion Tasks
-Programmatically uploads specified recurring tasks based on the day of the week to a Notion Database
-
-- [x] Use the Notion API to add pages to a database
-- [x] Use a JSON file to specify tasks and which days of the week they should be added to the Notion DB
-- [x] Automatic error notifications served to SMS via a local smtp server
-- [x] Deploy to production and create a recurring cronjob to automate script
+*Feel free to reach out if you have any questions about my setup!!! (<a href="mailto:shawn.jacobsen0@gmail.com">shawn.jacobsen0@gmail.com</a>)*
