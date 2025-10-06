@@ -1,0 +1,7 @@
+Aug 28, 2025 03:43:28.873 [130083880733440] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Aug 28, 2025 03:43:28.873 [130083880733440] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Aug 28, 2025 03:43:28.873 [130083880733440] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Aug 28, 2025 03:43:28.873 [130083880733440] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --match --type 1 --log-file-suffix  Matcher --item 92
+Aug 28, 2025 03:43:28.874 [130083881234176] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Aug 28, 2025 03:43:28.965 [130083881234176] DEBUG - Matcher: found 1 auxiliary files for Solaris
+Aug 28, 2025 03:43:28.965 [130083881234176] DEBUG - Matcher: no sidecar subtitle files found for /data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv

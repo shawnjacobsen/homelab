@@ -1,3 +1,5 @@
+# specify all cron jobs for all docker apps
+
 # Environment for all jobs
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin

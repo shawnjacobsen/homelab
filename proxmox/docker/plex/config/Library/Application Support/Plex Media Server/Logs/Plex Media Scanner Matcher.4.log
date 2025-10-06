@@ -1,0 +1,18 @@
+Aug 28, 2025 03:43:28.481 [129056741993216] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Aug 28, 2025 03:43:28.481 [129056741993216] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Aug 28, 2025 03:43:28.481 [129056741993216] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Aug 28, 2025 03:43:28.481 [129056741993216] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --match --type 1 --log-file-suffix  Matcher --item 62
+Aug 28, 2025 03:43:28.481 [129056742493952] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Aug 28, 2025 03:43:28.574 [129056742493952] DEBUG - Matcher: found 3 auxiliary files for Three Colors: White
+Aug 28, 2025 03:43:28.574 [129056742493952] DEBUG - Scanner: found local sidecar subtitle "/data/movies/Three Colors White (1994)/Три цвета - Белый_Rus2.srt"
+Aug 28, 2025 03:43:28.574 [129056742493952] DEBUG - Scanner: found local sidecar subtitle "/data/movies/Three Colors White (1994)/Три цвета - Белый_Eng.srt"
+Aug 28, 2025 03:43:28.574 [129056742493952] DEBUG - Scanner: found local sidecar subtitle "/data/movies/Three Colors White (1994)/Три цвета - Белый_Rus1.srt"
+Aug 28, 2025 03:43:28.574 [129056742493952] DEBUG - [FFMPEG] - Opening '/data/movies/Three Colors White (1994)/Три цвета - Белый_Rus2.srt' for reading
+Aug 28, 2025 03:43:28.574 [129056742493952] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Aug 28, 2025 03:43:28.575 [129056742493952] DEBUG - [FFMPEG] - Format srt probed with size=2048 and score=100
+Aug 28, 2025 03:43:28.580 [129056742493952] DEBUG - [FFMPEG] - Opening '/data/movies/Three Colors White (1994)/Три цвета - Белый_Eng.srt' for reading
+Aug 28, 2025 03:43:28.580 [129056742493952] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Aug 28, 2025 03:43:28.581 [129056742493952] DEBUG - [FFMPEG] - Format srt probed with size=2048 and score=100
+Aug 28, 2025 03:43:28.582 [129056742493952] DEBUG - [FFMPEG] - Opening '/data/movies/Three Colors White (1994)/Три цвета - Белый_Rus1.srt' for reading
+Aug 28, 2025 03:43:28.582 [129056742493952] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Aug 28, 2025 03:43:28.583 [129056742493952] DEBUG - [FFMPEG] - Format srt probed with size=2048 and score=100

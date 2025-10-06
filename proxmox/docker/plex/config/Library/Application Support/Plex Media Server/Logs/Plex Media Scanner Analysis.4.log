@@ -1,0 +1,50 @@
+Jun 05, 2025 03:12:31.555 [138166594784000] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Jun 05, 2025 03:12:31.555 [138166594784000] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Jun 05, 2025 03:12:31.555 [138166594784000] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Jun 05, 2025 03:12:31.555 [138166594784000] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --analyze --log-file-suffix  Analysis --no-thumbs --item 92
+Jun 05, 2025 03:12:31.556 [138166595292928] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 05, 2025 03:12:31.640 [138166595292928] DEBUG - Analyzing media parts for item 92 (Solaris): 224
+Jun 05, 2025 03:12:31.640 [138166595292928] DEBUG - [ID 224] Media part analysis: /data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [MI] Opening input file: "/data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv"
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - Opening '/data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv' for reading
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - Format matroska,webm probed with size=2048 and score=100
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - st:0 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - st:1 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - st:2 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:31.641 [138166595292928] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 5641 bytes read:33981 seeks:2 nb_streams:3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 6(SEI), nal_ref_idc: 0
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.642 [138166595292928] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.643 [138166595292928] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:31.645 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.645 [138166595292928] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:31.646 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.647 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.648 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:31.650 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:31.651 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:31.652 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:31.653 [138166595292928] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.654 [138166595292928] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:31.654 [138166595292928] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 7768 bytes read:66749 seeks:2 frames:42
+Jun 05, 2025 03:12:31.659 [138166595292928] DEBUG - [MI]  * 7f2a80418962653a452a174d5e80d266e3bb5704 [mkv h264/aac] Duration: 10014196ms, 1280x544 (2.352941) 23.976fps, bitrate=818kbps, audio channels=1, optimizedForStreaming=0 ("/data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv")
+Jun 05, 2025 03:12:31.659 [138166595292928] DEBUG - [MI] Chapters had generic titles, clearing.
+Jun 05, 2025 03:12:31.659 [138166595292928] DEBUG - [MI] Closing input file: "/data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv"
+Jun 05, 2025 03:12:31.659 [138166595292928] DEBUG - Committing media stream changes for part 224
+Jun 05, 2025 03:12:31.660 [138166595292928] DEBUG - Updating media item 224, size=1024478974, metadata_item_id=92
+Jun 05, 2025 03:12:31.660 [138166595292928] DEBUG - Updating part with ID=224 [/data/movies/Solaris (1972)/Solaris.1972.720p.BrRip.EN-SUB.x264-[MULVAcoded].mkv]
+Jun 05, 2025 03:12:31.671 [138166579227392] DEBUG - [HCl#1] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=92&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:31.672 [138166579079936] DEBUG - [HttpClient/HCl#1] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=92&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:31.672 [138166579227392] DEBUG - [HCl#2] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=92&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle
+Jun 05, 2025 03:12:31.672 [138166579079936] DEBUG - [HttpClient/HCl#2] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=92&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle (reused)
+Jun 05, 2025 03:12:31.673 [138166595292928] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.673 [138166595292928] DEBUG - [HCl#3] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.674 [138166579079936] DEBUG - [HttpClient/HCl#3] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:31.674 [138166595292928] DEBUG - Updating metadata item (save) (Solaris) with ID 92

@@ -1,0 +1,87 @@
+services:
+  ollama:
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+      - OLLAMA_DEBUG=1
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - 11434:11434
+    container_name: ollama
+    image: ollama/ollama
+    restart: always
+    networks:
+      - ai-net
+
+  open-webui:
+    ports:
+      - 7000:8080
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - ENABLE_RAG_WEB_SEARCH=true
+      - RAG_WEB_SEARCH_ENGINE=searxng
+      - RAG_WEB_SEARCH_RESULT_COUNT=3
+      - RAG_WEB_SEARCH_CONCURRENT_REQUESTS=10
+      - SEARXNG_QUERY_URL=http://searxng:8080/search?q=<query>
+    container_name: open-webui
+    restart: always
+    image: ghcr.io/open-webui/open-webui:latest
+    networks:
+      - ai-net
+
+  redis:
+    container_name: redis
+    image: valkey/valkey:7-alpine
+    command: valkey-server --save 30 1 --loglevel warning
+    restart: unless-stopped
+    volumes:
+      - valkey-data2:/data
+    cap_drop: [ALL]
+    cap_add: [SETGID, SETUID, DAC_OVERRIDE]
+    logging:
+      driver: json-file
+      options:
+        max-size: 4m
+        max-file: "1"
+    networks:
+      - ai-net
+
+  searxng:
+    container_name: searxng
+    image: searxng/searxng:latest
+    restart: unless-stopped
+    ports:
+      - 7777:8080
+    volumes:
+      - ./searxng/img:/usr/local/searxng/searx/static/themes/simple/img:rw
+      - ./searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://${SEARXNG_HOSTNAME:-localhost}/
+    cap_drop: [ALL]
+    cap_add: [CHOWN, SETGID, SETUID]
+    logging:
+      driver: json-file
+      options:
+        max-size: 4m
+        max-file: "1"
+    networks:
+      - ai-net
+
+  tika:
+    ports:
+      - 9998:9998
+    image: apache/tika:latest-full
+    restart: always
+    networks:
+      - ai-net
+
+volumes:
+  ollama:
+  open-webui:
+  valkey-data2:
+
+networks:
+  ai-net:

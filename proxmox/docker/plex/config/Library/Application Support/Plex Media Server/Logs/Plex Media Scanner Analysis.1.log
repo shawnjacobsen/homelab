@@ -1,0 +1,74 @@
+Jun 05, 2025 03:12:32.160 [132069865753344] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Jun 05, 2025 03:12:32.160 [132069865753344] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Jun 05, 2025 03:12:32.160 [132069865753344] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Jun 05, 2025 03:12:32.161 [132069865753344] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --analyze --log-file-suffix  Analysis --no-thumbs --item 98
+Jun 05, 2025 03:12:32.161 [132069866262272] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 05, 2025 03:12:32.260 [132069866262272] DEBUG - Analyzing media parts for item 98 (La La Land): 236
+Jun 05, 2025 03:12:32.261 [132069866262272] DEBUG - [ID 236] Media part analysis: /data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4
+Jun 05, 2025 03:12:32.261 [132069866262272] DEBUG - [MI] Opening input file: "/data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4"
+Jun 05, 2025 03:12:32.261 [132069866262272] DEBUG - [FFMPEG] - Opening '/data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4' for reading
+Jun 05, 2025 03:12:32.261 [132069866262272] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:32.262 [132069866262272] DEBUG - [FFMPEG] - Format mov,mp4,m4a,3gp,3g2,mj2 probed with size=2048 and score=100
+Jun 05, 2025 03:12:32.262 [132069866262272] DEBUG - [FFMPEG] - ISO: File Type Major Brand: isom
+Jun 05, 2025 03:12:32.280 [132069866262272] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:32.312 [132069866262272] DEBUG - [FFMPEG] - Processing st: 0, edit list 0 - media time: 100099, duration: 9201568800
+Jun 05, 2025 03:12:32.312 [132069866262272] DEBUG - [FFMPEG] - drop a frame at curr_cts: 0 @ 0
+Jun 05, 2025 03:12:32.312 [132069866262272] DEBUG - [FFMPEG] - drop a frame at curr_cts: 50049 @ 1
+Jun 05, 2025 03:12:32.320 [132069866262272] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:32.351 [132069866262272] DEBUG - [FFMPEG] - Processing st: 1, edit list 0 - media time: 2048, duration: 368071680
+Jun 05, 2025 03:12:32.351 [132069866262272] DEBUG - [FFMPEG] - drop a frame at curr_cts: 0 @ 0
+Jun 05, 2025 03:12:32.351 [132069866262272] DEBUG - [FFMPEG] - drop a frame at curr_cts: 1024 @ 1
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 23.916667 0.004936
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 23.916667 0.004936
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 24.000000 0.000788
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 24.000000 0.000788
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 24.083333 0.015973
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 24.083333 0.015973
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 48.000000 0.003150
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 48.000000 0.003150
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 120.000000 0.019688
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 120.000000 0.019688
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 23.976024 0.000000
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 23.976024 0.000000
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 47.952048 0.000000
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - rfps: 47.952048 0.000000
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 2137576090 bytes read:6446839 seeks:1 nb_streams:2
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - nal_unit_type: 32(VPS), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Decoding VPS
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Main 10 profile bitstream
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - nal_unit_type: 33(SPS), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Decoding SPS
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Main 10 profile bitstream
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Decoding VUI
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - nal_unit_type: 34(PPS), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.360 [132069866262272] DEBUG - [FFMPEG] - Decoding PPS
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - [FFMPEG] - demuxer injecting skip 2048 / discard 0
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 3412 bytes read:6479607 seeks:2 frames:2
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - [MI] Opening "/data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4" for MP4 atom parsing
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - Mp4AtomParser: Skipping ftyp atom of size 28 at offset 0
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - Mp4AtomParser: Skipping free atom of size 8 at offset 28
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - Mp4AtomParser: Skipping mdat atom of size 2131161983 at offset 36
+Jun 05, 2025 03:12:32.361 [132069866262272] DEBUG - Mp4AtomParser: Found moov atom of size 6414071 at offset 2131162019
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found trak atom of size 2652541 at offset 2131162135
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found trak atom of size 3761190 at offset 2133814676
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found mdia atom of size 2652405 at offset 2131162271
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found minf atom of size 2652308 at offset 2131162368
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found stbl atom of size 2652244 at offset 2131162432
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found mdia atom of size 3761054 at offset 2133814812
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found minf atom of size 3760969 at offset 2133814897
+Jun 05, 2025 03:12:32.363 [132069866262272] DEBUG - Mp4AtomParser: Found stbl atom of size 3760909 at offset 2133814957
+Jun 05, 2025 03:12:32.368 [132069866262272] DEBUG - [MI]  * 9160d446aa037fc121f5934a463ffc15abd9ef99 [mp4 hevc/aac] Duration: 7668203ms, 1920x752 (2.553191) 23.976fps, bitrate=2230kbps, audio channels=6, optimizedForStreaming=0 ("/data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4")
+Jun 05, 2025 03:12:32.368 [132069866262272] DEBUG - [MI] Chapters had generic titles, clearing.
+Jun 05, 2025 03:12:32.368 [132069866262272] DEBUG - [MI] Closing input file: "/data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4"
+Jun 05, 2025 03:12:32.369 [132069866262272] DEBUG - Committing media stream changes for part 236
+Jun 05, 2025 03:12:32.370 [132069866262272] DEBUG - Updating media item 236, size=2137576090, metadata_item_id=98
+Jun 05, 2025 03:12:32.370 [132069866262272] DEBUG - Updating part with ID=236 [/data/movies/La La Land (2016)/La.La.Land.2016.1080p.BluRay.x265-RARBG.mp4]
+Jun 05, 2025 03:12:32.370 [132069851749120] DEBUG - [HCl#1] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=98&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:32.371 [132069851257600] DEBUG - [HttpClient/HCl#1] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=98&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:32.371 [132069851749120] DEBUG - [HCl#2] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=98&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle
+Jun 05, 2025 03:12:32.371 [132069851257600] DEBUG - [HttpClient/HCl#2] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=98&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle (reused)
+Jun 05, 2025 03:12:32.373 [132069866262272] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:32.373 [132069866262272] DEBUG - [HCl#3] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:32.374 [132069851257600] DEBUG - [HttpClient/HCl#3] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:32.374 [132069866262272] DEBUG - Updating metadata item (save) (La La Land) with ID 98

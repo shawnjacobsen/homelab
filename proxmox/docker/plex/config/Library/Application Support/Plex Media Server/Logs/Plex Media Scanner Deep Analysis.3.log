@@ -1,0 +1,145 @@
+Jun 06, 2025 02:13:35.439 [137023055670016] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Jun 06, 2025 02:13:35.440 [137023055670016] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Jun 06, 2025 02:13:35.440 [137023055670016] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Jun 06, 2025 02:13:35.440 [137023055670016] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --analyze-deeply --item 61 --log-file-suffix  Deep Analysis
+Jun 06, 2025 02:13:35.440 [137023056170752] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 06, 2025 02:13:35.524 [137023056170752] DEBUG - [MI] Opening input file: "/data/movies/The Double Life of Veronique (1991)/Dvoynaya.zhizn.Veroniki.1991.bdrip-avc.criterion.collection.mkv"
+Jun 06, 2025 02:13:35.524 [137023056170752] DEBUG - [FFMPEG] - Opening '/data/movies/The Double Life of Veronique (1991)/Dvoynaya.zhizn.Veroniki.1991.bdrip-avc.criterion.collection.mkv' for reading
+Jun 06, 2025 02:13:35.524 [137023056170752] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 06, 2025 02:13:35.524 [137023056170752] DEBUG - [FFMPEG] - Format matroska,webm probed with size=2048 and score=100
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - st:0 removing common factor 1000000 from timebase
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - st:1 removing common factor 1000000 from timebase
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - st:2 removing common factor 1000000 from timebase
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - st:3 removing common factor 1000000 from timebase
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - st:4 removing common factor 1000000 from timebase
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - st:5 removing common factor 1000000 from timebase
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 113886 bytes read:148252 seeks:2 nb_streams:7
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 06, 2025 02:13:35.525 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=d8 avail_size_in_buf=106562
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 0 bytes (0 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=e0 avail_size_in_buf=106560
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 16 bytes (128 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=db avail_size_in_buf=106542
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - index=0
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - qscale[0]: 1
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 67 bytes (536 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=db avail_size_in_buf=106473
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - index=1
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - qscale[1]: 1
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 67 bytes (536 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=c0 avail_size_in_buf=106404
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - Changing bps from 0 to 8
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - sof0: picture: 567x700
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - component 0 2:2 id: 0 quant:0
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - component 1 1:1 id: 1 quant:1
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - component 2 1:1 id: 2 quant:1
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - pix fmt id 22111100
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - Format yuvj420p chosen by get_format().
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 17 bytes (136 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=c4 avail_size_in_buf=106385
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 0 bytes (0 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=c4 avail_size_in_buf=106352
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 0 bytes (0 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=c4 avail_size_in_buf=106169
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 0 bytes (0 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=c4 avail_size_in_buf=106136
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 0 bytes (0 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - escaping removed 381 bytes
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=da avail_size_in_buf=105953
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker parser used 105572 bytes (844576 bits)
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - marker=d9 avail_size_in_buf=0
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - decode frame unused 0 bytes
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 6(SEI), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 06, 2025 02:13:35.527 [137023056170752] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 06, 2025 02:13:35.528 [137023056170752] DEBUG - [FFMPEG] - no picture 
+Jun 06, 2025 02:13:35.529 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 06, 2025 02:13:35.530 [137023056170752] DEBUG - [FFMPEG] - no picture 
+Jun 06, 2025 02:13:35.530 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 06, 2025 02:13:35.531 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.532 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.534 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.534 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.535 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.536 [137023056170752] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 06, 2025 02:13:35.536 [137023056170752] DEBUG - [FFMPEG] - All info found
+Jun 06, 2025 02:13:35.537 [137023056170752] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 134072 bytes read:181020 seeks:2 frames:66
+Jun 06, 2025 02:13:35.750 [137023056170752] DEBUG - Deep Analysis: Read 10000 packets at 97.992000
+Jun 06, 2025 02:13:35.953 [137023056170752] DEBUG - Deep Analysis: Read 20000 packets at 195.552000
+Jun 06, 2025 02:13:36.197 [137023056170752] DEBUG - Deep Analysis: Read 30000 packets at 293.472000
+Jun 06, 2025 02:13:36.529 [137023056170752] DEBUG - Deep Analysis: Read 40000 packets at 391.091000
+Jun 06, 2025 02:13:36.952 [137023056170752] DEBUG - Deep Analysis: Read 50000 packets at 488.884000
+Jun 06, 2025 02:13:37.373 [137023056170752] DEBUG - Deep Analysis: Read 60000 packets at 586.272000
+Jun 06, 2025 02:13:37.494 [137023056170752] DEBUG - Deep Analysis: Read 70000 packets at 683.849000
+Jun 06, 2025 02:13:37.768 [137023056170752] DEBUG - Deep Analysis: Read 80000 packets at 781.192000
+Jun 06, 2025 02:13:38.090 [137023056170752] DEBUG - Deep Analysis: Read 90000 packets at 879.028000
+Jun 06, 2025 02:13:38.378 [137023056170752] DEBUG - Deep Analysis: Read 100000 packets at 976.767000
+Jun 06, 2025 02:13:38.677 [137023056170752] DEBUG - Deep Analysis: Read 110000 packets at 1074.888000
+Jun 06, 2025 02:13:38.857 [137023056170752] DEBUG - Deep Analysis: Read 120000 packets at 1172.832000
+Jun 06, 2025 02:13:39.180 [137023056170752] DEBUG - Deep Analysis: Read 130000 packets at 1270.302000
+Jun 06, 2025 02:13:39.473 [137023056170752] DEBUG - Deep Analysis: Read 140000 packets at 1367.491000
+Jun 06, 2025 02:13:39.744 [137023056170752] DEBUG - Deep Analysis: Read 150000 packets at 1465.214000
+Jun 06, 2025 02:13:40.055 [137023056170752] DEBUG - Deep Analysis: Read 160000 packets at 1563.380000
+Jun 06, 2025 02:13:40.389 [137023056170752] DEBUG - Deep Analysis: Read 170000 packets at 1661.235000
+Jun 06, 2025 02:13:40.700 [137023056170752] DEBUG - Deep Analysis: Read 180000 packets at 1758.966000
+Jun 06, 2025 02:13:40.999 [137023056170752] DEBUG - Deep Analysis: Read 190000 packets at 1857.139000
+Jun 06, 2025 02:13:41.299 [137023056170752] DEBUG - Deep Analysis: Read 200000 packets at 1954.752000
+Jun 06, 2025 02:13:41.570 [137023056170752] DEBUG - Deep Analysis: Read 210000 packets at 2052.701000
+Jun 06, 2025 02:13:41.842 [137023056170752] DEBUG - Deep Analysis: Read 220000 packets at 2150.280000
+Jun 06, 2025 02:13:42.112 [137023056170752] DEBUG - Deep Analysis: Read 230000 packets at 2248.032000
+Jun 06, 2025 02:13:42.373 [137023056170752] DEBUG - Deep Analysis: Read 240000 packets at 2345.888000
+Jun 06, 2025 02:13:42.632 [137023056170752] DEBUG - Deep Analysis: Read 250000 packets at 2443.566000
+Jun 06, 2025 02:13:42.954 [137023056170752] DEBUG - Deep Analysis: Read 260000 packets at 2541.875000
+Jun 06, 2025 02:13:43.320 [137023056170752] DEBUG - Deep Analysis: Read 270000 packets at 2639.624000
+Jun 06, 2025 02:13:43.577 [137023056170752] DEBUG - Deep Analysis: Read 280000 packets at 2737.289000
+Jun 06, 2025 02:13:43.756 [137023056170752] DEBUG - Deep Analysis: Read 290000 packets at 2834.931000
+Jun 06, 2025 02:13:44.005 [137023056170752] DEBUG - Deep Analysis: Read 300000 packets at 2932.576000
+Jun 06, 2025 02:13:44.366 [137023056170752] DEBUG - Deep Analysis: Read 310000 packets at 3030.624000
+Jun 06, 2025 02:13:44.671 [137023056170752] DEBUG - Deep Analysis: Read 320000 packets at 3128.479000
+Jun 06, 2025 02:13:44.956 [137023056170752] DEBUG - Deep Analysis: Read 330000 packets at 3226.057000
+Jun 06, 2025 02:13:45.443 [137023056170752] DEBUG - Deep Analysis: Read 340000 packets at 3323.712000
+Jun 06, 2025 02:13:45.547 [137023056170752] DEBUG - Deep Analysis: Read 350000 packets at 3421.832000
+Jun 06, 2025 02:13:45.813 [137023056170752] DEBUG - Deep Analysis: Read 360000 packets at 3519.283000
+Jun 06, 2025 02:13:46.140 [137023056170752] DEBUG - Deep Analysis: Read 370000 packets at 3617.088000
+Jun 06, 2025 02:13:46.411 [137023056170752] DEBUG - Deep Analysis: Read 380000 packets at 3714.633000
+Jun 06, 2025 02:13:46.744 [137023056170752] DEBUG - Deep Analysis: Read 390000 packets at 3812.544000
+Jun 06, 2025 02:13:47.044 [137023056170752] DEBUG - Deep Analysis: Read 400000 packets at 3910.496000
+Jun 06, 2025 02:13:47.356 [137023056170752] DEBUG - Deep Analysis: Read 410000 packets at 4008.171000
+Jun 06, 2025 02:13:47.667 [137023056170752] DEBUG - Deep Analysis: Read 420000 packets at 4106.270000
+Jun 06, 2025 02:13:47.989 [137023056170752] DEBUG - Deep Analysis: Read 430000 packets at 4204.062000
+Jun 06, 2025 02:13:48.305 [137023056170752] DEBUG - Deep Analysis: Read 440000 packets at 4301.940000
+Jun 06, 2025 02:13:48.625 [137023056170752] DEBUG - Deep Analysis: Read 450000 packets at 4399.584000
+Jun 06, 2025 02:13:48.931 [137023056170752] DEBUG - Deep Analysis: Read 460000 packets at 4497.224000
+Jun 06, 2025 02:13:49.164 [137023056170752] DEBUG - Deep Analysis: Read 470000 packets at 4594.882000
+Jun 06, 2025 02:13:49.445 [137023056170752] DEBUG - Deep Analysis: Read 480000 packets at 4693.056000
+Jun 06, 2025 02:13:49.776 [137023056170752] DEBUG - Deep Analysis: Read 490000 packets at 4790.880000
+Jun 06, 2025 02:13:50.065 [137023056170752] DEBUG - Deep Analysis: Read 500000 packets at 4888.799000
+Jun 06, 2025 02:13:50.409 [137023056170752] DEBUG - Deep Analysis: Read 510000 packets at 4986.688000
+Jun 06, 2025 02:13:50.679 [137023056170752] DEBUG - Deep Analysis: Read 520000 packets at 5084.296000
+Jun 06, 2025 02:13:50.967 [137023056170752] DEBUG - Deep Analysis: Read 530000 packets at 5182.067000
+Jun 06, 2025 02:13:51.267 [137023056170752] DEBUG - Deep Analysis: Read 540000 packets at 5279.968000
+Jun 06, 2025 02:13:51.574 [137023056170752] DEBUG - Deep Analysis: Read 550000 packets at 5377.907000
+Jun 06, 2025 02:13:51.855 [137023056170752] DEBUG - Deep Analysis: Read 560000 packets at 5475.637000
+Jun 06, 2025 02:13:52.138 [137023056170752] DEBUG - Deep Analysis: Read 570000 packets at 5573.376000
+Jun 06, 2025 02:13:52.376 [137023056170752] DEBUG - Deep Analysis: Read 580000 packets at 5671.284000
+Jun 06, 2025 02:13:52.440 [137023056170752] DEBUG - Deep Analysis: Read 590000 packets at 5769.216000
+Jun 06, 2025 02:13:52.465 [137023056170752] DEBUG - Deep Analysis: Read 600000 packets at 5866.944000
+Jun 06, 2025 02:13:52.470 [137023056170752] DEBUG - Deep Analysis: Sorting packets
+Jun 06, 2025 02:13:52.498 [137023056170752] DEBUG - Deep Analysis: Performing file bitrate analysis
+Jun 06, 2025 02:13:52.627 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 0
+Jun 06, 2025 02:13:52.652 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 1
+Jun 06, 2025 02:13:52.660 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 2
+Jun 06, 2025 02:13:52.688 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 3
+Jun 06, 2025 02:13:52.689 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 4
+Jun 06, 2025 02:13:52.689 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 5
+Jun 06, 2025 02:13:52.689 [137023056170752] DEBUG - Deep Analysis: Performing stream bitrate analysis on stream 6
+Jun 06, 2025 02:13:52.690 [137023056170752] DEBUG - Deep Analysis: Saving GoP analysis for stream 0
+Jun 06, 2025 02:13:52.691 [137023056170752] DEBUG - Deep Analysis: Saving GoP analysis for stream 6
+Jun 06, 2025 02:13:52.691 [137023056170752] DEBUG - Deep Analysis: Saving bitrate analysis
+Jun 06, 2025 02:13:52.691 [137023056170752] DEBUG - Updating part with ID=157 [/data/movies/The Double Life of Veronique (1991)/Dvoynaya.zhizn.Veroniki.1991.bdrip-avc.criterion.collection.mkv]
+Jun 06, 2025 02:13:52.692 [137023056170752] DEBUG - [MI] Closing input file: "/data/movies/The Double Life of Veronique (1991)/Dvoynaya.zhizn.Veroniki.1991.bdrip-avc.criterion.collection.mkv"
+Jun 06, 2025 02:13:52.693 [137023056170752] DEBUG - Updating media item 157, size=3122511632, metadata_item_id=61
+Jun 06, 2025 02:13:52.693 [137023056170752] DEBUG - Updating part with ID=157 [/data/movies/The Double Life of Veronique (1991)/Dvoynaya.zhizn.Veroniki.1991.bdrip-avc.criterion.collection.mkv]

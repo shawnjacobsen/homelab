@@ -1,0 +1,201 @@
+Jun 05, 2025 03:12:29.929 [135142927497984] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Jun 05, 2025 03:12:29.930 [135142927497984] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Jun 05, 2025 03:12:29.930 [135142927497984] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Jun 05, 2025 03:12:29.930 [135142927497984] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --analyze --log-file-suffix  Analysis --item 91
+Jun 05, 2025 03:12:29.930 [135142928006912] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 05, 2025 03:12:30.026 [135142928006912] DEBUG - Analyzing media parts for item 91 (Sea Monkey): 223
+Jun 05, 2025 03:12:30.026 [135142928006912] DEBUG - [ID 223] Media part analysis: /data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4
+Jun 05, 2025 03:12:30.027 [135142928006912] DEBUG - [MI] Opening input file: "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4"
+Jun 05, 2025 03:12:30.027 [135142928006912] DEBUG - [FFMPEG] - Opening '/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4' for reading
+Jun 05, 2025 03:12:30.027 [135142928006912] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:30.027 [135142928006912] DEBUG - [FFMPEG] - Format mov,mp4,m4a,3gp,3g2,mj2 probed with size=2048 and score=100
+Jun 05, 2025 03:12:30.027 [135142928006912] DEBUG - [FFMPEG] - ISO: File Type Major Brand: mp42
+Jun 05, 2025 03:12:30.027 [135142928006912] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:30.047 [135142928006912] DEBUG - [FFMPEG] - Processing st: 0, edit list 0 - media time: 2, duration: 143375
+Jun 05, 2025 03:12:30.054 [135142928006912] DEBUG - [FFMPEG] - Offset DTS by 2 to make first pts zero.
+Jun 05, 2025 03:12:30.056 [135142928006912] DEBUG - [FFMPEG] - Setting codecpar->delay to 2 for stream st: 0
+Jun 05, 2025 03:12:30.056 [135142928006912] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:30.068 [135142928006912] DEBUG - [FFMPEG] - Processing st: 1, edit list 0 - media time: 0, duration: 275280880
+Jun 05, 2025 03:12:30.075 [135142928006912] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 2982930 bytes read:3003634 seeks:0 nb_streams:2
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 6(SEI), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.076 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.079 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.081 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.083 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.084 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.088 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.093 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.097 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.099 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.100 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.102 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.107 [135142928006912] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:30.109 [135142928006912] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 2985658 bytes read:3003634 seeks:0 frames:14
+Jun 05, 2025 03:12:30.109 [135142928006912] DEBUG - [MI] Opening "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4" for MP4 atom parsing
+Jun 05, 2025 03:12:30.109 [135142928006912] DEBUG - Mp4AtomParser: Skipping ftyp atom of size 32 at offset 0
+Jun 05, 2025 03:12:30.109 [135142928006912] DEBUG - Mp4AtomParser: Found moov atom of size 2982890 at offset 32
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found trak atom of size 1862107 at offset 190
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found trak atom of size 1120625 at offset 1862297
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found mdia atom of size 1861971 at offset 326
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found minf atom of size 1861877 at offset 420
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found stbl atom of size 1861813 at offset 484
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found mdia atom of size 1120489 at offset 1862433
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found minf atom of size 1120395 at offset 1862527
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - Mp4AtomParser: Found stbl atom of size 1120335 at offset 1862587
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - [MI]  * 84efe5c014a467eef968ba3a5761af048c672a1c [mp4 h264/aac] Duration: 5735018ms, 1920x1080 (1.777778) 25.000fps, bitrate=5325kbps, audio channels=2, optimizedForStreaming=1 ("/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4")
+Jun 05, 2025 03:12:30.110 [135142928006912] DEBUG - [MI] Chapters had generic titles, clearing.
+Jun 05, 2025 03:12:30.111 [135142928006912] DEBUG - [MI] Closing input file: "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4"
+Jun 05, 2025 03:12:30.111 [135142928006912] DEBUG - Committing media stream changes for part 223
+Jun 05, 2025 03:12:30.112 [135142928006912] DEBUG - Updating media item 223, size=3817806952, metadata_item_id=91
+Jun 05, 2025 03:12:30.112 [135142928006912] DEBUG - Updating part with ID=223 [/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4]
+Jun 05, 2025 03:12:30.113 [135142913002240] DEBUG - [HCl#1] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=91&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:30.113 [135142928006912] DEBUG - [MI] Opening input file: "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4"
+Jun 05, 2025 03:12:30.113 [135142928006912] DEBUG - [FFMPEG] - Opening '/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4' for reading
+Jun 05, 2025 03:12:30.113 [135142928006912] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:30.113 [135142928006912] DEBUG - [FFMPEG] - Format mov,mp4,m4a,3gp,3g2,mj2 probed with size=2048 and score=100
+Jun 05, 2025 03:12:30.113 [135142928006912] DEBUG - [FFMPEG] - ISO: File Type Major Brand: mp42
+Jun 05, 2025 03:12:30.113 [135142928006912] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:30.113 [135142912477952] DEBUG - [HttpClient/HCl#1] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=91&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:30.113 [135142913002240] DEBUG - [HCl#2] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=91&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=thumbnailing
+Jun 05, 2025 03:12:30.114 [135142912477952] DEBUG - [HttpClient/HCl#2] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=91&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=thumbnailing (reused)
+Jun 05, 2025 03:12:30.125 [135142928006912] DEBUG - [FFMPEG] - Processing st: 0, edit list 0 - media time: 2, duration: 143375
+Jun 05, 2025 03:12:30.130 [135142928006912] DEBUG - [FFMPEG] - Offset DTS by 2 to make first pts zero.
+Jun 05, 2025 03:12:30.131 [135142928006912] DEBUG - [FFMPEG] - Setting codecpar->delay to 2 for stream st: 0
+Jun 05, 2025 03:12:30.131 [135142928006912] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:30.140 [135142928006912] DEBUG - [FFMPEG] - Processing st: 1, edit list 0 - media time: 0, duration: 275280880
+Jun 05, 2025 03:12:30.146 [135142928006912] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 2982930 bytes read:3003634 seeks:0 nb_streams:2
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 6(SEI), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.147 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.149 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.151 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.153 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.154 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.157 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.161 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.165 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.166 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.168 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.170 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.174 [135142928006912] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:30.176 [135142928006912] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 2985658 bytes read:3003634 seeks:0 frames:14
+Jun 05, 2025 03:12:30.176 [135142928006912] DEBUG - Creating /config/Library/Application Support/Plex Media Server/Media/localhost/8/4efe5c014a467eef968ba3a5761af048c672a1c.bundle/Contents/Thumbnails/thumb1.jpg (50.0%, 720x512).
+Jun 05, 2025 03:12:30.176 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.176 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.187 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.187 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.188 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.188 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.190 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.208 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.211 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.225 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.374 [135142928006912] DEBUG - Loaded memory image of size 1920x1080.
+Jun 05, 2025 03:12:30.409 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.409 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.418 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.418 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.419 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.419 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.421 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.426 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.428 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.429 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.561 [135142928006912] DEBUG - Loaded memory image of size 1920x1080.
+Jun 05, 2025 03:12:30.594 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.594 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.607 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.607 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.607 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.607 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.610 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.626 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.628 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.639 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.770 [135142928006912] DEBUG - Loaded memory image of size 1920x1080.
+Jun 05, 2025 03:12:30.799 [135142928006912] DEBUG - [MI] Closing input file: "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4"
+Jun 05, 2025 03:12:30.799 [135142928006912] DEBUG - [MI] Opening input file: "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4"
+Jun 05, 2025 03:12:30.800 [135142928006912] DEBUG - [FFMPEG] - Opening '/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4' for reading
+Jun 05, 2025 03:12:30.800 [135142928006912] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:30.800 [135142928006912] DEBUG - [FFMPEG] - Format mov,mp4,m4a,3gp,3g2,mj2 probed with size=2048 and score=100
+Jun 05, 2025 03:12:30.800 [135142928006912] DEBUG - [FFMPEG] - ISO: File Type Major Brand: mp42
+Jun 05, 2025 03:12:30.800 [135142928006912] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:30.810 [135142928006912] DEBUG - [FFMPEG] - Processing st: 0, edit list 0 - media time: 2, duration: 143375
+Jun 05, 2025 03:12:30.815 [135142928006912] DEBUG - [FFMPEG] - Offset DTS by 2 to make first pts zero.
+Jun 05, 2025 03:12:30.816 [135142928006912] DEBUG - [FFMPEG] - Setting codecpar->delay to 2 for stream st: 0
+Jun 05, 2025 03:12:30.817 [135142928006912] DEBUG - [FFMPEG] - Unknown dref type 0x206c7275 size 12
+Jun 05, 2025 03:12:30.825 [135142928006912] DEBUG - [FFMPEG] - Processing st: 1, edit list 0 - media time: 0, duration: 275280880
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 2982930 bytes read:3003634 seeks:0 nb_streams:2
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 6(SEI), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.831 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.833 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.835 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.837 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.838 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.842 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.845 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.849 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.850 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.852 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.854 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 0
+Jun 05, 2025 03:12:30.858 [135142928006912] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:30.859 [135142928006912] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 2985658 bytes read:3003634 seeks:0 frames:14
+Jun 05, 2025 03:12:30.859 [135142928006912] DEBUG - Creating /config/Library/Application Support/Plex Media Server/Media/localhost/8/4efe5c014a467eef968ba3a5761af048c672a1c.bundle/Contents/Art/art1.jpg (50.0%, 1280x720).
+Jun 05, 2025 03:12:30.860 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.860 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.860 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.860 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.861 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:30.861 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:30.863 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.878 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:30.880 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:30.892 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.020 [135142928006912] DEBUG - Loaded memory image of size 1920x1080.
+Jun 05, 2025 03:12:31.089 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.089 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.089 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.089 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.089 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.089 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.092 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:31.096 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.098 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:31.099 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.222 [135142928006912] DEBUG - Loaded memory image of size 1920x1080.
+Jun 05, 2025 03:12:31.289 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.289 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.290 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 7(SPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.290 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 8(PPS), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.290 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 5(IDR), nal_ref_idc: 3
+Jun 05, 2025 03:12:31.290 [135142928006912] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.292 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:31.311 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.313 [135142928006912] DEBUG - [FFMPEG] - no picture 
+Jun 05, 2025 03:12:31.326 [135142928006912] DEBUG - [FFMPEG] - nal_unit_type: 1(Coded slice of a non-IDR picture), nal_ref_idc: 2
+Jun 05, 2025 03:12:31.459 [135142928006912] DEBUG - Loaded memory image of size 1920x1080.
+Jun 05, 2025 03:12:31.528 [135142928006912] DEBUG - [MI] Closing input file: "/data/movies/Sea Donkey (2018)/Sea Donkey (1080p with 25fps).mp4"
+Jun 05, 2025 03:12:31.529 [135142928006912] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.529 [135142928006912] DEBUG - [HCl#3] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.530 [135142912477952] DEBUG - [HttpClient/HCl#3] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:31.530 [135142928006912] DEBUG - Updating metadata item (save) (Sea Monkey) with ID 91
+Jun 05, 2025 03:12:31.531 [135142913002240] DEBUG - [HCl#4] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=91&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle
+Jun 05, 2025 03:12:31.531 [135142912477952] DEBUG - [HttpClient/HCl#4] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=91&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle (reused)
+Jun 05, 2025 03:12:31.534 [135142928006912] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.534 [135142928006912] DEBUG - [HCl#5] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.534 [135142912477952] DEBUG - [HttpClient/HCl#5] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:31.534 [135142928006912] DEBUG - Updating metadata item (save) (Sea Monkey) with ID 91

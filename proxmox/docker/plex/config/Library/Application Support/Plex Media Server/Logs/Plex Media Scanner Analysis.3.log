@@ -1,0 +1,73 @@
+Jun 05, 2025 03:12:31.698 [123868170189568] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Jun 05, 2025 03:12:31.698 [123868170189568] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Jun 05, 2025 03:12:31.698 [123868170189568] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Jun 05, 2025 03:12:31.698 [123868170189568] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --analyze --log-file-suffix  Analysis --item 96
+Jun 05, 2025 03:12:31.699 [123868170698496] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 05, 2025 03:12:31.788 [123868170698496] DEBUG - Analyzing media parts for item 96 (Mirror): 234
+Jun 05, 2025 03:12:31.789 [123868170698496] DEBUG - [ID 234] Media part analysis: /data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi
+Jun 05, 2025 03:12:31.789 [123868170698496] DEBUG - [MI] Opening input file: "/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi"
+Jun 05, 2025 03:12:31.789 [123868170698496] DEBUG - [FFMPEG] - Opening '/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi' for reading
+Jun 05, 2025 03:12:31.789 [123868170698496] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:31.790 [123868170698496] DEBUG - [FFMPEG] - Format avi probed with size=2048 and score=100
+Jun 05, 2025 03:12:31.790 [123868170698496] DEBUG - [FFMPEG] - use odml:1
+Jun 05, 2025 03:12:31.790 [123868170698496] DEBUG - [FFMPEG] - st:1 removing common factor 384 from timebase
+Jun 05, 2025 03:12:31.822 [123868170698496] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 10252 bytes read:6549334 seeks:2 nb_streams:2
+Jun 05, 2025 03:12:31.822 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.823 [123868170698496] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:31.823 [123868170698496] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 18770 bytes read:6582102 seeks:2 frames:18
+Jun 05, 2025 03:12:31.823 [123868170698496] DEBUG - [MI]  * 76cc0847f8dccabd4cc47c67cafe3a48c07cd4c0 [avi mpeg4/mp3] Duration: 6111800ms, 448x336 (1.333333) 25.000fps, bitrate=960kbps, audio channels=2, optimizedForStreaming=0 ("/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi")
+Jun 05, 2025 03:12:31.823 [123868170698496] DEBUG - [MI] Chapters had generic titles, clearing.
+Jun 05, 2025 03:12:31.823 [123868170698496] DEBUG - [MI] Closing input file: "/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi"
+Jun 05, 2025 03:12:31.823 [123868170698496] DEBUG - Committing media stream changes for part 234
+Jun 05, 2025 03:12:31.824 [123868170698496] DEBUG - Updating media item 234, size=733526016, metadata_item_id=96
+Jun 05, 2025 03:12:31.824 [123868170698496] DEBUG - Updating part with ID=234 [/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi]
+Jun 05, 2025 03:12:31.824 [123868155661056] DEBUG - [HCl#1] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=96&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:31.824 [123868170698496] DEBUG - [MI] Opening input file: "/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi"
+Jun 05, 2025 03:12:31.824 [123868170698496] DEBUG - [FFMPEG] - Opening '/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi' for reading
+Jun 05, 2025 03:12:31.825 [123868170698496] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:31.825 [123868170698496] DEBUG - [FFMPEG] - Format avi probed with size=2048 and score=100
+Jun 05, 2025 03:12:31.825 [123868170698496] DEBUG - [FFMPEG] - use odml:1
+Jun 05, 2025 03:12:31.825 [123868170698496] DEBUG - [FFMPEG] - st:1 removing common factor 384 from timebase
+Jun 05, 2025 03:12:31.825 [123868155169536] DEBUG - [HttpClient/HCl#1] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=96&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:31.825 [123868155661056] DEBUG - [HCl#2] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=96&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=thumbnailing
+Jun 05, 2025 03:12:31.826 [123868155169536] DEBUG - [HttpClient/HCl#2] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=96&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=thumbnailing (reused)
+Jun 05, 2025 03:12:31.859 [123868170698496] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 10252 bytes read:6549334 seeks:2 nb_streams:2
+Jun 05, 2025 03:12:31.859 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.859 [123868170698496] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:31.859 [123868170698496] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 18770 bytes read:6582102 seeks:2 frames:18
+Jun 05, 2025 03:12:31.859 [123868170698496] DEBUG - Creating /config/Library/Application Support/Plex Media Server/Media/localhost/7/6cc0847f8dccabd4cc47c67cafe3a48c07cd4c0.bundle/Contents/Thumbnails/thumb1.jpg (50.0%, 720x512).
+Jun 05, 2025 03:12:31.859 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.871 [123868170698496] DEBUG - Loaded memory image of size 448x336.
+Jun 05, 2025 03:12:31.875 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.886 [123868170698496] DEBUG - Loaded memory image of size 448x336.
+Jun 05, 2025 03:12:31.890 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.902 [123868170698496] DEBUG - Loaded memory image of size 448x336.
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [MI] Closing input file: "/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi"
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [MI] Opening input file: "/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi"
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [FFMPEG] - Opening '/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi' for reading
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [FFMPEG] - Format avi probed with size=2048 and score=100
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [FFMPEG] - use odml:1
+Jun 05, 2025 03:12:31.906 [123868170698496] DEBUG - [FFMPEG] - st:1 removing common factor 384 from timebase
+Jun 05, 2025 03:12:31.940 [123868170698496] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 10252 bytes read:6549334 seeks:2 nb_streams:2
+Jun 05, 2025 03:12:31.940 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.940 [123868170698496] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:31.940 [123868170698496] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 18770 bytes read:6582102 seeks:2 frames:18
+Jun 05, 2025 03:12:31.940 [123868170698496] DEBUG - Creating /config/Library/Application Support/Plex Media Server/Media/localhost/7/6cc0847f8dccabd4cc47c67cafe3a48c07cd4c0.bundle/Contents/Art/art1.jpg (50.0%, 1280x720).
+Jun 05, 2025 03:12:31.940 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.952 [123868170698496] DEBUG - Loaded memory image of size 448x336.
+Jun 05, 2025 03:12:31.955 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.967 [123868170698496] DEBUG - Loaded memory image of size 448x336.
+Jun 05, 2025 03:12:31.970 [123868170698496] DEBUG - [FFMPEG] - Format yuv420p chosen by get_format().
+Jun 05, 2025 03:12:31.981 [123868170698496] DEBUG - Loaded memory image of size 448x336.
+Jun 05, 2025 03:12:31.984 [123868170698496] DEBUG - [MI] Closing input file: "/data/movies/Mirror (1975)/Mirror (Andrei Tarkovsky, 1975).avi"
+Jun 05, 2025 03:12:31.984 [123868170698496] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.984 [123868170698496] DEBUG - [HCl#3] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.985 [123868155169536] DEBUG - [HttpClient/HCl#3] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:31.985 [123868170698496] DEBUG - Updating metadata item (save) (Mirror) with ID 96
+Jun 05, 2025 03:12:31.989 [123868155661056] DEBUG - [HCl#4] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=96&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle
+Jun 05, 2025 03:12:31.989 [123868155169536] DEBUG - [HttpClient/HCl#4] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=96&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle (reused)
+Jun 05, 2025 03:12:31.993 [123868170698496] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.993 [123868170698496] DEBUG - [HCl#5] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:31.994 [123868155169536] DEBUG - [HttpClient/HCl#5] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:31.994 [123868170698496] DEBUG - Updating metadata item (save) (Mirror) with ID 96

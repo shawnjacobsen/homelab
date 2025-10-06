@@ -1,0 +1,45 @@
+Jun 05, 2025 03:12:32.017 [133431878032128] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
+Jun 05, 2025 03:12:32.017 [133431878032128] INFO - Linux version: 6.8.12-11-pve, language: en-US
+Jun 05, 2025 03:12:32.017 [133431878032128] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
+Jun 05, 2025 03:12:32.017 [133431878032128] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --analyze --log-file-suffix  Analysis --no-thumbs --item 97
+Jun 05, 2025 03:12:32.018 [133431878541056] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
+Jun 05, 2025 03:12:32.109 [133431878541056] DEBUG - Analyzing media parts for item 97 (The Green Knight): 235
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [ID 235] Media part analysis: /data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [MI] Opening input file: "/data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv"
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - Opening '/data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv' for reading
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - Setting default whitelist 'file,crypto,data'
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - Format matroska,webm probed with size=2048 and score=100
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - st:0 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - st:1 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - st:2 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:32.110 [133431878541056] DEBUG - [FFMPEG] - st:3 removing common factor 1000000 from timebase
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Before avformat_find_stream_info() pos: 5877 bytes read:32768 seeks:2 nb_streams:4
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - nal_unit_type: 32(VPS), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Decoding VPS
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Main 10 profile bitstream
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - nal_unit_type: 33(SPS), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Decoding SPS
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Main 10 profile bitstream
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Decoding VUI
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - nal_unit_type: 34(PPS), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Decoding PPS
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - nal_unit_type: 39(SEI_PREFIX), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Decoding SEI
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - nal_unit_type: 39(SEI_PREFIX), nuh_layer_id: 0, temporal_id: 0
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - Decoding SEI
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - All info found
+Jun 05, 2025 03:12:32.111 [133431878541056] DEBUG - [FFMPEG] - After avformat_find_stream_info() pos: 36468 bytes read:65536 seeks:2 frames:12
+Jun 05, 2025 03:12:32.116 [133431878541056] DEBUG - [MI]  * 185e0ff92797517f66cdd7d374fce0fbadf1477d [mkv hevc/eac3] Duration: 7785694ms, 3836x2072 (1.851351) 23.976fps, bitrate=1314kbps, audio channels=6, optimizedForStreaming=0 ("/data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv")
+Jun 05, 2025 03:12:32.116 [133431878541056] DEBUG - [MI] Chapters had generic titles, clearing.
+Jun 05, 2025 03:12:32.117 [133431878541056] DEBUG - [MI] Closing input file: "/data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv"
+Jun 05, 2025 03:12:32.132 [133431878541056] DEBUG - Committing media stream changes for part 235
+Jun 05, 2025 03:12:32.133 [133431878541056] DEBUG - Updating media item 235, size=1279203753, metadata_item_id=97
+Jun 05, 2025 03:12:32.133 [133431878541056] DEBUG - Updating part with ID=235 [/data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv]
+Jun 05, 2025 03:12:32.134 [133431863999232] DEBUG - [HCl#1] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=97&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:32.134 [133431862467328] DEBUG - [HttpClient/HCl#1] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=97&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=analyzing
+Jun 05, 2025 03:12:32.135 [133431863999232] DEBUG - [HCl#2] HTTP requesting GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=97&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle
+Jun 05, 2025 03:12:32.135 [133431862467328] DEBUG - [HttpClient/HCl#2] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/:/metadata/notify/changeItemState?librarySectionID=1&metadataItemID=97&metadataType=1&state=-1&parentID=-1&rootID=-1&mediaState=idle (reused)
+Jun 05, 2025 03:12:32.137 [133431878541056] DEBUG - Downloading document http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:32.137 [133431878541056] DEBUG - [HCl#3] HTTP requesting GET http://127.0.0.1:32400/library/changestamp
+Jun 05, 2025 03:12:32.138 [133431862467328] DEBUG - [HttpClient/HCl#3] HTTP/1.1 (0.0s) 200 response from GET http://127.0.0.1:32400/library/changestamp (reused)
+Jun 05, 2025 03:12:32.138 [133431878541056] DEBUG - Updating metadata item (save) (The Green Knight) with ID 97
