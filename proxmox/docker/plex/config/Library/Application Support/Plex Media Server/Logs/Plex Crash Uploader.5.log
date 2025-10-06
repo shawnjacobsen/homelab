@@ -1,4 +1,0 @@
-Jun 05, 2025 19:28:30.658 [129014444051256] INFO - Crash Uploader - Platform: Linux ServerUUID: 120b7cd791f3b024d1960dbffa5c2b633a0adb94 UserId: shaj684@gmail.com Version: 1.41.7.9823-59f304c16
-Jun 05, 2025 19:28:30.658 [129014444051256] INFO - Pre-processed minidump directory: /config/Library/Application Support/Plex Media Server/Crash Reports/1.41.7.9823-59f304c16
-Jun 05, 2025 19:28:30.658 [129014444051256] INFO - Post-processed minidump directory: /tmp
-Jun 05, 2025 19:28:30.660 [129014471964680] INFO - Crash Uploader - Processing Complete.

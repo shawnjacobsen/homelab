@@ -1,7 +1,0 @@
-Aug 28, 2025 03:43:29.144 [134770043988736] INFO - Plex Media Scanner v1.41.7.9823-59f304c16 - Docker Docker Container x86_64 - build: linux-x86_64 - GMT -04:00
-Aug 28, 2025 03:43:29.144 [134770043988736] INFO - Linux version: 6.8.12-11-pve, language: en-US
-Aug 28, 2025 03:43:29.144 [134770043988736] INFO - Processor: 16-core Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz
-Aug 28, 2025 03:43:29.144 [134770043988736] INFO - /usr/lib/plexmediaserver/Plex Media Scanner --match --type 1 --log-file-suffix  Matcher --item 97
-Aug 28, 2025 03:43:29.145 [134770044489472] DEBUG - Opening 20 database sessions to library (com.plexapp.plugins.library), SQLite 3.39.4, threadsafe=1
-Aug 28, 2025 03:43:29.239 [134770044489472] DEBUG - Matcher: found 0 auxiliary files for The Green Knight
-Aug 28, 2025 03:43:29.239 [134770044489472] DEBUG - Matcher: no sidecar subtitle files found for /data/movies/The Green Knight (2021)/The.Green.Knight.2021.2160p.WEB-DL.x265.10bit.HDR.DDP5.1.Atmos-NOGRP.mkv
