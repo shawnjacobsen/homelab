@@ -13,3 +13,7 @@ chromedriver.exe
 # ignore all files in a logs directory but keep the .gitkeep file
 **/logs/*
 !.gitkeep
+
+# ignore plex config and transcoding
+proxmox/docker/plex/config
+proxmox/docker/plex/transcoding
