@@ -9,7 +9,7 @@ services:
       - PORT=8000
     networks:
       - homelab_shared_net
-      
+
 networks:
   homelab_shared_net:
     external: true

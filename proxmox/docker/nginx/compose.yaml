@@ -1,26 +1,9 @@
 services:
-  nginx_proxy_manager:
-    image: "jc21/nginx-proxy-manager:latest"
-    container_name: nginx_proxy_manager
-    restart: unless-stopped
-    ports:
-      - "80:80"    # HTTP
-      - "443:443"  # HTTPS
-      - "81:81"    # Admin Panel
-    volumes:
-      - ./data/npm_data:/data
-      - ./data/npm_letsencrypt:/etc/letsencrypt
-      - ./data/npm_logs:/var/log/nginx  
-    environment:
-      DB_SQLITE_FILE: "/data/database.sqlite" # Using SQLite instead of MySQL for simplicity
-      INITIAL_ADMIN_EMAIL: shawn.jacobsen0@gmail.com
-      INITIAL_ADMIN_PASSWORD: changeme
-    networks:
-      - homelab_shared_net
-
   tailscale:
     image: tailscale/tailscale:v1.80.0
     env_file: .env
+    networks:
+      - homelab_shared_net
     environment:
       TS_HOSTNAME: ${TS_HOSTNAME} # Enter the hostname for your tailnet
       TS_AUTH_KEY: ${TS_AUTH_KEY} # OAuth client key recommended
@@ -39,9 +22,20 @@ services:
         target: /tmp # Mounting the entire /tmp folder to access tailscale.sock
     cap_add:
       - NET_ADMIN
-    networks:
-      - homelab_shared_net
-      
+  nginx_proxy_manager:
+    image: "jc21/nginx-proxy-manager:latest"
+    container_name: nginx_proxy_manager
+    restart: unless-stopped
+    network_mode: service:tailscale
+    volumes:
+      - ./data/npm_data:/data
+      - ./data/npm_letsencrypt:/etc/letsencrypt
+      - ./data/npm_logs:/var/log/nginx  
+    environment:
+      DB_SQLITE_FILE: "/data/database.sqlite" # Using SQLite instead of MySQL for simplicity
+      INITIAL_ADMIN_EMAIL: shawn.jacobsen0@gmail.com
+      INITIAL_ADMIN_PASSWORD: changeme
+
   goaccess:
     image: justsky/goaccess-for-nginxproxymanager:latest
     container_name: goaccess
