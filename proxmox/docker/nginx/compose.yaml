@@ -1,0 +1,72 @@
+services:
+  nginx_proxy_manager:
+    image: "jc21/nginx-proxy-manager:latest"
+    container_name: nginx_proxy_manager
+    restart: unless-stopped
+    ports:
+      - "80:80"    # HTTP
+      - "443:443"  # HTTPS
+      - "81:81"    # Admin Panel
+    volumes:
+      - ./data/npm_data:/data
+      - ./data/npm_letsencrypt:/etc/letsencrypt
+      - ./data/npm_logs:/var/log/nginx  
+    environment:
+      DB_SQLITE_FILE: "/data/database.sqlite" # Using SQLite instead of MySQL for simplicity
+      INITIAL_ADMIN_EMAIL: shawn.jacobsen0@gmail.com
+      INITIAL_ADMIN_PASSWORD: changeme
+    networks:
+      - homelab_shared_net
+
+  tailscale:
+    image: tailscale/tailscale:v1.80.0
+    env_file: .env
+    environment:
+      TS_HOSTNAME: ${TS_HOSTNAME} # Enter the hostname for your tailnet
+      TS_AUTH_KEY: ${TS_AUTH_KEY} # OAuth client key recommended
+      TS_EXTRA_ARGS: ${TS_EXTRA_ARGS} # Tags are required when using OAuth client
+      TS_PERMIT_CERT_UID: caddy
+    init: true
+    restart: unless-stopped
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - type: volume
+        source: tailscale
+        target: /var/lib/tailscale
+      - type: volume
+        source: tailscale_sock
+        target: /tmp # Mounting the entire /tmp folder to access tailscale.sock
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - homelab_shared_net
+      
+  goaccess:
+    image: justsky/goaccess-for-nginxproxymanager:latest
+    container_name: goaccess
+    restart: unless-stopped
+    environment:
+        - TZ=America/Denver
+        #- SKIP_ARCHIVED_LOGS=False #optional   
+        #- BASIC_AUTH=False #optional
+        #- BASIC_AUTH_USERNAME=user #optional
+        #- BASIC_AUTH_PASSWORD=pass #optional                
+    ports:
+        - '7880:7880'
+    volumes:
+        - ./data/npm_data/logs:/opt/log
+        # - ./data/npm_data/logs/proxy-host-1_access.log:/opt/log/proxy-host-1_access.log
+    networks:
+      - homelab_shared_net
+
+networks:
+  homelab_shared_net:
+    name: homelab_shared_net
+    driver: bridge
+
+volumes:
+  tailscale:
+    name: tailscale
+  tailscale_sock:
+    name: tailscale_sock

@@ -1,0 +1,29 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "5678:5678"
+    environment:
+      N8N_GENERIC_TIMEZONE: America/New_York
+      N8N_PROTOCOL: ${N8N_PROTOCOL}
+      N8N_SECURE_COOKIE: ${N8N_SECURE_COOKIE}
+      N8N_EDITOR_BASE_URL: ${N8N_PROTOCOL}://${N8N_HOST}/
+      WEBHOOK_URL: ${N8N_PROTOCOL}://${N8N_HOST}/
+      DB_TYPE: sqlite
+      EMAIL_ADDRESS: shawn.jacobsen0@gmail.com
+    volumes:
+      - n8n_data:/home/node/.
+      - ./local-files:/files
+    networks:
+      - homelab_shared_net
+
+volumes:
+  n8n_data:
+    name: n8n_data
+      
+networks:
+  homelab_shared_net:
+    external: true

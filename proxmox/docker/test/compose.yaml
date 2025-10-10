@@ -1,0 +1,15 @@
+services:
+  hello-world:
+    image: ghcr.io/kljensen/hello-world-http:latest
+    init: true
+    ports:
+      - "4444:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+    networks:
+      - homelab_shared_net
+      
+networks:
+  homelab_shared_net:
+    external: true

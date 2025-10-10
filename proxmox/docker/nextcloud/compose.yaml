@@ -16,55 +16,6 @@ services:
       APACHE_IP_BINDING: 127.0.0.1
       SKIP_DOMAIN_VALIDATION: true
       NEXTCLOUD_MOUNT: /mnt/datashare
-  nextcloud-aio-caddy:
-    env_file: .env
-    build:
-      context: .
-      dockerfile: Caddy.Dockerfile
-    restart: unless-stopped
-    environment:
-      NC_DOMAIN: ${NC_DOMAIN} # Change this to your domain ending with .ts.net in the format {$TS_HOSTNAME}.{tailnetdomain}
-    volumes:
-      - type: bind
-        source: ./Caddyfile
-        target: /etc/caddy/Caddyfile
-      - type: volume
-        source: caddy_certs
-        target: /certs
-      - type: volume
-        source: caddy_data
-        target: /data
-      - type: volume
-        source: caddy_config
-        target: /config
-      - type: volume
-        source: tailscale_sock
-        target: /var/run/tailscale/ # Mount the volume for /var/run/tailscale/tailscale.sock
-        read_only: true
-    network_mode: service:nextcloud-aio-tailscale
-  nextcloud-aio-tailscale:
-    image: tailscale/tailscale:v1.80.0
-    env_file: .env
-    environment:
-      TS_HOSTNAME: ${TS_HOSTNAME} # Enter the hostname for your tailnet
-      TS_AUTH_KEY: ${TS_AUTH_KEY} # OAuth client key recommended
-      TS_EXTRA_ARGS: ${TS_EXTRA_ARGS} # Tags are required when using OAuth client
-      TS_PERMIT_CERT_UID: caddy
-    init: true
-    restart: unless-stopped
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - type: volume
-        source: tailscale
-        target: /var/lib/tailscale
-      - type: volume
-        source: tailscale_sock
-        target: /tmp # Mounting the entire /tmp folder to access tailscale.sock
-    cap_add:
-      - NET_ADMIN
-    networks:
-      - nextcloud-aio
 volumes:
   nextcloud_aio_mastercontainer:
     name: nextcloud_aio_mastercontainer # This line cannot be changed.
@@ -74,10 +25,6 @@ volumes:
     name: caddy_data
   caddy_config:
     name: caddy_config
-  tailscale:
-    name: tailscale
-  tailscale_sock:
-    name: tailscale_sock
 networks:
   nextcloud-aio:
     name: nextcloud-aio
