@@ -9,11 +9,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - nextcloud-aio
+      - homelab_shared_net
     ports:
       - 0.0.0.0:8080:8080
     environment:
       APACHE_PORT: 11000
       APACHE_IP_BINDING: 127.0.0.1
+      APACHE_ADDITIONAL_NETWORK: homelab_shared_net
       SKIP_DOMAIN_VALIDATION: true
       NEXTCLOUD_MOUNT: /mnt/datashare
 volumes:
@@ -33,3 +35,5 @@ networks:
     driver_opts:
       com.docker.network.driver.mtu: "9001" # Jumbo Frame
       com.docker.network.bridge.host_binding_ipv4: "127.0.0.1" # Harden aio
+  homelab_shared_net:
+    external: true
