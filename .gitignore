@@ -23,3 +23,7 @@ proxmox/docker/piwigo/piwigo-data
 
 # ignore nginx chat json
 proxmox/docker/nginx/chat.json
+
+# ignore local documentation
+.docs.local/*
+!.docs.local/.gitkeep
