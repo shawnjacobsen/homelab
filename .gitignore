@@ -17,3 +17,9 @@ chromedriver.exe
 # ignore plex config and transcoding
 proxmox/docker/plex/config
 proxmox/docker/plex/transcoding
+
+# ignore piwigo data
+proxmox/docker/piwigo/piwigo-data
+
+# ignore nginx chat json
+proxmox/docker/nginx/chat.json

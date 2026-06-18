@@ -19,6 +19,9 @@ services:
       - ./local-files:/files
     networks:
       - homelab_shared_net
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
 
 volumes:
   n8n_data:
