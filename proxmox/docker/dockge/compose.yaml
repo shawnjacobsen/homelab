@@ -10,3 +10,11 @@ services:
       - /home/shawn/homelab/proxmox/docker:/home/shawn/homelab/proxmox/docker
     environment:
       - DOCKGE_STACKS_DIR=/home/shawn/homelab/proxmox/docker
+    networks:
+      - default
+      - homelab_shared_net
+
+networks:
+  default:
+  homelab_shared_net:
+    external: true

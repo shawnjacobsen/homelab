@@ -11,10 +11,9 @@ My homelab runs essential home services while serving as a platform for explorin
 - **CPU**: Intel Xeon E5-2640 v3 (8-core, 2.6GHz)
 - **RAM**: 16GB DDR4-3000 CL15
 - **Motherboard**: ASUS X99 WS/IPMI
-- **GPU**: NVIDIA GTX 1070 (passed through to LXC)
+- **GPU**: NVIDIA GTX 1070 *(passthrough to LXC 101 currently disabled; planned for restoration)*
 - **Boot Drive**: 256GB SSD
 - **Network**: Dual NIC bridge
-
 
 ## ZFS Storage
 
@@ -30,72 +29,200 @@ Single 1TB drive for experimental workloads and media content:
 - Temporary storage and testing datasets
 
 ### **Dataset Organization**
-- `tank/userdata` (926GB) - NextCloud user storage
-- `tank/docker` (141GB) - Docker engine data and volumes
-- `mouse/media` - Plex media library (movies, tv, music)
-  - **Compression**: LZ4
+- `tank/userdata` (926GB) — NextCloud user storage
+- `tank/docker` (141GB) — Docker engine data and volumes
+- `mouse/media` — Plex media library (movies, tv, music), LZ4 compression
 
 ## Virtualization Layer
 
 ### **Ubuntu Docker LXC (VMID: 101)**
 - **Hostname**: docker
+- **IP**: 10.0.0.30
 - **OS**: Ubuntu 24.04.2 LTS
 - **Resources**: 16GB RAM, 16 CPU cores
+- **ZFS bind mounts**:
+  - `/tank/docker` → `/var/lib/docker`
+  - `/tank/userdata` → `/mnt/datashare/myfiles`
+  - `/mouse/media` → `/mnt/datashare/media`
 
-### **GPU Passthrough Configuration**
-Direct NVIDIA device access through LXC mount entries:
-/dev/nvidia0, /dev/nvidiactl, /dev/nvidia-modeset
-/dev/nvidia-uvm, /dev/nvidia-uvm-tools
-/dev/nvidia-caps/nvidia-cap1, /dev/nvidia-caps/nvidia-cap2
+## Networking Architecture
 
-## Service Implementation
+### Access Tiers
 
-### **File Hosting - NextCloud AIO**
-- **Access**: Via Tailscale (cloud.tailnet)
-- **Integration**: Tailscale + Caddy for automatic HTTPS certificates
-- **Data**: ZFS `tank/userdata` provides core file storage with snapshot protection
+Services are exposed across up to three access tiers depending on sensitivity:
 
-### **Media Streaming - Plex**
-- **Access**: Via Tailscale (docker.tailnet:32400/web)
-- **Transcoding**: NVIDIA GTX 1070 hardware acceleration (NVENC/NVDEC)
-- **Media Libraries**: 
-  - Movies: `/data/movies`
-  - TV Shows: `/data/tv` 
-  - Music: `/data/music`
-- **Storage**: ZFS `mouse/media` with 1M recordsize optimization
+| Tier | How it works |
+|------|-------------|
+| **LAN** | Direct port binding on `10.0.0.30`; available only on the `10.0.0.0/24` network |
+| **Tailscale** (`*.tail.shawnjacobsen.com`) | Wildcard DNS → `100.102.124.71` (the `cloud` device on the tailnet). Traffic hits NPM, which reverse-proxies to the target container. Requires Tailscale auth. |
+| **Public** (`*.shawnjacobsen.com`) | Cloudflare tunnel (`cloudflared-homelab-1`) terminates at the `cloudflared` container and forwards to the target service. No port forwarding or static IP needed. |
 
-### **Local AI Infrastructure**
-- **Ollama**: Port 11434 (LLM inference engine)
-- **Open WebUI**: Port 7000 (web interface)
-- **GPU Acceleration**: NVIDIA GTX 1070 compute cores
-- **Supporting Services**: SearXNG (port 7777), Redis, Apache Tika
-- **Network**: Isolated Docker network (ai-net) for service communication
+### Tailscale Mesh (tailnet: `heron-fiordland.ts.net`)
 
-### **Network Services**
-- **Pi-hole**: DNS/ad-blocking on 10.0.0.30 (ports 53, 80, 443)
-  - Selective deployment - configured devices only
-  - Preserves default DHCP for testing and work devices
-- **Tailscale**: Mesh VPN with OAuth authentication
-  - Machine name: "cloud"
-  - Automatic certificate management
-  - Replaced Cloudflare Tunnel due to NextCloud AIO compatibility
+Four devices on the tailnet:
+- `cloud` (`100.102.124.71`) — Docker LXC 101; the hub for all homelab services
+- `shawn-desktop` — primary workstation
+- `shawn-x1c` — ThinkPad X1 Carbon laptop
+- `iphone-15-pro` — mobile
 
-## Technical Architecture
+`*.tail.shawnjacobsen.com` is a wildcard DNS A record pointing to `100.102.124.71`. NPM (running inside the Tailscale container's network namespace) handles routing for all `*.tail.shawnjacobsen.com` requests.
 
-### **Container Orchestration**
-- **Management**: Dockge web interface (port 5001)
-- **Stacks**: Version-controlled Docker Compose files
-- **Services**: dockge, nextcloud-aio, plex, llm (Ollama stack), pi-hole
-- **Repository**: All configurations stored in Git for reproducibility
+### Docker Networks
+
+| Network | Owner | Purpose |
+|---------|-------|---------|
+| `homelab_shared_net` | `nginx` stack (declares it; all others use `external: true`) | Shared bridge; allows NPM and `cloudflared` to reach all services by container name |
+| `ai-net` | `llm` stack | Isolated network for Ollama, SearXNG, Redis, and Tika. `open-webui` bridges into `homelab_shared_net` as well. |
+| `nextcloud-aio` | `nextcloud` stack | Internal AIO network; MTU 9001 (jumbo frames), IPv4-only, loopback-bound for hardening |
+| `piwigo-network` | `piwigo` stack | Internal network between Piwigo app and MariaDB |
+
+> **Bring-up order matters**: `nginx` must start first — it creates `homelab_shared_net`. All other stacks that attach to it as `external: true` will fail to start if it doesn't exist.
+
+### Reverse Proxy (NPM + Tailscale)
+
+NPM runs with `network_mode: service:tailscale`, meaning it shares the Tailscale container's network namespace. This gives NPM a Tailscale IP without needing its own network interface, and sidesteps ISP static-IP limitations. The `cloudflared` container reaches NPM via `nginx-tailscale-1:80` over `homelab_shared_net`.
+
+### Cloudflare Tunnel
+
+Tunnel `cloudflared-homelab-1` (status: healthy) routes public traffic without exposing any ports to the internet:
+
+| Public hostname | Routes to |
+|----------------|-----------|
+| `n8n.shawnjacobsen.com` | NPM → `n8n:5678` |
+| `photos.shawnjacobsen.com` | `piwigo-piwigo-main-1:80` (direct, bypasses NPM) |
+
+## Services
+
+### Reverse Proxy & Access — `nginx` stack
+
+Three containers:
+
+- **Tailscale** — Mesh VPN; NPM shares its network namespace. Exposes port 81 on the LAN for NPM admin.
+- **Nginx Proxy Manager (NPM)** — Reverse proxy for all `*.tail.shawnjacobsen.com` and some `*.shawnjacobsen.com` routes.
+- **GoAccess** — Real-time log analytics for NPM access logs.
+
+| Access | URL |
+|--------|-----|
+| NPM admin (LAN) | `10.0.0.30:81` |
+| NPM admin (Tailscale) | `npm.tail.shawnjacobsen.com` |
+| GoAccess dashboard (LAN) | `10.0.0.30:7880` |
+
+---
+
+### File Hosting — `nextcloud` stack
+
+NextCloud All-in-One mastercontainer manages the full NextCloud suite (Apache, Collabora, Talk, etc.) internally.
+
+| Access | URL |
+|--------|-----|
+| AIO setup UI (LAN) | `10.0.0.30:8080` |
+| AIO setup UI (Tailscale) | `nc-admin.tail.shawnjacobsen.com` |
+| Files / web UI (Tailscale) | `drive.tail.shawnjacobsen.com` |
+
+- **Data**: ZFS `tank/userdata` → `/mnt/datashare/myfiles` (no backups currently configured)
+- **Network**: `nextcloud-aio` (internal, jumbo frames) + `homelab_shared_net`
+
+---
+
+### Media Streaming — `plex` stack
+
+| Access | URL |
+|--------|-----|
+| LAN | `10.0.0.30:32400/web` |
+| Tailscale | `plex.tail.shawnjacobsen.com` |
+
+- **Network**: `host` mode (direct port binding on LXC)
+- **Media**: ZFS `mouse/media` mounted read-only at `/data` (movies, tv, music)
+- **GPU**: Hardware transcoding disabled — GTX 1070 passthrough to LXC 101 is not currently active. Re-enable `NVIDIA_VISIBLE_DEVICES` and `runtime: nvidia` in `plex/compose.yaml` after restoring passthrough.
+
+---
+
+### Automation — `n8n` stack
+
+| Access | URL |
+|--------|-----|
+| LAN | `10.0.0.30:5678` |
+| Tailscale | `n8n.tail.shawnjacobsen.com` |
+| Public | `n8n.shawnjacobsen.com` |
+
+- **Database**: SQLite
+- **Public routing**: Cloudflare tunnel → NPM → `n8n:5678`
+
+---
+
+### Local AI — `llm` stack
+
+All services run on the isolated `ai-net` network. Only Open WebUI also bridges to `homelab_shared_net` for NPM access.
+
+| Service | LAN | Tailscale |
+|---------|-----|-----------|
+| Open WebUI | `10.0.0.30:7000` | `open-webui.tail.shawnjacobsen.com` |
+| Ollama (API) | `10.0.0.30:11434` | — |
+| SearXNG | `10.0.0.30:7777` | — |
+| Apache Tika | `10.0.0.30:9998` | — |
+
+- **RAG**: Open WebUI queries SearXNG; Tika handles document parsing
+- **GPU**: Passthrough not active (see Plex note above); Ollama runs CPU-only until restored
+
+---
+
+### Photo Gallery — `piwigo` stack
+
+| Access | URL |
+|--------|-----|
+| LAN | `10.0.0.30:${piwigo_port}` |
+| Tailscale | `photos.tail.shawnjacobsen.com` |
+| Public | `photos.shawnjacobsen.com` |
+
+- **Photos**: sourced from `/mnt/datashare/myfiles/Photography/Photo Exports`
+- **Database**: MariaDB LTS on internal `piwigo-network`
+- **Public routing**: Cloudflare tunnel → `piwigo-piwigo-main-1:80` (bypasses NPM)
+
+---
+
+### DNS & Ad-blocking — `pi-hole` stack
+
+| Access | URL |
+|--------|-----|
+| Web UI (LAN) | `10.0.0.30:80` |
+| DNS (LAN) | `10.0.0.30:53` |
+
+- **Network**: Docker default `bridge` (not on `homelab_shared_net`)
+- DNS server for all configured LAN devices. Breaking Pi-hole breaks LAN DNS — handle with care.
+
+---
+
+### Cloudflare Tunnel — `cloudflare` stack
+
+The `cloudflared` container maintains the outbound tunnel to Cloudflare. No ports exposed. Attached to `homelab_shared_net` so it can reach `piwigo` and `nginx-tailscale-1` by container name.
+
+---
+
+### Stack Manager — `dockge` stack
+
+| Access | URL |
+|--------|-----|
+| LAN | `10.0.0.30:5001` |
+| Tailscale | `dockge.tail.shawnjacobsen.com` |
+
+Manages all compose stacks; its stacks directory points at this repo (`/home/shawn/homelab/proxmox/docker`).
+
+## Local API Documentation
+
+API reference specs are stored in `.docs.local/` (gitignored) for use when making direct API calls:
+
+| File | API |
+|------|-----|
+| `tailscale-api.json` | Tailscale REST API — query devices, ACLs, tailnet settings |
 
 ## Related Automation Projects
 
 ### **Canvas Integration**
-Python automation synchronizing Canvas LMS with Notion databases - handles course data, assignment tracking, and API abstraction for reuse in other projects.
+Python automation synchronizing Canvas LMS with Notion databases — handles course data, assignment tracking, and API abstraction for reuse in other projects.
 
 ### **Task Management Automation**
 Scheduled system managing recurring Notion tasks via JSON configuration with automated deployment and SMS error notifications.
 
 ---
 
-*Feel free to reach out if you have any questions about my setup!!! (<a href="mailto:shawn.jacobsen0@gmail.com">shawn.jacobsen0@gmail.com</a>)*
+*Feel free to reach out if you have any questions about my setup! (<a href="mailto:shawn.jacobsen0@gmail.com">shawn.jacobsen0@gmail.com</a>)*

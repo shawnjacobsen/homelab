@@ -9,8 +9,11 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM_TOKEN}
       - PLEX_UID=1000
       - PLEX_GID=1000
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+      # GPU passthrough is disabled for this LXC (GPU dedicated to Windows 11 VM, see 101.conf).
+      # Re-enable these two lines only after restoring NVIDIA passthrough, or the nvidia
+      # prestart hook fails ("nvml error: driver not loaded") and the container won't start.
+      # - NVIDIA_VISIBLE_DEVICES=all
+      # - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
     volumes:
       - ./config:/config
       - ./transcoding:/transcode

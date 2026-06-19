@@ -6,6 +6,7 @@ services:
       - TZ=${timezone}
     networks:
       - piwigo-network
+      - homelab_shared_net
     ports:
       - ${piwigo_port}:80
     depends_on:

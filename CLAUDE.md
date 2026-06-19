@@ -17,9 +17,20 @@ truth for every stack's compose file and the scheduled jobs that maintain them.
 
 ## Source of Truth & References
 
-- **This repo** (`/home/shawn/homelab`) is the source of truth for all compose files, scripts, and cron definitions. GitHub: `shawnjacobsen/homelab`.
+- **This repo** (`/home/shawn/homelab`) is the source of truth for all compose files, scripts, and cron definitions. GitHub: `shawnjacobsen/homelab`. it is the production environment that impacts
 - **Live Docker state** on LXC 101 is the source of truth for what's *actually running* — use the `docker-mcp` MCP tools (`list-containers`, `get-logs`, etc.) or `docker` CLI to check.
 - **Architecture reference**: Notion "Homelab Architecture v3.0" — fetch via the Notion MCP (`notion-fetch` on `https://app.notion.com/p/2076f656231080298a6ff44565f476c5`) for hardware serials, GPU plans, storage rationale, and historical/deprecated decisions.
+- **Homelab Log**: Notion "📑 Homelab Log" (page ID `1e16f656231081b7be1bd7e09569c41a`) — the running, dated changelog of homelab work (what was changed/fixed and why). Fetch via the Notion MCP (`notion-fetch`); append a new `### <Month Day, Year>` entry (max ~3 bullets) after completing notable changes. Distinct from the Architecture doc — this is chronological history, not the current-state spec.
+- **Local API docs** (`.docs.local/`): OpenAPI/reference specs for APIs used in this project. Currently: `tailscale-api.json`. Use these when making direct API calls.
+
+### Tailscale API
+Query the tailnet directly via the Tailscale REST API. The API key is available as `$TAILSCALE_API_KEY` in the Claude Code environment (not `~/.bashrc`). Reference: `.docs.local/tailscale-api.json`.
+
+```bash
+# List all devices
+curl -s -H "Authorization: Bearer $TAILSCALE_API_KEY" \
+  "https://api.tailscale.com/api/v2/tailnet/heron-fiordland.ts.net/devices"
+```
 
 > ⚠️ **The Notion doc lags the repo.** It lists Nginx Proxy Manager and Cloudflare Tunnel as *deprecated*, but both are present and **running** in this repo (added in the latest commits) — NPM now runs inside Tailscale's network namespace, which sidesteps the old Xfinity static-IP problem. When repo/live state and Notion disagree, **repo + live state win**; treat Notion as background/history.
 

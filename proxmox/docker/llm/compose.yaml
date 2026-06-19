@@ -1,8 +1,14 @@
 services:
   ollama:
-    runtime: nvidia
+    # GPU passthrough is disabled for this LXC (GPU dedicated to Windows 11 VM, see 101.conf).
+    # Re-enable `runtime: nvidia` + NVIDIA_VISIBLE_DEVICES once passthrough is restored; until
+    # then the nvidia prestart hook fails and Ollama runs CPU-only (slow inference).
+    # runtime: nvidia
     environment:
-      - NVIDIA_VISIBLE_DEVICES=0
+      # The ollama image bakes in NVIDIA_VISIBLE_DEVICES=all, which triggers the nvidia
+      # prestart hook and fails without GPU. Force it to `void` to disable the hook (CPU-only).
+      # When GPU passthrough is restored, set this back to `0` and re-enable runtime: nvidia.
+      - NVIDIA_VISIBLE_DEVICES=void
       - OLLAMA_DEBUG=1
     volumes:
       - ollama:/root/.ollama
@@ -31,6 +37,7 @@ services:
     image: ghcr.io/open-webui/open-webui:latest
     networks:
       - ai-net
+      - homelab_shared_net
 
   redis:
     container_name: redis
@@ -85,3 +92,5 @@ volumes:
 
 networks:
   ai-net:
+  homelab_shared_net:
+    external: true
