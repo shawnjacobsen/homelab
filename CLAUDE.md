@@ -81,7 +81,12 @@ mp2: /mouse/media    → /mnt/datashare/media        (Plex media: /movies /tv /m
 Stacks mount subpaths of `/mnt/datashare/...` — e.g. NextCloud uses `/mnt/datashare`, Plex `/data` (ro), Piwigo `/mnt/datashare/myfiles/Photography/Photo Exports`.
 
 ### GPU (active — device-node passthrough)
-The GTX 1070 is **live** for LXC 101. The host runs the NVIDIA driver (`550.163.01`) and the `/dev/nvidia*` nodes appear in the privileged LXC (`nvidia-smi` works there) — note this happens **without** the `lxc.mount.entry` lines in `101.conf` being uncommented, so that commented block is vestigial, not the mechanism. The Docker layer is what matters: `nvidia-container-toolkit` runs with **`no-cgroups = true`** (it can't manage cgroups inside an LXC; host-only file `/etc/nvidia-container-runtime/config.toml`, not in the repo), which means each GPU stack (`plex`, `llm`/ollama) **must** list `/dev/nvidia0`, `/dev/nvidiactl`, `/dev/nvidia-uvm` under `devices:` in its compose plus `runtime: nvidia` + `NVIDIA_VISIBLE_DEVICES` — otherwise the container hits `Failed to initialize NVML: Unknown Error`. Full how-to lives in `README.md`. Leftover VFIO config (`vfio.conf`, `nomodeset`/`intel_iommu` cmdline) is benign but a latent reboot-race; strip it on the next host-reboot window.
+The GTX 1070 is **live** for LXC 101 (host NVIDIA driver `550.163.01`). Three layers make it reboot-safe — all three are required (full how-to + troubleshooting in `README.md`):
+1. **Host** `nvidia-uvm-init.service` (oneshot, `Before=pve-guests.service`) creates `/dev/nvidia-uvm` at boot — it's created lazily on first CUDA use, so without this it's absent on a cold boot. Host-only, not in the repo.
+2. **`101.conf`** `lxc.mount.entry` lines bind-mount the host `/dev/nvidia*` (incl. `uvm`) into the LXC — these are now **active** (both repo `proxmox/docker/101.conf` and live `/etc/pve/lxc/101.conf`); majors are dynamic so unpinned, cgroup perms come from `lxc.cgroup2.devices.allow: a`.
+3. **`no-cgroups = true`** in `/etc/nvidia-container-runtime/config.toml` (host-only) means the toolkit injects libs but not cgroup perms, so each GPU stack (`plex`, `llm`/ollama) **must** also list `/dev/nvidia0`,`/dev/nvidiactl`,`/dev/nvidia-uvm` under `devices:` plus `runtime: nvidia` + `NVIDIA_VISIBLE_DEVICES`, or it hits `Failed to initialize NVML: Unknown Error`.
+
+The old VFIO config (`vfio.conf`, `nomodeset`/`intel_iommu` cmdline, vfio in `/etc/modules`) was **removed** 2026-06-20 (backups in `/root/vfio-teardown-bak/`); VT-d stays off.
 
 ## Docker Stacks
 

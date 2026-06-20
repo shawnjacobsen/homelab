@@ -5,9 +5,7 @@
 > ## Resolution — how it actually went (read this first)
 > The phased plan below was mostly **already satisfied** by the time we executed: a host
 > reboot brought the card back, the host NVIDIA driver (`550.163.01`) was already installed,
-> the `/dev/nvidia*` nodes were already present in the LXC, and the LXC userland already
-> matched. So Phase 0/2/3/4 needed **no work**, and Phase 3's `101.conf` mount-entry
-> uncommenting turned out to be **unnecessary** (the nodes reach the privileged LXC without it).
+> and the LXC userland already matched. So Phase 0/2/4 needed **no work**.
 >
 > The real gap was the **Docker → container layer**, in two parts:
 > 1. **`/etc/nvidia-container-runtime/config.toml` on the LXC → `no-cgroups = true`.** The
@@ -20,9 +18,22 @@
 >    explicit device list the container hits `Failed to initialize NVML: Unknown Error`.
 >    (commit `151f9c7`).
 >
-> **Not done / deferred:** Phase 1 (tear down leftover VFIO `vfio.conf` + `nomodeset`/`intel_iommu`
-> cmdline). It's currently benign (the `nvidia` driver claims the card) but is a latent
-> reboot-race — do it on the next host-reboot maintenance window. VT-d stays **off**.
+> **Phase 1 (VFIO teardown) — DONE 2026-06-20.** Stripped the kernel cmdline to `quiet`,
+> removed `vfio.conf` + `iommu_unsafe_interrupts.conf`, removed the `vfio*` lines from
+> `/etc/modules`, ran `update-grub` + `update-initramfs -u -k all`, and rebooted. Host now boots
+> clean with `Kernel driver in use: nvidia` and **vfio not loaded**. VT-d stays **off**. Backups
+> in `/root/vfio-teardown-bak/`.
+>
+> **Phase 3 (`101.conf` bind-mounts) — DONE, and it WAS necessary** (initial hunch that the
+> nodes reach the LXC without it was wrong). Root cause found on the post-reboot regression:
+> `/dev/nvidia-uvm` is created **lazily on first CUDA use**, so on a cold boot it exists on
+> neither host nor LXC, and the containers' `devices:` mapping fails with
+> `error gathering device information ... /dev/nvidia-uvm: no such file or directory` (exit 128).
+> Fixed with two complementary pieces:
+> - **Host `nvidia-uvm-init.service`** (oneshot, `ExecStart=/usr/bin/nvidia-modprobe -c 0 -u`,
+>   ordered `Before=pve-guests.service`) → creates `/dev/nvidia-uvm` before the LXC autostarts.
+> - **`101.conf` `lxc.mount.entry`** bind-mounts (repo + live) → pipe the host `/dev/nvidia*`
+>   (incl. `uvm`) into the LXC deterministically. Majors are dynamic so left unpinned.
 
 ---
 
