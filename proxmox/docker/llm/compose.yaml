@@ -1,15 +1,19 @@
 services:
   ollama:
-    # GPU passthrough is disabled for this LXC (GPU dedicated to Windows 11 VM, see 101.conf).
-    # Re-enable `runtime: nvidia` + NVIDIA_VISIBLE_DEVICES once passthrough is restored; until
-    # then the nvidia prestart hook fails and Ollama runs CPU-only (slow inference).
-    # runtime: nvidia
+    # GPU enabled via device-node passthrough: the host NVIDIA driver (550.163.01) is shared
+    # into this privileged LXC. nvidia-container-toolkit runs with no-cgroups=true (it cannot
+    # manage cgroups from inside an LXC), so the explicit `devices:` below are REQUIRED — they
+    # grant Docker the cgroup device permissions. Without them NVML fails ("Unknown Error")
+    # even though the runtime injects the userland libraries.
+    runtime: nvidia
     environment:
-      # The ollama image bakes in NVIDIA_VISIBLE_DEVICES=all, which triggers the nvidia
-      # prestart hook and fails without GPU. Force it to `void` to disable the hook (CPU-only).
-      # When GPU passthrough is restored, set this back to `0` and re-enable runtime: nvidia.
-      - NVIDIA_VISIBLE_DEVICES=void
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
       - OLLAMA_DEBUG=1
+    devices:
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
     volumes:
       - ollama:/root/.ollama
     ports:
