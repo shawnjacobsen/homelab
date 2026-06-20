@@ -82,7 +82,7 @@ Stacks mount subpaths of `/mnt/datashare/...` — e.g. NextCloud uses `/mnt/data
 
 ### GPU (active — device-node passthrough)
 The GTX 1070 is **live** for LXC 101 (host NVIDIA driver `550.163.01`). Three layers make it reboot-safe — all three are required (full how-to + troubleshooting in `README.md`):
-1. **Host** `nvidia-uvm-init.service` (oneshot, `Before=pve-guests.service`) creates `/dev/nvidia-uvm` at boot — it's created lazily on first CUDA use, so without this it's absent on a cold boot. Host-only, not in the repo.
+1. **Host** `nvidia-uvm-init.service` (oneshot, `Before=pve-guests.service`) creates the **full** node set at boot (`nvidia-modprobe -c 0 -u` + `-m` + `nvidia-smi`) — `uvm`/`nvidiactl`/`modeset` are created lazily on first driver use, so without this they're absent on a cold boot and a stack loses the boot race (exit 128). Host-only, not in the repo.
 2. **`101.conf`** `lxc.mount.entry` lines bind-mount the host `/dev/nvidia*` (incl. `uvm`) into the LXC — these are now **active** (both repo `proxmox/docker/101.conf` and live `/etc/pve/lxc/101.conf`); majors are dynamic so unpinned, cgroup perms come from `lxc.cgroup2.devices.allow: a`.
 3. **`no-cgroups = true`** in `/etc/nvidia-container-runtime/config.toml` (host-only) means the toolkit injects libs but not cgroup perms, so each GPU stack (`plex`, `llm`/ollama) **must** also list `/dev/nvidia0`,`/dev/nvidiactl`,`/dev/nvidia-uvm` under `devices:` plus `runtime: nvidia` + `NVIDIA_VISIBLE_DEVICES`, or it hits `Failed to initialize NVML: Unknown Error`.
 

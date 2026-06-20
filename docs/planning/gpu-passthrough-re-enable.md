@@ -30,10 +30,15 @@
 > neither host nor LXC, and the containers' `devices:` mapping fails with
 > `error gathering device information ... /dev/nvidia-uvm: no such file or directory` (exit 128).
 > Fixed with two complementary pieces:
-> - **Host `nvidia-uvm-init.service`** (oneshot, `ExecStart=/usr/bin/nvidia-modprobe -c 0 -u`,
->   ordered `Before=pve-guests.service`) → creates `/dev/nvidia-uvm` before the LXC autostarts.
+> - **Host `nvidia-uvm-init.service`** (oneshot, ordered `Before=pve-guests.service`) → creates
+>   the **full** node set before the LXC autostarts: `nvidia-modprobe -c 0 -u` + `-m` + `nvidia-smi`.
+>   (First cut only created `uvm`; on the validation reboot plex lost the boot race because
+>   `nvidiactl`/`modeset` weren't on the host yet at LXC start — hardened to create everything.)
 > - **`101.conf` `lxc.mount.entry`** bind-mounts (repo + live) → pipe the host `/dev/nvidia*`
 >   (incl. `uvm`) into the LXC deterministically. Majors are dynamic so left unpinned.
+>
+> **Validated across two cold reboots (2026-06-20):** host service runs before guests, all nodes
+> present, vfio not loaded, and **both Ollama and Plex auto-start with the GPU, no intervention.**
 
 ---
 
