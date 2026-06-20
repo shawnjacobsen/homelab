@@ -28,7 +28,7 @@ Each fact has a single home. Before writing something down, put it in the right 
 - **CPU**: Intel Xeon E5-2640 v3 (8-core, 2.6GHz)
 - **RAM**: 16GB DDR4-3000 CL15
 - **Motherboard**: ASUS X99 WS/IPMI
-- **GPU**: NVIDIA GTX 1070 *(passthrough to LXC 101 currently disabled; planned for restoration)*
+- **GPU**: NVIDIA GTX 1070 — shared into LXC 101 via device-node passthrough (host driver `550.163.01`); used by Ollama for CUDA inference and Plex for NVENC/NVDEC transcoding
 - **Boot Drive**: 256GB SSD
 - **Network**: Dual NIC bridge
 
@@ -168,7 +168,7 @@ NextCloud All-in-One mastercontainer manages the full NextCloud suite (Apache, C
 
 - **Network**: `host` mode (direct port binding on LXC)
 - **Media**: ZFS `mouse/media` mounted read-only at `/data` (movies, tv, music)
-- **GPU**: Hardware transcoding disabled — GTX 1070 passthrough to LXC 101 is not currently active. Re-enable `NVIDIA_VISIBLE_DEVICES` and `runtime: nvidia` in `plex/compose.yaml` after restoring passthrough.
+- **GPU**: Hardware transcoding **active** via the GTX 1070. `plex/compose.yaml` sets `runtime: nvidia`, `NVIDIA_VISIBLE_DEVICES=all`, `NVIDIA_DRIVER_CAPABILITIES=compute,video,utility`, plus explicit `devices:` for `/dev/nvidia0`, `/dev/nvidiactl`, `/dev/nvidia-uvm` (see GPU note below for why the device list is required).
 
 ---
 
@@ -197,7 +197,9 @@ All services run on the isolated `ai-net` network. Only Open WebUI also bridges 
 | Apache Tika | `10.0.0.30:9998` | — |
 
 - **RAG**: Open WebUI queries SearXNG; Tika handles document parsing
-- **GPU**: Passthrough not active (see Plex note above); Ollama runs CPU-only until restored
+- **GPU**: Ollama runs on the GTX 1070 (CUDA). `llm/compose.yaml` sets `runtime: nvidia`, `NVIDIA_VISIBLE_DEVICES=all`, `NVIDIA_DRIVER_CAPABILITIES=compute,utility`, plus explicit `devices:` for `/dev/nvidia0`, `/dev/nvidiactl`, `/dev/nvidia-uvm`.
+
+> **GPU passthrough — how it works & the `no-cgroups` gotcha.** The host runs the NVIDIA driver (`550.163.01`); the `/dev/nvidia*` nodes are present in privileged LXC 101 and `nvidia-smi` works there. Because `nvidia-container-toolkit` cannot manage cgroups from inside an LXC, `/etc/nvidia-container-runtime/config.toml` on the LXC has **`no-cgroups = true`** (host-only file, not in this repo). With that set, the runtime still injects the NVIDIA userland libraries but no longer grants the container cgroup device permissions — so each GPU stack **must** also list the device nodes under `devices:` in its compose file, or `nvidia-smi` inside the container fails with `Failed to initialize NVML: Unknown Error`. The leftover VFIO config (`/etc/modprobe.d/vfio.conf`, `nomodeset`/`intel_iommu` kernel cmdline) is currently benign (the `nvidia` driver claims the card) but is a latent reboot-race and should be stripped on the next host-reboot maintenance window.
 
 ---
 

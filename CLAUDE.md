@@ -80,8 +80,8 @@ mp2: /mouse/media    → /mnt/datashare/media        (Plex media: /movies /tv /m
 ```
 Stacks mount subpaths of `/mnt/datashare/...` — e.g. NextCloud uses `/mnt/datashare`, Plex `/data` (ro), Piwigo `/mnt/datashare/myfiles/Photography/Photo Exports`.
 
-### GPU caveat
-The Notion doc describes a shared multi-GPU plan, but **`101.conf` in this repo has all NVIDIA passthrough lines commented out** ("disabling to dedicate gpu to Windows 11 VM"). So as committed, the GTX 1070 is **not** available to LXC 101 — Plex hardware transcoding and Ollama GPU inference will not work until those `lxc.mount.entry` / `lxc.cgroup2.devices.allow` lines are re-enabled and the LXC restarted. Verify the live state before assuming GPU is present.
+### GPU (active — device-node passthrough)
+The GTX 1070 is **live** for LXC 101. The host runs the NVIDIA driver (`550.163.01`) and the `/dev/nvidia*` nodes appear in the privileged LXC (`nvidia-smi` works there) — note this happens **without** the `lxc.mount.entry` lines in `101.conf` being uncommented, so that commented block is vestigial, not the mechanism. The Docker layer is what matters: `nvidia-container-toolkit` runs with **`no-cgroups = true`** (it can't manage cgroups inside an LXC; host-only file `/etc/nvidia-container-runtime/config.toml`, not in the repo), which means each GPU stack (`plex`, `llm`/ollama) **must** list `/dev/nvidia0`, `/dev/nvidiactl`, `/dev/nvidia-uvm` under `devices:` in its compose plus `runtime: nvidia` + `NVIDIA_VISIBLE_DEVICES` — otherwise the container hits `Failed to initialize NVML: Unknown Error`. Full how-to lives in `README.md`. Leftover VFIO config (`vfio.conf`, `nomodeset`/`intel_iommu` cmdline) is benign but a latent reboot-race; strip it on the next host-reboot window.
 
 ## Docker Stacks
 
@@ -160,7 +160,7 @@ Any repeatable operation (health checks, stack updates, backup routines, log tri
 
 - **Stack won't start, "network homelab_shared_net not found"** → bring up the `nginx` stack first (it creates that network).
 - **Service unreachable via tailnet** → check the `tailscale` container in the `nginx` stack is up; NPM rides its network namespace.
-- **Plex transcoding / Ollama not using GPU** → GPU passthrough is commented out in `101.conf` (see GPU caveat); re-enable and restart LXC 101.
+- **Plex transcoding / Ollama not using GPU** (or `Failed to initialize NVML: Unknown Error`) → the stack's compose must have `runtime: nvidia`, `NVIDIA_VISIBLE_DEVICES`, **and** explicit `devices:` for `/dev/nvidia0`,`/dev/nvidiactl`,`/dev/nvidia-uvm` (required because `no-cgroups=true`); confirm `nvidia-smi` works in the LXC first. See the GPU section.
 - **DNS down on the LAN** → check the `pi-hole` container (10.0.0.30).
 - **Cron job not running** → `systemctl status cron`, `sudo grep CRON /var/log/syslog`, confirm `update-cron.sh` was run after edits.
 </content>

@@ -1,5 +1,33 @@
 # Plan: GPU Passthrough to Docker LXC (single consumer, no VM)
 
+**Status:** ✅ DONE (2026-06-20) — GTX 1070 live in LXC 101; Ollama on CUDA, Plex NVENC/NVDEC.
+
+> ## Resolution — how it actually went (read this first)
+> The phased plan below was mostly **already satisfied** by the time we executed: a host
+> reboot brought the card back, the host NVIDIA driver (`550.163.01`) was already installed,
+> the `/dev/nvidia*` nodes were already present in the LXC, and the LXC userland already
+> matched. So Phase 0/2/3/4 needed **no work**, and Phase 3's `101.conf` mount-entry
+> uncommenting turned out to be **unnecessary** (the nodes reach the privileged LXC without it).
+>
+> The real gap was the **Docker → container layer**, in two parts:
+> 1. **`/etc/nvidia-container-runtime/config.toml` on the LXC → `no-cgroups = true`.** The
+>    toolkit can't manage cgroups inside an LXC. (Host-only file; not version-controlled.)
+> 2. **Compose files were deliberately CPU-only.** Ollama was pinned to
+>    `NVIDIA_VISIBLE_DEVICES=void` with `runtime: nvidia` commented; Plex had its NVIDIA env
+>    commented out. Re-enabled both **and** added explicit `devices:` for
+>    `/dev/nvidia0`,`/dev/nvidiactl`,`/dev/nvidia-uvm` — required because with `no-cgroups=true`
+>    the runtime injects libraries but no longer grants cgroup device perms, so without the
+>    explicit device list the container hits `Failed to initialize NVML: Unknown Error`.
+>    (commit `151f9c7`).
+>
+> **Not done / deferred:** Phase 1 (tear down leftover VFIO `vfio.conf` + `nomodeset`/`intel_iommu`
+> cmdline). It's currently benign (the `nvidia` driver claims the card) but is a latent
+> reboot-race — do it on the next host-reboot maintenance window. VT-d stays **off**.
+
+---
+
+## Original plan (kept for reference)
+
 **Status:** PLANNED — blocked on Phase 0 (GPU not currently enumerated on the host)
 
 **Goal:** Expose the NVIDIA **GTX 1070** to **LXC 101** and its Docker containers so
