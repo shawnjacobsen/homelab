@@ -5,6 +5,23 @@
 
 My homelab runs essential home services while serving as a platform for exploring enterprise technologies. Built on an Intel Xeon E5-2640 v3 system with ZFS storage and Proxmox virtualization, it provides file hosting, media streaming, AI services, and secure remote access through containerized applications.
 
+## Information Architecture — Where Everything Lives
+
+Each fact has a single home. Before writing something down, put it in the right place and don't duplicate it elsewhere — overlapping copies drift out of sync and cause inaccuracies.
+
+| Store | Visibility | Holds | Does NOT hold |
+|-------|-----------|-------|---------------|
+| **`README.md`** (this file) | repo / GitHub | Current-state specific configs, how-tos, file & path locations, access methods, troubleshooting — and this matrix | Secrets; the dated changelog; planning/scratch notes |
+| **`CLAUDE.md`** | repo | AI-agent operating guidelines, guardrails, routing rules | Architecture/config detail (links here instead); secrets |
+| **`docs/`** | repo | Planning, design decisions, in-progress runbooks, working notes/memory | Secrets; stable current-state facts (those graduate into this README); the dated changelog |
+| **`.docs.local/`** | gitignored | Sensitive / external API specs (e.g. `tailscale-api.json`) | Anything meant to be version-controlled |
+| **`.env`, `*.env*`** | gitignored | Secrets, tokens, credentials | Ever committed |
+| **Notion — [Homelab Architecture v3.0](https://app.notion.com/p/2076f656231080298a6ff44565f476c5)** | public | High-level/general architecture, hardware reference, conceptual topology & rationale (non-sensitive) | Specific configs, file paths, secrets, how-tos, dated changes |
+| **Notion — 📑 Homelab Log** | public | Kinetic dated changelog: what was done & why, high-level | Detailed configs, secrets, planning, current-state spec |
+| **Live state** (Proxmox + Docker on LXC 101) | — | The truth for what's *actually running* (check via SSH / `docker`) | — |
+
+> When the repo / live state and Notion disagree, **the repo and live state win.** Treat Notion as general background and chronological history.
+
 ## Hardware
 
 ### **Proxmox Host (pve)**
@@ -44,6 +61,24 @@ Single 1TB drive for experimental workloads and media content:
   - `/tank/docker` → `/var/lib/docker`
   - `/tank/userdata` → `/mnt/datashare/myfiles`
   - `/mouse/media` → `/mnt/datashare/media`
+
+## Host Access (SSH)
+
+SSH aliases are configured on the workstation (`~/.ssh/config`) — no password needed:
+
+| Alias | Target |
+|-------|--------|
+| `ssh homelab` | Proxmox host → `root@10.0.0.20:22` |
+| `ssh docker` | Docker LXC → `shawn@10.0.0.30:2053` |
+
+Explicit form if aliases aren't available:
+
+```bash
+ssh root@10.0.0.20            # Proxmox host
+ssh shawn@10.0.0.30 -p 2053   # Docker LXC
+```
+
+> The Proxmox web UI is at `https://10.0.0.20:8006` (direct, bare-metal — not behind NPM/Tailscale). Use the raw IP if LAN DNS (Pi-hole on `10.0.0.30`) is down.
 
 ## Networking Architecture
 

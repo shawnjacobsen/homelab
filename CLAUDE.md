@@ -15,13 +15,23 @@ truth for every stack's compose file and the scheduled jobs that maintain them.
 - **.env**: Per-stack or root credential file (gitignored, NEVER commit).
 - **.env.template**: Tracked template for the root automation credentials (NO secrets).
 
-## Source of Truth & References
+## Information Architecture — Where Everything Lives
 
-- **This repo** (`/home/shawn/homelab`) is the source of truth for all compose files, scripts, and cron definitions. GitHub: `shawnjacobsen/homelab`. it is the production environment that impacts
-- **Live Docker state** on LXC 101 is the source of truth for what's *actually running* — use the `docker-mcp` MCP tools (`list-containers`, `get-logs`, etc.) or `docker` CLI to check.
-- **Architecture reference**: Notion "Homelab Architecture v3.0" — fetch via the Notion MCP (`notion-fetch` on `https://app.notion.com/p/2076f656231080298a6ff44565f476c5`) for hardware serials, GPU plans, storage rationale, and historical/deprecated decisions.
-- **Homelab Log**: Notion "📑 Homelab Log" (page ID `1e16f656231081b7be1bd7e09569c41a`) — the running, dated changelog of homelab work (what was changed/fixed and why). Fetch via the Notion MCP (`notion-fetch`); append a new `### <Month Day, Year>` entry (max ~3 bullets) after completing notable changes. Distinct from the Architecture doc — this is chronological history, not the current-state spec.
-- **Local API docs** (`.docs.local/`): OpenAPI/reference specs for APIs used in this project. Currently: `tailscale-api.json`. Use these when making direct API calls.
+Every fact has ONE home. Before recording anything, route it to the correct store below and do not duplicate it elsewhere — overlapping copies drift and cause inaccuracies. The repo `README.md` carries the authoritative human-facing matrix; the routing rules here govern where you (the agent) write.
+
+| Store | Holds | Does NOT hold |
+|-------|-------|---------------|
+| **`README.md`** (repo) | Current-state specific configs, how-tos, file/path locations, access methods, troubleshooting; the authoritative info-architecture matrix | Secrets; dated changelog; planning/scratch |
+| **`CLAUDE.md`** (repo) | Agent operating guidelines, guardrails, routing rules | Duplicated architecture/config (link to README); secrets |
+| **`docs/`** (repo) | Planning, design decisions, in-progress runbooks, working memory/notes | Secrets; stable current-state facts (graduate to README); the dated changelog |
+| **`.docs.local/`** (gitignored) | Sensitive/external API specs (e.g. `tailscale-api.json`) | Anything that should be version-controlled |
+| **`.env` / `*.env*`** (gitignored) | Secrets, tokens, credentials | Ever committed |
+| **Notion "Homelab Architecture v3.0"** (public) | High-level/general architecture, hardware reference, conceptual topology & rationale — non-sensitive only | Specific configs, file paths, secrets, how-tos, dated changes |
+| **Notion "📑 Homelab Log"** (public) | Kinetic dated changelog — what was done & why, high-level | Detailed configs, secrets, planning, current-state spec |
+| **Live state** (Proxmox + Docker on LXC 101) | Source of truth for what's *actually running* — check via `docker-mcp`/`docker` CLI or SSH | — |
+
+- **This repo** (`/home/shawn/homelab`, GitHub `shawnjacobsen/homelab`) is the source of truth for compose files, scripts, and cron defs — and is the live production environment. When repo/live state and Notion disagree, **repo + live state win.**
+- **Notion access** (via Notion MCP `notion-fetch`): Architecture v3.0 = `https://app.notion.com/p/2076f656231080298a6ff44565f476c5`; Homelab Log = page ID `1e16f656231081b7be1bd7e09569c41a`. After notable changes, append a new `### <Month Day, Year>` entry (max ~3 bullets) to the Log — use the `homelab-log` skill.
 
 ### Tailscale API
 Query the tailnet directly via the Tailscale REST API. The API key is available as `$TAILSCALE_API_KEY` in the Claude Code environment (not `~/.bashrc`). Reference: `.docs.local/tailscale-api.json`.
@@ -32,7 +42,7 @@ curl -s -H "Authorization: Bearer $TAILSCALE_API_KEY" \
   "https://api.tailscale.com/api/v2/tailnet/heron-fiordland.ts.net/devices"
 ```
 
-> ⚠️ **The Notion doc lags the repo.** It lists Nginx Proxy Manager and Cloudflare Tunnel as *deprecated*, but both are present and **running** in this repo (added in the latest commits) — NPM now runs inside Tailscale's network namespace, which sidesteps the old Xfinity static-IP problem. When repo/live state and Notion disagree, **repo + live state win**; treat Notion as background/history.
+> ⚠️ **Example of Notion lag:** the Architecture page lists Nginx Proxy Manager and Cloudflare Tunnel as *deprecated*, but both are present and **running** (NPM runs inside Tailscale's network namespace, sidestepping the old Xfinity static-IP problem). This is why repo + live state win over Notion.
 
 ## Before Every Non-Trivial Response
 
