@@ -15,7 +15,10 @@ services:
       - /dev/nvidiactl:/dev/nvidiactl
       - /dev/nvidia-uvm:/dev/nvidia-uvm
     volumes:
-      - ollama:/root/.ollama
+      # Ollama model storage lives on the mouse ZFS pool (dataset mouse/ollama →
+      # LXC /mnt/ollama via 101.conf mp3). Bind mount, NOT a named volume, so a stray
+      # `docker compose down -v` can't wipe the models. See docs/planning/ollama-models-on-mouse.md
+      - /mnt/ollama:/root/.ollama
     ports:
       - 11434:11434
     container_name: ollama
@@ -90,7 +93,6 @@ services:
       - ai-net
 
 volumes:
-  ollama:
   open-webui:
   valkey-data2:
 
